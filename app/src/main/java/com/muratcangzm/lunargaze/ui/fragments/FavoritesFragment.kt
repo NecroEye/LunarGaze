@@ -1,12 +1,21 @@
 package com.muratcangzm.lunargaze.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.muratcangzm.lunargaze.databinding.FavoritesFragmentLayoutBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoritesFragment : Fragment() {
+
+
+    private var _binding: FavoritesFragmentLayoutBinding? = null
+    private val binding
+        get() = _binding!!
 
     init {
 
@@ -18,8 +27,11 @@ class FavoritesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+    ): View {
+
+        _binding = FavoritesFragmentLayoutBinding.inflate(inflater, container, false)
+
+         return binding.root
     }
 
 
@@ -27,5 +39,12 @@ class FavoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        _binding = null
+
+    }
 
 }

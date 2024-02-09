@@ -4,19 +4,23 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.databinding.CategoryRecyclerLayoutBinding
 import com.muratcangzm.lunargaze.models.remote.CategoryModel
+import com.muratcangzm.lunargaze.ui.fragments.HomeFragmentDirections
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
 class CategoryAdapter
-@Inject constructor(@ActivityContext private val  context: Context,
-                    private val glide: RequestManager) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>(){
+@Inject constructor(
+    @ActivityContext private val context: Context,
+    private val glide: RequestManager
+) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     private lateinit var binding: CategoryRecyclerLayoutBinding
-    private var categoryList : CategoryModel? = null
+    private var categoryList: CategoryModel? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -46,9 +50,9 @@ class CategoryAdapter
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitCategory(categories: CategoryModel){
+    fun submitCategory(categories: CategoryModel) {
 
-        categories.let{
+        categories.let {
             categoryList = categories
             notifyDataSetChanged()
 
@@ -57,13 +61,11 @@ class CategoryAdapter
     }
 
 
-    inner class CategoryViewHolder : RecyclerView.ViewHolder(binding.root){
+    inner class CategoryViewHolder : RecyclerView.ViewHolder(binding.root) {
 
 
-        fun setData(data: CategoryModel.CategoryData){
-
-
-
+        @SuppressLint("SuspiciousIndentation")
+        fun setData(data: CategoryModel.CategoryData) {
 
             binding.apply {
 
@@ -74,12 +76,25 @@ class CategoryAdapter
 
                 categoryText.text = data.name ?: "Empty"
 
+                categoryCard.setOnClickListener {
+
+
+                    val action =
+                        HomeFragmentDirections.actionHomeFragmentToDisplayFragment(data.name!!)
+
+                    Navigation
+                        .findNavController(it)
+                        .navigate(action)
+
+
+                }
+
+
             }
         }
 
 
     }
-
 
 
 }

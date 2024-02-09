@@ -5,4 +5,17 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="300dp"
+        android:text="Display Screen"
+        android:id="@+id/displayText"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="23sp"/>
+
+
 </LinearLayout>

@@ -9,10 +9,29 @@
         android:id="@+id/homeFragment"
         android:name="com.muratcangzm.lunargaze.ui.fragments.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/home_fragment_layout"/>
+        tools:layout="@layout/home_fragment_layout">
+        <action
+            android:id="@+id/action_homeFragment_to_displayFragment"
+            app:destination="@id/displayFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.muratcangzm.lunargaze.ui.fragments.FavoritesFragment"
         android:label="FavoritesFragment"
         tools:layout="@layout/favorites_fragment_layout"/>
+    <fragment
+        android:id="@+id/displayFragment"
+        android:name="com.muratcangzm.lunargaze.ui.fragments.DisplayFragment"
+        android:label="DisplayFragment"
+        tools:layout="@layout/display_fragment_layout"
+        >
+        <action
+            android:id="@+id/action_displayFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <!--suppress NavigationFile -->
+        <argument
+            android:name="channelData"
+            app:argType="string" />
+
+    </fragment>
 </navigation>

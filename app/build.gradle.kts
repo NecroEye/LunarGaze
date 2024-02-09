@@ -21,6 +21,7 @@ android {
     }
 
     buildTypes {
+
         release {
             isMinifyEnabled = true
             isDebuggable = false
@@ -31,6 +32,7 @@ android {
                 "proguard-rules.pro"
             )
         }
+
         debug {
             isMinifyEnabled = false
             isDebuggable = true
