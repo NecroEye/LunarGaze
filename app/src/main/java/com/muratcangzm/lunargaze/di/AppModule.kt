@@ -29,18 +29,14 @@ object AppModule {
     @Provides
     @Singleton
     fun provideApplicationContext(@ApplicationContext application: Application): Context {
-
         return application.applicationContext
-
     }
 
 
     @Provides
     @Singleton
     fun provideGiphyRepository(api: GiphyAPI): GiphyRepo {
-
         return GiphyRepo(api)
-
     }
 
 

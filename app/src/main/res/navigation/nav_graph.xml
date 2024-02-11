@@ -13,12 +13,19 @@
         <action
             android:id="@+id/action_homeFragment_to_displayFragment"
             app:destination="@id/displayFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.muratcangzm.lunargaze.ui.fragments.FavoritesFragment"
         android:label="FavoritesFragment"
-        tools:layout="@layout/favorites_fragment_layout"/>
+        tools:layout="@layout/favorites_fragment_layout">
+        <action
+            android:id="@+id/action_favoritesFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/displayFragment"
         android:name="com.muratcangzm.lunargaze.ui.fragments.DisplayFragment"

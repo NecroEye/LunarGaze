@@ -8,5 +8,6 @@
     <color name="deep_blue">#002663</color>
     <color name="coal">#042e45</color>
     <color name="grey">#666666</color>
+    <color name="transparent_half_background">#80000000</color>
 
 </resources>

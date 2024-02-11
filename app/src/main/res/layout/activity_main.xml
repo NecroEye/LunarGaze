@@ -1,18 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.MainActivity">
 
+   <com.google.android.material.appbar.AppBarLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+
+       <com.google.android.material.appbar.CollapsingToolbarLayout
+           android:id="@+id/collapsing_toolbar"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_scrollFlags="scroll|exitUntilCollapsed"
+           app:contentScrim="?attr/colorPrimary"
+           app:expandedTitleGravity="top"
+           app:expandedTitleMarginStart="48dp"
+           app:expandedTitleMarginEnd="64dp">
+
+           <androidx.appcompat.widget.Toolbar
+               android:id="@+id/toolbar"
+               android:layout_width="match_parent"
+               android:layout_height="?attr/actionBarSize"
+               app:layout_collapseMode="pin"
+               app:title="My Collapsing Toolbar" />
+
+       </com.google.android.material.appbar.CollapsingToolbarLayout>
+   </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
-</LinearLayout>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/transparent_half_background"
+        android:elevation="6dp"
+        app:itemIconSize="32dp"
+        app:itemIconTint="@color/white"
+        app:itemRippleColor="@color/deep_blue"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/menu" />
+
+
+</RelativeLayout>

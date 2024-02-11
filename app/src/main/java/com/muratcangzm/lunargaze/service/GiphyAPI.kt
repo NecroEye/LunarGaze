@@ -10,7 +10,8 @@ import retrofit2.http.Query
 interface GiphyAPI {
 
     @GET(Constants.CATEGORIES)
-    suspend fun getCategory(@Query("api_key") apiKey: String = "00OYOh871nJ0XtRFIbWgQzvORuV7M3kx")
+    suspend fun getCategory(
+        @Query("api_key") apiKey: String = "00OYOh871nJ0XtRFIbWgQzvORuV7M3kx")
             : Response<CategoryModel>
 
 
@@ -21,5 +22,4 @@ interface GiphyAPI {
         @Query("limit") limit: Int = 50
     )
             : Response<ChannelModel>
-
 }

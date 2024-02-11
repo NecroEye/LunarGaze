@@ -51,11 +51,10 @@ class DisplayFragment : Fragment() {
     }
 
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SuspiciousIndentation")
     private fun observeDataChange() {
 
         viewLifecycleOwner.lifecycleScope.launch {
-
             viewModel.channelResult.collect {
 
                 it?.let { result ->
@@ -63,7 +62,8 @@ class DisplayFragment : Fragment() {
                     // FIXME: fashion and beauty gets error cauze of empty array check nullablity
 
                     Log.d("DisplayFragment Data: ", "$result")
-                    binding.displayText.text = "Display Screen ${result.channelData!![0].displayName}"
+                    if(result.channelData!!.isNotEmpty())
+                    binding.displayText.text = "Display Screen ${result.channelData[0].displayName ?: "Boş"}"
 
                 }
 
