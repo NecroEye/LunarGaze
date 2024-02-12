@@ -12,13 +12,23 @@
         tools:layout="@layout/home_fragment_layout">
         <action
             android:id="@+id/action_homeFragment_to_displayFragment"
-            app:destination="@id/displayFragment" />
+            app:destination="@id/displayFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/homeFragment" />
         <action
             android:id="@+id/action_homeFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
         <action
             android:id="@+id/action_homeFragment_to_searchDisplayFragment"
-            app:destination="@id/searchDisplayFragment" />
+            app:destination="@id/searchDisplayFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"

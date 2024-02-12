@@ -13,7 +13,11 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/night_blue"
         android:elevation="6dp"
-        app:title="Lunar Gaze"
+        app:title="   Lunar Gaze"
+        app:logo="@drawable/toolbar_icon2"
+        app:logoScaleType="centerInside"
+        app:logoAdjustViewBounds="true"
+        android:layout_alignParentTop="true"
         app:menu="@menu/toolbar_icons"
         app:titleTextAppearance="@style/Widget.LunarGaze.Toolbar"
         app:titleTextColor="@color/white" />
@@ -41,8 +45,8 @@
         app:labelVisibilityMode="unlabeled"
         app:itemActiveIndicatorStyle="@style/CustomBottomNavIndicator"
         app:itemIconSize="32dp"
-        app:itemIconTint="@color/coal"
-        app:itemRippleColor="@color/deep_blue"
+        app:itemIconTint="@color/silver"
+        app:itemRippleColor="@color/grey"
         app:menu="@menu/menu" />
 
 
