@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">LunarGaze</string>
+    <string name="app_name">Lunar Gaze</string>
     <string name="category_image">Category Image</string>
     <string name="empty">Empty</string>
     <string name="favorites">Favorites</string>
     <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="create_favorite_folder">Create Favorite Folder</string>
 </resources>

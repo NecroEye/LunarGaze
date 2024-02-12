@@ -6,36 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-   <com.google.android.material.appbar.AppBarLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/night_blue"
+        android:elevation="6dp"
+        app:title="Lunar Gaze"
+        app:menu="@menu/toolbar_icons"
+        app:titleTextAppearance="@style/Widget.LunarGaze.Toolbar"
+        app:titleTextColor="@color/white" />
 
 
-       <com.google.android.material.appbar.CollapsingToolbarLayout
-           android:id="@+id/collapsing_toolbar"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           app:layout_scrollFlags="scroll|exitUntilCollapsed"
-           app:contentScrim="?attr/colorPrimary"
-           app:expandedTitleGravity="top"
-           app:expandedTitleMarginStart="48dp"
-           app:expandedTitleMarginEnd="64dp">
 
-           <androidx.appcompat.widget.Toolbar
-               android:id="@+id/toolbar"
-               android:layout_width="match_parent"
-               android:layout_height="?attr/actionBarSize"
-               app:layout_collapseMode="pin"
-               app:title="My Collapsing Toolbar" />
-
-       </com.google.android.material.appbar.CollapsingToolbarLayout>
-   </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="64dp"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 
@@ -47,10 +38,11 @@
         android:layout_alignParentBottom="true"
         android:background="@color/transparent_half_background"
         android:elevation="6dp"
+        app:labelVisibilityMode="unlabeled"
+        app:itemActiveIndicatorStyle="@style/CustomBottomNavIndicator"
         app:itemIconSize="32dp"
-        app:itemIconTint="@color/white"
+        app:itemIconTint="@color/coal"
         app:itemRippleColor="@color/deep_blue"
-        app:itemTextColor="@color/white"
         app:menu="@menu/menu" />
 
 

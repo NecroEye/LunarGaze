@@ -5,5 +5,16 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="Widget.LunarGaze.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">23sp</item>
+        <item name="fontFamily">@font/acme</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CustomBottomNavIndicator" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@drawable/custom_indicator</item>
+    </style>
+
     <style name="Theme.LunarGaze" parent="Base.Theme.LunarGaze" />
 </resources>

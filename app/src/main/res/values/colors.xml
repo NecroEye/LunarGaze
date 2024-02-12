@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="black">#FF000000</color>
     <color name="red">#FF5733</color>
     <color name="white">#FFFFFFFF</color>
@@ -8,6 +8,10 @@
     <color name="deep_blue">#002663</color>
     <color name="coal">#042e45</color>
     <color name="grey">#666666</color>
-    <color name="transparent_half_background">#80000000</color>
+    <color name="led">#53BFB7</color>
+    <color name="night">#0c0d0f</color>
+    <color name="light_black">#273130</color>
+    <color name="night_blue">#243F9C</color>
+    <color name="transparent_half_background">#D9000000</color>
 
 </resources>
