@@ -6,14 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.muratcangzm.lunargaze.databinding.SearchDisplayFragmentLayoutBinding
+import com.muratcangzm.lunargaze.viewmodels.SearchDisplayViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchDisplayFragment : Fragment() {
 
 
     private var _binding: SearchDisplayFragmentLayoutBinding? = null
     private val binding
         get() = _binding!!
+
+    private val viewModel:SearchDisplayViewModel by viewModels()
 
     init {
 
@@ -40,6 +46,8 @@ class SearchDisplayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
+
 
 
     override fun onDestroyView() {
