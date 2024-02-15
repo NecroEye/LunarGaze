@@ -59,7 +59,6 @@ class DisplayFragment : Fragment() {
 
                 it?.let { result ->
 
-                    // FIXME: fashion and beauty gets error cauze of empty array check nullablity
 
                     Log.d("DisplayFragment Data: ", "$result")
                     if(result.channelData!!.isNotEmpty())

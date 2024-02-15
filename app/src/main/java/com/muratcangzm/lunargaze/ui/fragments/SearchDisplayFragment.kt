@@ -2,14 +2,17 @@ package com.muratcangzm.lunargaze.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.muratcangzm.lunargaze.databinding.SearchDisplayFragmentLayoutBinding
-import com.muratcangzm.lunargaze.viewmodels.SearchDisplayViewModel
+import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchDisplayFragment : Fragment() {
@@ -19,7 +22,7 @@ class SearchDisplayFragment : Fragment() {
     private val binding
         get() = _binding!!
 
-    private val viewModel:SearchDisplayViewModel by viewModels()
+    private val viewModel: DisplayViewModel by viewModels()
 
     init {
 
@@ -36,8 +39,10 @@ class SearchDisplayFragment : Fragment() {
         _binding = SearchDisplayFragmentLayoutBinding.inflate(inflater, container, false)
 
         val receivedData = requireArguments().getString("searchData")
+        Log.d("ReceivedData", "$receivedData")
+        viewModel.getChannels(receivedData!!)
+        observeDataChange()
 
-        binding.searchFragment.text = "SearchDisplay: you searched that $receivedData"
 
         return binding.root
     }
@@ -47,7 +52,24 @@ class SearchDisplayFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun observeDataChange() {
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.channelResult.collect {
+
+                it?.let { result ->
+                    Log.d("SearchDisplayFragment Data: ", "$result")
+                    binding.searchFragment.text = " Search display: ${result.channelData!![0].displayName ?: "boş"}"
+
+                }
+
+            }
+
+        }
+
+
+    }
 
 
     override fun onDestroyView() {
