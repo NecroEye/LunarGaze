@@ -9,11 +9,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.muratcangzm.lunargaze.databinding.DisplayFragmentLayoutBinding
+import com.muratcangzm.lunargaze.ui.adapters.DisplayAdapter
 import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DisplayFragment : Fragment() {
@@ -22,6 +26,8 @@ class DisplayFragment : Fragment() {
     private val binding
         get() = _binding!!
 
+    @Inject
+    lateinit var displayAdapter: DisplayAdapter
     private val viewModel: DisplayViewModel by viewModels()
 
 
@@ -38,9 +44,9 @@ class DisplayFragment : Fragment() {
         _binding = DisplayFragmentLayoutBinding.inflate(inflater, container, false)
 
         val receivedData = requireArguments().getString("channelData")
-        Log.d("ReceivedData", "$receivedData")
+        setAdapter()
 
-        viewModel.getChannels(receivedData!!)
+        viewModel.getChannels(receivedData!!.lowercase())
         observeDataChange()
 
         return binding.root
@@ -60,13 +66,30 @@ class DisplayFragment : Fragment() {
                 it?.let { result ->
 
 
-                    Log.d("DisplayFragment Data: ", "$result")
-                    if(result.channelData!!.isNotEmpty())
-                    binding.displayText.text = "Display Screen ${result.channelData[0].displayName ?: "Boş"}"
+
+                    if(result.pagination!!.totalCount == 0){
+                       binding.displayEmptyText.visibility = View.VISIBLE
+                    }
+                    else{
+                    displayAdapter.submitData(result)
+                    binding.displayEmptyText.visibility = View.INVISIBLE
+                    }
 
                 }
 
             }
+
+        }
+
+    }
+
+    private fun setAdapter() {
+
+        binding.displayRecycler.apply {
+
+            adapter = displayAdapter
+            layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+            hasFixedSize()
 
         }
 

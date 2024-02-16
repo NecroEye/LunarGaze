@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.muratcangzm.lunargaze.databinding.SearchDisplayFragmentLayoutBinding
-import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
+import com.muratcangzm.lunargaze.viewmodels.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -22,7 +22,7 @@ class SearchDisplayFragment : Fragment() {
     private val binding
         get() = _binding!!
 
-    private val viewModel: DisplayViewModel by viewModels()
+    private val viewModel: SearchViewModel by viewModels()
 
     init {
 
@@ -40,7 +40,9 @@ class SearchDisplayFragment : Fragment() {
 
         val receivedData = requireArguments().getString("searchData")
         Log.d("ReceivedData", "$receivedData")
-        viewModel.getChannels(receivedData!!)
+
+        binding.searchFragment.text = "you searched: $receivedData"
+        viewModel.fetchSearchData(receivedData!!.lowercase())
         observeDataChange()
 
 
@@ -56,13 +58,11 @@ class SearchDisplayFragment : Fragment() {
     private fun observeDataChange() {
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.channelResult.collect {
+            viewModel.searchResult.collect {
 
-                it?.let { result ->
-                    Log.d("SearchDisplayFragment Data: ", "$result")
-                    binding.searchFragment.text = " Search display: ${result.channelData!![0].displayName ?: "boş"}"
 
-                }
+                    Log.d("SearchDisplayFragment Data: ", "$it")
+
 
             }
 

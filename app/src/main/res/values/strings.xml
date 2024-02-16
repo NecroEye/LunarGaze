@@ -6,4 +6,6 @@
     <string name="home">Home</string>
     <string name="search">Search</string>
     <string name="create_favorite_folder">Create Favorite Folder</string>
+    <string name="displayImage">Searched Images</string>
+    <string name="displayEmpty">There is nothing to show</string>
 </resources>

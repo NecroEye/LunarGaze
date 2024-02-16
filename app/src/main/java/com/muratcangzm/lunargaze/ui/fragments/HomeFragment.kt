@@ -85,6 +85,7 @@ class HomeFragment : Fragment() {
                 requireContext(), 2, RecyclerView.VERTICAL, false
             )
             adapter = categoryAdapter
+            hasFixedSize()
 
         }
 

@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/night">
 
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/displayEmptyText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="300dp"
-        android:text="Display Screen"
-        android:id="@+id/displayText"
+        android:text="@string/displayEmpty"
+        android:textColor="@color/white"
+        android:fontFamily="@font/acme"
+        android:textSize="19.5sp"
+        android:visibility="invisible"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textSize="23sp"/>
+        android:layout_marginHorizontal="5dp"
+        android:maxLines="1"
+        android:layout_marginTop="230dp"/>
 
 
-</LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/displayRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</RelativeLayout>

@@ -50,6 +50,26 @@ class GiphyRepo(private val api: GiphyAPI) {
 
     }
 
+    suspend fun fetchSearch(search: String): Flow<DataResponse<SearchModel>> = flow {
+
+        try{
+
+            val response = api.getSearch(query = search)
+
+            if (response.isSuccessful)
+                emit(DataResponse.success(response.body()))
+            else
+                emit(DataResponse.error("Network error, please try again later!"))
+
+        }
+        catch (e:Exception){
+            Log.d("Api Error", "${e.message}")
+
+        }
+
+
+    }
+
 
 
 }
