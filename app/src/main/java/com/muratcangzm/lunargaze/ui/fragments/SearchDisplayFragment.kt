@@ -9,10 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.muratcangzm.lunargaze.databinding.SearchDisplayFragmentLayoutBinding
-import com.muratcangzm.lunargaze.viewmodels.SearchViewModel
+import com.muratcangzm.lunargaze.ui.adapters.CategoryAdapter
+import com.muratcangzm.lunargaze.ui.adapters.DisplayAdapter
+import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchDisplayFragment : Fragment() {
@@ -22,7 +26,11 @@ class SearchDisplayFragment : Fragment() {
     private val binding
         get() = _binding!!
 
-    private val viewModel: SearchViewModel by viewModels()
+    @Inject
+    lateinit var searchAdapter: DisplayAdapter
+
+
+    private val viewModel: DisplayViewModel by viewModels()
 
     init {
 
@@ -39,10 +47,14 @@ class SearchDisplayFragment : Fragment() {
         _binding = SearchDisplayFragmentLayoutBinding.inflate(inflater, container, false)
 
         val receivedData = requireArguments().getString("searchData")
-        Log.d("ReceivedData", "$receivedData")
 
-        binding.searchFragment.text = "you searched: $receivedData"
-        viewModel.fetchSearchData(receivedData!!.lowercase())
+        binding.searchAdapter.adapter = searchAdapter
+        binding.searchAdapter.layoutManager =
+            StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        binding.searchAdapter.hasFixedSize()
+
+
+        viewModel.getChannels(receivedData!!.lowercase())
         observeDataChange()
 
 
@@ -58,17 +70,22 @@ class SearchDisplayFragment : Fragment() {
     private fun observeDataChange() {
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.searchResult.collect {
+            viewModel.channelResult.collect {
 
+                // if pagination's total count is above 50 then create a random number generator its size demands pagination count and only 50 image picks
 
-                    Log.d("SearchDisplayFragment Data: ", "$it")
+                it?.let {
+                    if (it.pagination!!.totalCount == 0) {
+                        binding.searchFragmentEmpty.visibility = View.VISIBLE
+                    } else {
+                        binding.searchFragmentEmpty.visibility = View.INVISIBLE
+                        searchAdapter.submitData(it)
+                    }
 
+                }
 
             }
-
         }
-
-
     }
 
 

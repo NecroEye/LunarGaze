@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/night">
 
 
     <TextView
+        android:id="@+id/searchFragmentEmpty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search Display"
-        android:textSize="23sp"
-        android:id="@+id/searchFragment"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="300dp"
         android:gravity="center"
+        android:maxLines="1"
+        android:text="@string/displaySearchEmpty"
+        android:textColor="@color/white"
+        android:textSize="23sp"
         android:textStyle="bold"
-        android:textColor="@color/night"
-        android:layout_marginTop="300dp"/>
+        android:visibility="invisible" />
 
 
-</LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchAdapter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</RelativeLayout>

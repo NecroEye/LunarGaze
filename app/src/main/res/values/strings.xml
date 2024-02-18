@@ -8,4 +8,5 @@
     <string name="create_favorite_folder">Create Favorite Folder</string>
     <string name="displayImage">Searched Images</string>
     <string name="displayEmpty">There is nothing to show</string>
+    <string name="displaySearchEmpty">Nothing was found</string>
 </resources>
