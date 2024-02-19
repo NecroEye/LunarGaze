@@ -79,7 +79,7 @@ class SearchDisplayFragment : Fragment() {
                         binding.searchFragmentEmpty.visibility = View.VISIBLE
                     } else {
                         binding.searchFragmentEmpty.visibility = View.INVISIBLE
-                        searchAdapter.submitData(it)
+                        searchAdapter.submitData(it, this@SearchDisplayFragment)
                     }
 
                 }

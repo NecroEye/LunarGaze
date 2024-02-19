@@ -52,6 +52,9 @@
         <argument
             android:name="channelData"
             app:argType="string" />
+        <action
+            android:id="@+id/action_displayFragment_to_fullScreenImageFragment"
+            app:destination="@id/fullScreenImageFragment" />
 
     </fragment>
     <fragment
@@ -66,5 +69,26 @@
         <argument
             android:name="searchData"
             app:argType="string" />
+        <action
+            android:id="@+id/action_searchDisplayFragment_to_fullScreenImageFragment"
+            app:destination="@id/fullScreenImageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullScreenImageFragment"
+        android:name="com.muratcangzm.lunargaze.ui.fragments.FullScreenImageFragment"
+        tools:layout="@layout/image_fullscreen_layout"
+        android:label="FullScreenImageFragment" >
+        <!--suppress NavigationFile -->
+        <argument
+            android:name="imageData"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fullScreenImageFragment_to_displayFragment"
+            app:destination="@id/displayFragment"
+            app:popUpTo="@id/displayFragment" />
+        <action
+            android:id="@+id/action_fullScreenImageFragment_to_searchDisplayFragment"
+            app:destination="@id/searchDisplayFragment"
+            app:popUpTo="@id/searchDisplayFragment" />
     </fragment>
 </navigation>

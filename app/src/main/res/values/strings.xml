@@ -9,4 +9,9 @@
     <string name="displayImage">Searched Images</string>
     <string name="displayEmpty">There is nothing to show</string>
     <string name="displaySearchEmpty">Nothing was found</string>
+    <string name="favorite_folders">favorite folders</string>
+    <string name="default_folder_name">My Favorite Images</string>
+    <string name="full_screen_image">Full Screen Image</string>
+    <string name="save_button_icon">Save Button Icon</string>
+    <string name="share_button_icon">Share Button Icon</string>
 </resources>

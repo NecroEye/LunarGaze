@@ -71,7 +71,7 @@ class DisplayFragment : Fragment() {
                        binding.displayEmptyText.visibility = View.VISIBLE
                     }
                     else{
-                    displayAdapter.submitData(result)
+                    displayAdapter.submitData(result, this@DisplayFragment)
                     binding.displayEmptyText.visibility = View.INVISIBLE
                     }
 

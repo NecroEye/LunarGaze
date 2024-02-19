@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    android:padding="1dp">
+
+
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:contentDescription="@string/favorite_folders"
+        android:scaleType="fitXY"
+        android:padding="1dp"
+        android:src="@drawable/folder"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/customFolderName"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/acme"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/default_folder_name"
+        android:textColor="@color/night"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
