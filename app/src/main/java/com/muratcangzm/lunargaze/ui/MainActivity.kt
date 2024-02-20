@@ -92,6 +92,8 @@ class MainActivity : AppCompatActivity() {
                     val action =
                         HomeFragmentDirections.actionHomeFragmentToSearchDisplayFragment(query)
                     navController.navigate(action)
+
+                    searchView.clearFocus()
                 }
 
                 return false

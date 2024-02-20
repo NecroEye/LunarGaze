@@ -5,15 +5,25 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/backButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@color/night"
-        android:padding="5dp"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular"
-        app:srcCompat="@drawable/back_arrow" />
+        android:backgroundTint="@color/black"
+        app:rippleColor="@color/silver"
+        app:strokeColor="@color/black">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/night"
+            android:padding="5dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular"
+            app:srcCompat="@drawable/back_arrow" />
+
+    </com.google.android.material.card.MaterialCardView>
+
 
     <ImageView
         android:id="@+id/fullScreenImage"
@@ -24,27 +34,68 @@
         android:contentDescription="@string/full_screen_image"
         android:src="@drawable/ic_launcher_background" />
 
-
-    <ImageView
-        android:id="@+id/saveButton"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/saveButtonCard"
         android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_height="42dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginVertical="10dp"
-        android:layout_marginEnd="20dp"
-        android:contentDescription="@string/save_button_icon"
-        android:src="@drawable/save" />
+        android:layout_marginEnd="25dp"
+        android:backgroundTint="@color/black"
+        app:rippleColor="@color/silver"
+        app:strokeColor="@color/black">
 
-    <ImageView
-        android:id="@+id/shareButton"
+        <ImageView
+            android:id="@+id/saveButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/save_button_icon"
+            android:src="@drawable/save" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/shareButtonCard"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignEnd="@id/saveButton"
-        android:layout_alignBottom="@id/saveButton"
+        android:layout_height="42dp"
+        android:layout_alignEnd="@id/saveButtonCard"
+        android:layout_alignBottom="@id/saveButtonCard"
+        android:layout_marginEnd="65dp"
+        android:backgroundTint="@color/black"
+        app:rippleColor="@color/silver"
+        app:strokeColor="@color/black">
+
+        <ImageView
+            android:id="@+id/shareButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/share_button_icon"
+            android:src="@drawable/share" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_alignEnd="@id/shareButtonCard"
+        android:layout_alignBottom="@id/saveButtonCard"
         android:layout_marginEnd="60dp"
-        android:contentDescription="@string/share_button_icon"
-        android:src="@drawable/share" />
+        android:id="@+id/bookmarkedButtonCard"
+        android:backgroundTint="@color/black"
+        app:rippleColor="@color/silver"
+        app:strokeColor="@color/black">
+
+        <ImageView
+            android:id="@+id/bookmarkedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/share_button_icon"
+            android:src="@drawable/bookmark2" />
+
+    </com.google.android.material.card.MaterialCardView>
 
 
 </RelativeLayout>
