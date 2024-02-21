@@ -2,7 +2,9 @@ package com.muratcangzm.lunargaze.ui.fragments
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +13,14 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.RequestManager
-import com.muratcangzm.lunargaze.Manifest
-import com.muratcangzm.lunargaze.R
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.muratcangzm.lunargaze.databinding.ImageFullscreenLayoutBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import java.io.IOException
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -93,6 +96,8 @@ class FullScreenImageFragment : Fragment() {
             saveButtonCard.setOnClickListener {
 
                 Toast.makeText(requireContext(), "SavedButton", Toast.LENGTH_SHORT).show()
+                requestPermissionIfHasnt()
+
 
             }
 
@@ -109,11 +114,61 @@ class FullScreenImageFragment : Fragment() {
 
     private fun requestPermissionIfHasnt() {
 
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
-            1
-        )
+
+        if (!hasStoragePermission()) {
+
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                1
+            )
+            Log.d("izin", "girdi")
+        } else {
+            Log.d("izin", "izin verildi")
+
+            downloadImage(receivedData)
+
+        }
+
+
+    }
+
+    private fun downloadImage(imageUrl: String?) {
+
+        if (imageUrl.isNullOrEmpty()) {
+            Log.e("DownloadImage", "Image URL is null or empty")
+            return
+        }
+
+        val target = object : CustomTarget<File>() {
+            override fun onResourceReady(resource: File, transition: Transition<in File>?) {
+                saveUrlToExternalStorage(resource)
+            }
+
+            override fun onLoadCleared(placeholder: Drawable?) {
+                Log.e("DownloadImage", "Failed to download image")
+            }
+        }
+
+        glide.downloadOnly().load(imageUrl).into(target)
+
+    }
+
+    private fun saveUrlToExternalStorage(gifFile: File) {
+
+        val filename = "lunar_gaze_download"
+        val externalStoragePublicDirectory =
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+
+        val file = File(externalStoragePublicDirectory, filename)
+
+        try {
+            gifFile.copyTo(file)
+            Toast.makeText(requireContext(), "Saved successfully", Toast.LENGTH_SHORT).show()
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Toast.makeText(requireContext(), "Failed to save", Toast.LENGTH_SHORT).show()
+        }
 
     }
 

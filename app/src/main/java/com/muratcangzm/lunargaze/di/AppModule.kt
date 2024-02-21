@@ -2,6 +2,7 @@ package com.muratcangzm.lunargaze.di
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
@@ -77,6 +78,12 @@ object AppModule {
                     .error(R.drawable.not_found)
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             )
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreference(@ApplicationContext context: Context) : SharedPreferences{
+        return context.getSharedPreferences("shared_key", Context.MODE_PRIVATE)
     }
 
 }

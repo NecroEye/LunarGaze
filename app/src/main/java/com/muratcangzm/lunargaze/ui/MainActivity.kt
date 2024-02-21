@@ -61,7 +61,8 @@ class MainActivity : AppCompatActivity() {
                     binding.toolbar.visibility = View.VISIBLE
 
                 }
-                R.id.fullScreenImageFragment ->{
+
+                R.id.fullScreenImageFragment -> {
                     binding.toolbar.visibility = View.GONE
                     binding.bottomNavigation.visibility = View.GONE
                 }
@@ -84,9 +85,10 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
-                if (query!!.isNotEmpty()){
+                if (query!!.isNotEmpty()) {
 
-                    val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+                    val navHostFragment =
+                        supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
                     val navController = navHostFragment.navController
 
                     val action =
