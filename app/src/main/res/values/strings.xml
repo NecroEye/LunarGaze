@@ -14,4 +14,7 @@
     <string name="full_screen_image">Full Screen Image</string>
     <string name="save_button_icon">Save Button Icon</string>
     <string name="share_button_icon">Share Button Icon</string>
+    <string name="create_favorite_file">Create Favorite File</string>
+    <string name="save">Save</string>
+    <string name="enter_a_name_for_your_file">Enter a name for your file</string>
 </resources>
