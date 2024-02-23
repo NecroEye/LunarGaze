@@ -17,4 +17,5 @@
     <string name="create_favorite_file">Create Favorite File</string>
     <string name="save">Save</string>
     <string name="enter_a_name_for_your_file">Enter a name for your file</string>
+    <string name="your_favorite_file_list_is_empty">Your favorite file list is empty</string>
 </resources>

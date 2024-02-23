@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="5dp"
     android:layout_gravity="center"
@@ -11,7 +11,7 @@
 
 
     <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="13dp"
         android:fontFamily="@font/acme"
@@ -22,7 +22,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/favInputLayout"
-        android:layout_width="360dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_marginVertical="20dp"
@@ -35,7 +35,7 @@
         app:boxCornerRadiusTopStart="10dp"
         app:endIconMode="clear_text"
         app:endIconTint="@color/black"
-        app:helperText="Boş Bırakılamaz*"
+        app:helperText="Cannot be empty*"
         app:counterMaxLength="16"
         app:counterEnabled="true"
         app:counterTextColor="@color/white"
@@ -53,13 +53,12 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginVertical="13dp"
-        android:layout_marginStart="135dp"
+        android:layout_marginStart="115dp"
         android:fontFamily="@font/acme"
         android:text="@string/save"
         android:textColor="@color/white"

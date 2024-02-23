@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_favoritesFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/toBookMarked"
+            app:destination="@id/favoritedImageFragment" />
     </fragment>
     <fragment
         android:id="@+id/displayFragment"
@@ -90,5 +93,14 @@
             android:id="@+id/action_fullScreenImageFragment_to_searchDisplayFragment"
             app:destination="@id/searchDisplayFragment"
             app:popUpTo="@id/searchDisplayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritedImageFragment"
+        android:name="com.muratcangzm.lunargaze.ui.fragments.FavoritedImageFragment"
+        android:label="FavoritedImageFragment"
+        tools:layout="@layout/favorited_image_layout">
+        <action
+            android:id="@+id/action_favoritedImageFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
 </navigation>

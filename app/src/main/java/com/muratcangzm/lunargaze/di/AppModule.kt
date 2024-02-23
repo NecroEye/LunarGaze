@@ -1,8 +1,11 @@
 package com.muratcangzm.lunargaze.di
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
@@ -18,6 +21,7 @@ import com.muratcangzm.lunargaze.viewmodels.HomeViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -63,7 +67,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDao(favoriteDatabase: FavoriteDatabase) : FavoriteDao {
+    fun provideDao(favoriteDatabase: FavoriteDatabase): FavoriteDao {
         return favoriteDatabase.getDao()
     }
 
@@ -76,14 +80,19 @@ object AppModule {
                     .encodeQuality(Constants.ENCODE_QUALITY)
                     .placeholder(R.drawable.not_found)
                     .error(R.drawable.not_found)
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
             )
     }
 
     @Provides
     @Singleton
-    fun provideSharedPreference(@ApplicationContext context: Context) : SharedPreferences{
+    fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
         return context.getSharedPreferences("shared_key", Context.MODE_PRIVATE)
+    }
+
+    @Provides
+    fun provideNavController(@ActivityContext activity: Activity): NavController {
+        return Navigation.findNavController(activity, R.id.fragmentContainerView)
     }
 
 }
