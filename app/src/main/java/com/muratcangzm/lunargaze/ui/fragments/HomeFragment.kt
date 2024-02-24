@@ -23,7 +23,7 @@ class HomeFragment : Fragment() {
 
 
     private var _binding: HomeFragmentLayoutBinding? = null
-    private val viewModel: HomeViewModel by viewModels()
+    val viewModel: HomeViewModel by viewModels()
 
     @Inject
     lateinit var categoryAdapter: CategoryAdapter
@@ -77,7 +77,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun setupViews() {
+    fun setupViews() {
 
         binding.categoryRecycler.apply {
 

@@ -3,9 +3,9 @@ package com.muratcangzm.lunargaze.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.muratcangzm.lunargaze.R
@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding
         get() = _binding!!
+
+    private var searchItem: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +47,10 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.favoritesFragment -> {
-                    binding.toolbar.visibility = View.GONE
+                    binding.toolbar.visibility = View.VISIBLE
+                    binding.bottomNavigation.visibility = View.VISIBLE
+                    searchItem?.isVisible = false
+
 
                 }
 
@@ -59,6 +64,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
                     binding.toolbar.visibility = View.VISIBLE
+                    searchItem?.isVisible = true
+
+
 
                 }
 
@@ -66,7 +74,8 @@ class MainActivity : AppCompatActivity() {
                     binding.toolbar.visibility = View.GONE
                     binding.bottomNavigation.visibility = View.GONE
                 }
-                R.id.favoritedImageFragment ->{
+
+                R.id.favoritedImageFragment -> {
 
                     binding.toolbar.visibility = View.GONE
                     binding.bottomNavigation.visibility = View.GONE
@@ -82,8 +91,8 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.toolbar_icons, menu)
 
 
-        val searchItem = menu!!.findItem(R.id.search_icon)
-        val searchView = searchItem.actionView as SearchView
+        searchItem = menu!!.findItem(R.id.search_icon)
+        val searchView = searchItem?.actionView as SearchView
 
         searchView.tooltipText = "Search whatever you want"
 
@@ -100,7 +109,9 @@ class MainActivity : AppCompatActivity() {
                         HomeFragmentDirections.actionHomeFragmentToSearchDisplayFragment(query)
                     navController.navigate(action)
 
+
                     searchView.clearFocus()
+
                 }
 
                 return false

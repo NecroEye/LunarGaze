@@ -60,9 +60,10 @@ android {
 
 dependencies {
 
-    val nav_version = "2.7.6"
+    val nav_version = "2.7.7"
     val lifecycle_version = "2.7.0"
     val room_version = "2.6.1"
+    val fragment_version = "1.6.2"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -108,6 +109,8 @@ dependencies {
     androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
     implementation("com.google.truth:truth:1.1.4")
     testImplementation("org.mockito:mockito-core:4.7.0")
+    debugImplementation("androidx.fragment:fragment-testing:$fragment_version")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
 
     //Android Testing
     androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
