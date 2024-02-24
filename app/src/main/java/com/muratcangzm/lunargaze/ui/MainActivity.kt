@@ -66,6 +66,11 @@ class MainActivity : AppCompatActivity() {
                     binding.toolbar.visibility = View.GONE
                     binding.bottomNavigation.visibility = View.GONE
                 }
+                R.id.favoritedImageFragment ->{
+
+                    binding.toolbar.visibility = View.GONE
+                    binding.bottomNavigation.visibility = View.GONE
+                }
 
                 else -> throw Exception("There isn't any destination")
             }

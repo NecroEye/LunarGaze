@@ -70,7 +70,7 @@ constructor(@ActivityContext private val context: Context) :
 
                 fileCard.setOnClickListener{
 
-                 //  it.findNavController().navigate(R.id.toBookMarked)
+                 it.findNavController().navigate(R.id.toBookMarked)
 
 
                 }
