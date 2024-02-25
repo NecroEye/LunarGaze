@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.muratcangzm.lunargaze.R
@@ -54,7 +55,6 @@ constructor(@ActivityContext private val context: Context) :
 
         files.let {
             emptyFileName = files
-            Log.d("Array Sonuç: ", emptyFileName.size.toString())
         }
         notifyDataSetChanged()
 
@@ -72,9 +72,14 @@ constructor(@ActivityContext private val context: Context) :
 
                  it.findNavController().navigate(R.id.toBookMarked)
 
-
                 }
 
+                fileCard.setOnLongClickListener{
+
+                    Toast.makeText(context, fileName, Toast.LENGTH_SHORT).show()
+
+                    return@setOnLongClickListener true
+                }
             }
         }
 

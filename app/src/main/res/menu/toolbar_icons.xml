@@ -4,6 +4,13 @@
 
 
     <item
+        android:id="@+id/bin_icon"
+        android:icon="@drawable/bin_icon"
+        android:title="@string/bin"
+        android:iconTint="@color/night"
+        app:showAsAction="ifRoom|collapseActionView"/>
+
+    <item
         android:id="@+id/search_icon"
         android:icon="@drawable/search_icon"
         android:title="@string/search"

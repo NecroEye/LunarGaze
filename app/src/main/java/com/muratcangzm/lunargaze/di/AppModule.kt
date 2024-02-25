@@ -50,7 +50,6 @@ object AppModule {
     fun provideHomeViewModel(repo: GiphyRepo): HomeViewModel {
 
         return HomeViewModel(repo)
-
     }
 
 

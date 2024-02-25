@@ -51,13 +51,11 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigation.visibility = View.VISIBLE
                     searchItem?.isVisible = false
 
-
                 }
 
                 R.id.searchDisplayFragment -> {
                     binding.toolbar.visibility = View.GONE
                     binding.bottomNavigation.visibility = View.GONE
-
 
                 }
 
@@ -65,8 +63,6 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigation.visibility = View.VISIBLE
                     binding.toolbar.visibility = View.VISIBLE
                     searchItem?.isVisible = true
-
-
 
                 }
 
