@@ -131,7 +131,6 @@ class FullScreenImageFragment : Fragment() {
 
             saveButtonCard.setOnClickListener {
 
-                Toast.makeText(requireContext(), "SavedButton", Toast.LENGTH_SHORT).show()
                 requestPermissionIfHasnt()
 
 
@@ -158,9 +157,7 @@ class FullScreenImageFragment : Fragment() {
                 arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
                 1
             )
-            Log.d("izin", "girdi")
         } else {
-            Log.d("izin", "izin verildi")
 
             downloadImage(receivedData)
 
