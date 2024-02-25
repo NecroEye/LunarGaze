@@ -1,6 +1,9 @@
 package com.muratcangzm.lunargaze.ui.fragments
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -14,10 +17,15 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.android.material.button.MaterialButton
+import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.ImageFullscreenLayoutBinding
+import com.muratcangzm.lunargaze.ui.adapters.RadioButtonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.IOException
@@ -33,7 +41,11 @@ class FullScreenImageFragment : Fragment() {
 
     @Inject
     lateinit var glide: RequestManager
+    @Inject
+    lateinit var radioAdapter: RadioButtonAdapter
+
     private var receivedData: String? = null
+    private var alertDialog: AlertDialog? = null
 
 
     init {
@@ -65,6 +77,7 @@ class FullScreenImageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    @SuppressLint("InflateParams")
     private fun setUIComponent() {
 
         binding.apply {
@@ -79,7 +92,30 @@ class FullScreenImageFragment : Fragment() {
 
             bookmarkedButtonCard.setOnClickListener {
 
-                Toast.makeText(requireContext(), "BookmarkButton", Toast.LENGTH_SHORT).show()
+                val inflater = LayoutInflater.from(requireContext())
+                val popupSave = inflater.inflate(R.layout.saved_popup_layout, null)
+
+                val radioRecycler = popupSave.findViewById<RecyclerView>(R.id.radioButtonRecycler)
+                val saveButton = popupSave.findViewById<MaterialButton>(R.id.popupSaveButton)
+
+                radioRecycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL, false)
+                radioRecycler.adapter = radioAdapter
+                radioRecycler.hasFixedSize()
+
+
+
+
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setView(popupSave)
+                alertDialog = builder.create()
+
+                alertDialog?.show()
+
+                saveButton.setOnClickListener{
+
+                    Toast.makeText(requireContext(),"pressed", Toast.LENGTH_SHORT).show()
+                    alertDialog?.dismiss()
+                }
 
             }
 
@@ -177,5 +213,6 @@ class FullScreenImageFragment : Fragment() {
         super.onDestroyView()
         receivedData = null
         _binding = null
+        alertDialog = null
     }
 }

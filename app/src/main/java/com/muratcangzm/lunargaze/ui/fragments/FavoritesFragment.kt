@@ -1,24 +1,15 @@
 package com.muratcangzm.lunargaze.ui.fragments
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.PopupWindow
-import androidx.annotation.DrawableRes
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.muratcangzm.lunargaze.R
@@ -26,7 +17,6 @@ import com.muratcangzm.lunargaze.databinding.FavoritesFragmentLayoutBinding
 import com.muratcangzm.lunargaze.ui.adapters.FavoriteFileAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import kotlin.math.log
 
 @AndroidEntryPoint
 class FavoritesFragment : Fragment() {
@@ -143,6 +133,8 @@ class FavoritesFragment : Fragment() {
         super.onDestroyView()
 
         _binding = null
+        overlayView = null
+        alertDialog = null
 
     }
 

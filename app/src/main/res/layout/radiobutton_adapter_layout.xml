@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RadioButton
+        android:layout_margin="5dp"
+        android:padding="1dp"
+        android:id="@+id/saveRadioButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/acme"
+        android:maxLines="1"
+        android:paddingStart="3dp"
+        android:text="@string/empty"
+        android:textColor="@color/silver"
+        android:textSize="16.5sp"
+        android:textStyle="bold"
+        tools:ignore="RtlSymmetry" />
+
+</LinearLayout>

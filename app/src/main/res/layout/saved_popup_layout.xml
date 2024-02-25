@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginVertical="150dp"
+    android:background="@drawable/pop_up_design"
+    android:orientation="vertical">
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/acme"
+        android:maxLines="1"
+        android:text="@string/select_a_file_to_save_your_image"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:dividerColor="@color/night"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/radioButtonRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/radiogroup_design" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/popupSaveButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/acme"
+        android:text="@string/save"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:cornerRadius="5dp"
+        app:rippleColor="@color/silver" />
+
+</LinearLayout>
