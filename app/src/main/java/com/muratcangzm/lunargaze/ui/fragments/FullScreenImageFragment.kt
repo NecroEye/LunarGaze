@@ -25,8 +25,15 @@ import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.button.MaterialButton
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.ImageFullscreenLayoutBinding
+import com.muratcangzm.lunargaze.models.local.FavoriteDao
+import com.muratcangzm.lunargaze.models.local.FavoriteModel
+import com.muratcangzm.lunargaze.models.remote.ChannelModel
+import com.muratcangzm.lunargaze.repository.FavoriteRepo
 import com.muratcangzm.lunargaze.ui.adapters.RadioButtonAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.File
 import java.io.IOException
 import javax.inject.Inject
@@ -41,11 +48,17 @@ class FullScreenImageFragment : Fragment() {
 
     @Inject
     lateinit var glide: RequestManager
+
     @Inject
     lateinit var radioAdapter: RadioButtonAdapter
 
-    private var receivedData: String? = null
+    @Inject
+    lateinit var favoriteRepo: FavoriteRepo
+
+    private var receivedData: ChannelModel.ChannelData? = null
     private var alertDialog: AlertDialog? = null
+    private var favoriteModel: FavoriteModel? = null
+    private var compositeDisposable = CompositeDisposable()
 
 
     init {
@@ -62,7 +75,7 @@ class FullScreenImageFragment : Fragment() {
 
         _binding = ImageFullscreenLayoutBinding.inflate(inflater, container, false)
 
-        receivedData = requireArguments().getString("imageData")
+        receivedData = requireArguments().getParcelable<ChannelModel.ChannelData>("imageData")
         Log.d("FullScreenData: ", " $receivedData")
 
 
@@ -83,7 +96,7 @@ class FullScreenImageFragment : Fragment() {
         binding.apply {
 
             glide
-                .load(receivedData)
+                .load(receivedData!!.user!!.avatarUrl)
                 .into(fullScreenImage)
 
             backButton.setOnClickListener {
@@ -98,11 +111,10 @@ class FullScreenImageFragment : Fragment() {
                 val radioRecycler = popupSave.findViewById<RecyclerView>(R.id.radioButtonRecycler)
                 val saveButton = popupSave.findViewById<MaterialButton>(R.id.popupSaveButton)
 
-                radioRecycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL, false)
+                radioRecycler.layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                 radioRecycler.adapter = radioAdapter
                 radioRecycler.hasFixedSize()
-
-
 
 
                 val builder = AlertDialog.Builder(requireContext())
@@ -111,9 +123,28 @@ class FullScreenImageFragment : Fragment() {
 
                 alertDialog?.show()
 
-                saveButton.setOnClickListener{
+                saveButton.setOnClickListener {
 
-                    Toast.makeText(requireContext(),"pressed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Successfully Saved", Toast.LENGTH_SHORT).show()
+                    Log.d("Kayıtlılar: ", "${radioAdapter.whichChecked.size}")
+
+
+                    favoriteModel = receivedData?.user?.avatarUrl?.let { it1 ->
+                        FavoriteModel(
+                            null,
+                            radioAdapter.whichChecked,
+                            it1,
+                            receivedData!!.user!!.description
+                        )
+                    }
+
+                    val disposable = favoriteRepo.insertFavImage(favoriteModel!!)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe()
+
+                    compositeDisposable.add(disposable)
+
                     alertDialog?.dismiss()
                 }
 
@@ -123,7 +154,7 @@ class FullScreenImageFragment : Fragment() {
 
                 val sharedIntent = Intent(Intent.ACTION_SEND)
                 sharedIntent.type = "text/plain"
-                sharedIntent.putExtra(Intent.EXTRA_TEXT, receivedData)
+                sharedIntent.putExtra(Intent.EXTRA_TEXT, receivedData!!.user!!.avatarUrl)
 
                 startActivity(Intent.createChooser(sharedIntent, "Share an image/gif"))
 
@@ -132,7 +163,6 @@ class FullScreenImageFragment : Fragment() {
             saveButtonCard.setOnClickListener {
 
                 requestPermissionIfHasnt()
-
 
             }
 
@@ -159,7 +189,7 @@ class FullScreenImageFragment : Fragment() {
             )
         } else {
 
-            downloadImage(receivedData)
+            downloadImage(receivedData!!.user!!.avatarUrl)
 
         }
 
@@ -211,5 +241,9 @@ class FullScreenImageFragment : Fragment() {
         receivedData = null
         _binding = null
         alertDialog = null
+        favoriteModel = null
+
+        compositeDisposable.clear()
+
     }
 }

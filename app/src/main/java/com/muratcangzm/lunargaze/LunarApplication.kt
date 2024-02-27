@@ -5,4 +5,9 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class LunarApplication : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+    }
+
 }

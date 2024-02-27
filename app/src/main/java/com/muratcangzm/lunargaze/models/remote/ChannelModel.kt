@@ -1,5 +1,7 @@
 package com.muratcangzm.lunargaze.models.remote
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -37,7 +39,17 @@ data class ChannelModel(
         @SerializedName("user")
         @Expose
         val user: User?,
-    ) {
+    ) : Parcelable {
+
+        constructor(parcel: Parcel) : this(
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            TODO("featuredGif"),
+            TODO("user")
+        )
 
         data class FeaturedGif(
             @SerializedName("type")
@@ -110,6 +122,28 @@ data class ChannelModel(
             val description: String?,
 
             )
+
+        override fun writeToParcel(parcel: Parcel, flags: Int) {
+            parcel.writeValue(id)
+            parcel.writeString(displayName)
+            parcel.writeString(slug)
+            parcel.writeString(type)
+            parcel.writeString(contentType)
+        }
+
+        override fun describeContents(): Int {
+            return 0
+        }
+
+        companion object CREATOR : Parcelable.Creator<ChannelData> {
+            override fun createFromParcel(parcel: Parcel): ChannelData {
+                return ChannelData(parcel)
+            }
+
+            override fun newArray(size: Int): Array<ChannelData?> {
+                return arrayOfNulls(size)
+            }
+        }
 
     }
 

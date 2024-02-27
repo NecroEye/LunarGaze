@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.models.local.FavoriteDao
 import com.muratcangzm.lunargaze.models.local.FavoriteDatabase
+import com.muratcangzm.lunargaze.repository.FavoriteRepo
 import com.muratcangzm.lunargaze.repository.GiphyRepo
 import com.muratcangzm.lunargaze.service.GiphyAPI
 import com.muratcangzm.lunargaze.utils.Constants
@@ -44,6 +45,12 @@ object AppModule {
         return GiphyRepo(api)
     }
 
+    @Provides
+    @Singleton
+    fun provideFavoriteRepo(dao: FavoriteDao) : FavoriteRepo{
+        return FavoriteRepo(dao)
+    }
+
 
     @Provides
     @Singleton
@@ -55,13 +62,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRoom(@ApplicationContext application: Application) = Room.databaseBuilder(
-        application,
+    fun provideRoom(@ApplicationContext context: Context): FavoriteDatabase = Room.databaseBuilder(
+        context,
         FavoriteDatabase::class.java,
         "db"
-    )
-        .fallbackToDestructiveMigration()
-        .build()
+    ).build()
 
 
     @Provides

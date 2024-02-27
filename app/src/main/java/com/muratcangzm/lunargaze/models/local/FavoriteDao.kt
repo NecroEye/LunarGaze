@@ -11,7 +11,6 @@ import io.reactivex.rxjava3.core.Flowable
 @Dao
 interface FavoriteDao {
 
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFavImage(favoriteModel: FavoriteModel) : Completable
 
@@ -20,8 +19,6 @@ interface FavoriteDao {
 
     @Query("SELECT * FROM favImages")
     fun getAllFavImages() : Flowable<List<FavoriteModel>>
-
-
 
 
 }

@@ -84,7 +84,7 @@
         <!--suppress NavigationFile -->
         <argument
             android:name="imageData"
-            app:argType="string" />
+            app:argType="com.muratcangzm.lunargaze.models.remote.ChannelModel$ChannelData" />
         <action
             android:id="@+id/action_fullScreenImageFragment_to_displayFragment"
             app:destination="@id/displayFragment"
@@ -102,5 +102,9 @@
         <action
             android:id="@+id/action_favoritedImageFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
+        <!--suppress NavigationFile -->
+        <argument
+            android:name="roomData"
+            app:argType="com.muratcangzm.lunargaze.models.local.FavoriteModel[]" />
     </fragment>
 </navigation>

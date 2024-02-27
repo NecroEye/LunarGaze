@@ -1,6 +1,7 @@
 package com.muratcangzm.lunargaze.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,8 +27,10 @@ class FavoritedImageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FavoritedImageLayoutBinding.inflate(inflater, container, false)
+
+        val receivedData = requireArguments().getParcelableArray("roomData")
+        Log.d("Yerel Data: ", "${receivedData?.size}")
 
      return binding.root
 

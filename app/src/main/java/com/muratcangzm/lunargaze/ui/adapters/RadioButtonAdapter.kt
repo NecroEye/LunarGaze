@@ -12,14 +12,16 @@ import kotlin.jvm.Throws
 
 class RadioButtonAdapter
 @Inject
-constructor(@ApplicationContext private val context:Context,
-    private val sharedPreferences: SharedPreferences) :
-RecyclerView.Adapter<RadioButtonAdapter.RadioButtonHolder>(){
+constructor(
+    @ApplicationContext private val context: Context,
+    private val sharedPreferences: SharedPreferences
+) :
+    RecyclerView.Adapter<RadioButtonAdapter.RadioButtonHolder>() {
 
     private lateinit var binding: RadiobuttonAdapterLayoutBinding
     private val savedLists: Map<String, *> = sharedPreferences.all
     private var allFileNames: List<String>? = null
-    var whichChecked: String? = null
+    var whichChecked = mutableListOf<String>()
 
     init {
         allFileNames = savedLists.values.filterIsInstance<String>()
@@ -27,7 +29,8 @@ RecyclerView.Adapter<RadioButtonAdapter.RadioButtonHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RadioButtonHolder {
 
-        binding = RadiobuttonAdapterLayoutBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding =
+            RadiobuttonAdapterLayoutBinding.inflate(LayoutInflater.from(context), parent, false)
 
         return RadioButtonHolder()
     }
@@ -46,20 +49,22 @@ RecyclerView.Adapter<RadioButtonAdapter.RadioButtonHolder>(){
         return super.getItemViewType(position)
     }
 
-    inner class RadioButtonHolder() : RecyclerView.ViewHolder(binding.root){
+
+    inner class RadioButtonHolder() : RecyclerView.ViewHolder(binding.root) {
 
 
-        fun setData(fileName:String){
+        fun setData(fileName: String) {
 
             binding.apply {
                 saveRadioButton.text = fileName ?: "boş"
 
-               saveRadioButton.setOnCheckedChangeListener { _, isChecked ->
+                saveRadioButton.setOnCheckedChangeListener { _, isChecked ->
 
-                   if(isChecked)
-                     whichChecked = fileName
+                    if (isChecked)
+                        whichChecked.add(fileName)
 
-               }
+
+                }
 
             }
 
@@ -67,7 +72,6 @@ RecyclerView.Adapter<RadioButtonAdapter.RadioButtonHolder>(){
 
 
     }
-
 
 
 }

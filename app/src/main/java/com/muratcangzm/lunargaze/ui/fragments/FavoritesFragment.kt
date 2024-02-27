@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +21,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class FavoritesFragment : Fragment() {
-
 
     private var _binding: FavoritesFragmentLayoutBinding? = null
     private val binding
@@ -119,6 +119,8 @@ class FavoritesFragment : Fragment() {
 
                     val updatedList = stringList.toMutableList().apply { add(input.text.toString()) }
                     favoriteFileAdapter.submitFileNames(updatedList)
+
+
                 }
 
 

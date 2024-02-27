@@ -85,13 +85,13 @@ constructor(
                     if (currentDestination!!.id == R.id.displayFragment) {
                         val action =
                             DisplayFragmentDirections.actionDisplayFragmentToFullScreenImageFragment(
-                                data.user.avatarUrl!!
+                                data
                             )
                         Navigation.findNavController(it).navigate(action)
                     } else {
                         val action1 =
                             SearchDisplayFragmentDirections.actionSearchDisplayFragmentToFullScreenImageFragment(
-                                data.user.avatarUrl!!
+                                data
                             )
                         Navigation.findNavController(it)
                             .navigate(action1)
