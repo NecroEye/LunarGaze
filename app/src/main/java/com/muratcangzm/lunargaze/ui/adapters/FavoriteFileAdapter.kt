@@ -11,13 +11,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.FavoriteFolderLayoutBinding
-import com.muratcangzm.lunargaze.models.local.FavoriteDao
-import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.repository.FavoriteRepo
 import com.muratcangzm.lunargaze.ui.fragments.FavoritesFragmentDirections
 import dagger.hilt.android.qualifiers.ActivityContext
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
@@ -95,11 +92,10 @@ constructor(
 
                             Log.d("Bütün oda: ", "${roomList.size}")
 
-
                             val newData = roomList.filter { favorite ->
                                 favorite.folder?.any { folderName ->
                                     folderName == fileName
-                                } == true
+                                } == true // any'nin döndüreceği boolean eşitse true'ya
                             }
 
                              val action = FavoritesFragmentDirections.toBookMarked(newData.toTypedArray())

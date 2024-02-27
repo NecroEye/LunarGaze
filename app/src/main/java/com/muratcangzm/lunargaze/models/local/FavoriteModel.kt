@@ -15,14 +15,26 @@ data class FavoriteModel(
     var folder:List<String>?,
     @ColumnInfo("table_imageUrl")
     var imageUrl:String,
-    @ColumnInfo("table_imageName")
-    var imageName:String?,
+    @ColumnInfo("table_userName")
+    var userName:String?,
+    @ColumnInfo("table_rating")
+    var rating:String?,
+    @ColumnInfo("table_type")
+    var type:String?,
+    @ColumnInfo("table_updateTime")
+    var updateTime:String?,
+    @ColumnInfo("table_description")
+    var description:String?,
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.createStringArrayList(),
         parcel.readString()!!,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
         parcel.readString()
     ) {
     }
@@ -31,7 +43,11 @@ data class FavoriteModel(
         parcel.writeValue(id)
         parcel.writeStringList(folder)
         parcel.writeString(imageUrl)
-        parcel.writeString(imageName)
+        parcel.writeString(userName)
+        parcel.writeString(rating)
+        parcel.writeString(type)
+        parcel.writeString(updateTime)
+        parcel.writeString(description)
     }
 
     override fun describeContents(): Int {
@@ -48,3 +64,5 @@ data class FavoriteModel(
         }
     }
 }
+
+

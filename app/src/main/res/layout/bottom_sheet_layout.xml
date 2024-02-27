@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_sheet_design"
+        android:orientation="vertical"
+        android:padding="1dp">
+
+
+        <LinearLayout
+            android:id="@+id/SheetClose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="2dp">
+
+            <View
+                android:layout_width="70dp"
+                android:layout_height="7dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bottom_sheet_top" />
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            android:ellipsize="end"
+            android:ems="10"
+            android:fontFamily="@font/acme"
+            android:gravity="start"
+            android:lines="1"
+            android:padding="2dp"
+            android:text="@string/information"
+            android:textColor="@color/white"
+            android:textSize="22.2sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:dividerColor="@color/deep_blue" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/updateTime"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="15dp"
+            android:ellipsize="end"
+            android:ems="10"
+            android:fontFamily="@font/acme"
+            android:text="@string/empty"
+            android:textColor="@color/white"
+            android:textSize="19.5sp"
+            android:textStyle="bold" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:ems="10"
+                android:fontFamily="@font/acme"
+                android:text="@string/type"
+                android:textColor="@color/white"
+                android:textSize="19.5sp"
+                android:textStyle="bold" />
+
+
+            <View
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="40dp"
+                android:background="@color/deep_blue" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/imageType"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="start"
+                android:layout_marginTop="2.4dp"
+                android:layout_marginEnd="55dp"
+                android:ellipsize="end"
+                android:ems="10"
+                android:fontFamily="@font/acme"
+                android:lines="1"
+                android:text="@string/empty"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:ems="10"
+                android:fontFamily="@font/acme"
+                android:maxLines="1"
+                android:text="@string/uploaded_by"
+                android:textColor="@color/white"
+                android:textSize="19.5sp"
+                android:textStyle="bold" />
+
+
+            <View
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="40dp"
+                android:background="@color/deep_blue" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/uploader"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="start"
+                android:layout_marginTop="2.4dp"
+                android:layout_marginEnd="55dp"
+                android:ellipsize="end"
+                android:ems="10"
+                android:fontFamily="@font/acme"
+                android:lines="1"
+                android:text="@string/empty"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:ems="10"
+                android:fontFamily="@font/acme"
+                android:text="@string/rating"
+                android:textColor="@color/white"
+                android:textSize="19.5sp"
+                android:textStyle="bold" />
+
+
+            <View
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="40dp"
+                android:background="@color/deep_blue" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/imageRating"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="start"
+                android:layout_marginTop="2.4dp"
+                android:layout_marginEnd="55dp"
+                android:ellipsize="end"
+                android:ems="10"
+                android:fontFamily="@font/acme"
+                android:lines="1"
+                android:text="@string/empty"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+
+        </RelativeLayout>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/imageLinkText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="15dp"
+            android:drawableStart="@drawable/link"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/coal"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/lorem_ipsum"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="italic" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="15dp"
+            android:ellipsize="end"
+            android:ems="10"
+            android:fontFamily="@font/acme"
+            android:gravity="start"
+            android:lines="1"
+            android:padding="2dp"
+            android:text="@string/description"
+            android:textColor="@color/white"
+            android:textSize="21.2sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/descriptionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="5dp"
+            android:ellipsize="end"
+            android:ems="8"
+            android:fontFamily="@font/acme"
+            android:gravity="start"
+            android:lines="2"
+            android:padding="2dp"
+            android:text="@string/empty"
+            android:textColor="@color/white"
+            android:textSize="16.2sp" />
+
+
+    </LinearLayout>
+</RelativeLayout>

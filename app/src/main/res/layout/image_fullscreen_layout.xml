@@ -60,12 +60,12 @@
         android:id="@+id/shareButtonCard"
         android:layout_width="40dp"
         android:layout_height="42dp"
+        android:layout_above="@id/saveButtonCard"
         android:layout_alignEnd="@id/saveButtonCard"
-        android:layout_alignBottom="@id/saveButtonCard"
-        android:layout_marginEnd="65dp"
         android:backgroundTint="@color/black"
         app:rippleColor="@color/silver"
         app:strokeColor="@color/black">
+
 
         <ImageView
             android:id="@+id/shareButton"
@@ -78,12 +78,13 @@
 
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bookmarkedButtonCard"
         android:layout_width="40dp"
         android:layout_height="45dp"
-        android:layout_alignEnd="@id/shareButtonCard"
-        android:layout_alignBottom="@id/saveButtonCard"
-        android:layout_marginEnd="60dp"
-        android:id="@+id/bookmarkedButtonCard"
+        android:layout_above="@id/shareButtonCard"
+        android:layout_alignEnd="@id/saveButtonCard"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/black"
         app:rippleColor="@color/silver"
         app:strokeColor="@color/black">
@@ -96,6 +97,25 @@
             android:src="@drawable/bookmark2" />
 
     </com.google.android.material.card.MaterialCardView>
+
+
+    <RelativeLayout
+        android:id="@+id/bottomSheetPopUp"
+        android:layout_width="130dp"
+        android:layout_height="25dp"
+        android:layout_alignBottom="@id/saveButtonCard"
+        android:layout_marginHorizontal="140dp"
+        android:background="@drawable/simple_corner_layout">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/bottom_sheet_top" />
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

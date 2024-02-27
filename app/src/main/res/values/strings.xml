@@ -21,4 +21,10 @@
     <string name="bin">bin</string>
     <string name="select_a_file_to_save_your_image">Select a file to save your image</string>
     <string name="there_is_nothing_in_your_file">There is nothing in your bookmark</string>
+    <string name="information">Information</string>
+    <string name="type">Type</string>
+    <string name="uploaded_by">Uploaded by</string>
+    <string name="rating">Rating</string>
+    <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of .</string>
+    <string name="description">Description</string>
 </resources>

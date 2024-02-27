@@ -73,6 +73,9 @@ data class ChannelModel(
             @SerializedName("title")
             @Expose
             val title: String?,
+            @SerializedName("rating")
+            @Expose
+            val rating: String?,
             @SerializedName("import_datetime")
             @Expose
             val sharedDateTime: String?,

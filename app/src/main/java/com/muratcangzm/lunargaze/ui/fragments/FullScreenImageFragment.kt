@@ -2,8 +2,9 @@ package com.muratcangzm.lunargaze.ui.fragments
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.ClipData
 import android.content.Intent
-import android.content.SharedPreferences
+import android.content.ClipboardManager
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -22,10 +23,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import android.content.Context
+import android.widget.LinearLayout
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.textview.MaterialTextView
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.ImageFullscreenLayoutBinding
-import com.muratcangzm.lunargaze.models.local.FavoriteDao
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.models.remote.ChannelModel
 import com.muratcangzm.lunargaze.repository.FavoriteRepo
@@ -103,6 +107,11 @@ class FullScreenImageFragment : Fragment() {
                 findNavController().navigateUp()
             }
 
+            bottomSheetPopUp.setOnClickListener {
+                showBottomSheet()
+
+            }
+
             bookmarkedButtonCard.setOnClickListener {
 
                 val inflater = LayoutInflater.from(requireContext())
@@ -125,16 +134,21 @@ class FullScreenImageFragment : Fragment() {
 
                 saveButton.setOnClickListener {
 
-                    Toast.makeText(requireContext(), "Successfully Saved", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Successfully Saved", Toast.LENGTH_SHORT)
+                        .show()
                     Log.d("Kayıtlılar: ", "${radioAdapter.whichChecked.size}")
 
 
-                    favoriteModel = receivedData?.user?.avatarUrl?.let { it1 ->
+                    favoriteModel = receivedData?.user?.avatarUrl?.let { image ->
                         FavoriteModel(
                             null,
                             radioAdapter.whichChecked,
-                            it1,
-                            receivedData!!.user!!.description
+                            image,
+                            receivedData!!.featuredGif!!.username,
+                            receivedData!!.featuredGif!!.rating,
+                            receivedData!!.featuredGif!!.type,
+                            receivedData!!.featuredGif!!.sharedDateTime,
+                            receivedData!!.featuredGif!!.title
                         )
                     }
 
@@ -232,6 +246,58 @@ class FullScreenImageFragment : Fragment() {
             e.printStackTrace()
             Toast.makeText(requireContext(), "Failed to save", Toast.LENGTH_SHORT).show()
         }
+
+    }
+
+    @SuppressLint("InflateParams")
+    private fun showBottomSheet() {
+
+        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
+        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+
+        val updateTime = sheetView.findViewById<MaterialTextView>(R.id.updateTime)
+        val description = sheetView.findViewById<MaterialTextView>(R.id.descriptionText)
+        val close = sheetView.findViewById<LinearLayout>(R.id.SheetClose)
+        val uploader = sheetView.findViewById<MaterialTextView>(R.id.uploader)
+        val type = sheetView.findViewById<MaterialTextView>(R.id.imageType)
+        val rating = sheetView.findViewById<MaterialTextView>(R.id.imageRating)
+        val link = sheetView.findViewById<MaterialTextView>(R.id.imageLinkText)
+
+
+
+        receivedData.apply {
+
+            updateTime.text = this!!.featuredGif?.sharedDateTime ?: "Empty"
+            type.text = this.type ?: "Empty"
+            uploader.text = this.featuredGif?.username ?: "Empty"
+            rating.text = this.featuredGif?.rating ?: "Empty"
+            description.text = this.featuredGif?.title ?: "Empty"
+            link.text = this.featuredGif?.embedUrl ?: "Empty"
+
+            link.setOnClickListener {
+
+                val clipboardManager =
+                    requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+                val clip = ClipData.newPlainText("URL", this.featuredGif?.embedUrl)
+                clipboardManager.setPrimaryClip(clip)
+
+                Toast.makeText(requireContext(), "URL Copied", Toast.LENGTH_SHORT).show()
+
+            }
+
+            close.setOnClickListener {
+                bottomSheetDialog.dismiss()
+            }
+
+
+        }
+
+
+
+
+        bottomSheetDialog.setContentView(sheetView)
+        bottomSheetDialog.show()
 
     }
 

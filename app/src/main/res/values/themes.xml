@@ -23,5 +23,17 @@
         <item name="android:background">@drawable/custom_indicator</item>
     </style>
 
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="background">
+            @color/black
+        </item>
+    </style>
+    
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">
+             @style/BottomSheetStyle
+        </item>
+    </style>
+
     <style name="Theme.LunarGaze" parent="Base.Theme.LunarGaze" />
 </resources>

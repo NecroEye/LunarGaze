@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.muratcangzm.lunargaze.databinding.FavoritedImageLayoutBinding
+import com.muratcangzm.lunargaze.models.local.FavoriteModel
 
 class FavoritedImageFragment : Fragment() {
 
@@ -29,8 +30,13 @@ class FavoritedImageFragment : Fragment() {
     ): View {
         _binding = FavoritedImageLayoutBinding.inflate(inflater, container, false)
 
-        val receivedData = requireArguments().getParcelableArray("roomData")
+        val receivedData = requireArguments().getParcelableArray("roomData") as Array<FavoriteModel>?
+
         Log.d("Yerel Data: ", "${receivedData?.size}")
+
+
+
+
 
      return binding.root
 

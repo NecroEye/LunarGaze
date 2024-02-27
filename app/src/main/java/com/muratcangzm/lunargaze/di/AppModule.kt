@@ -47,7 +47,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideFavoriteRepo(dao: FavoriteDao) : FavoriteRepo{
+    fun provideFavoriteRepo(dao: FavoriteDao): FavoriteRepo {
         return FavoriteRepo(dao)
     }
 
@@ -66,7 +66,9 @@ object AppModule {
         context,
         FavoriteDatabase::class.java,
         "db"
-    ).build()
+    )
+        .fallbackToDestructiveMigration()
+        .build()
 
 
     @Provides
