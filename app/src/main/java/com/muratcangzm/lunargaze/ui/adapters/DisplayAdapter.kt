@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
@@ -12,8 +13,6 @@ import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.DisplayAdapterFragmentBinding
 import com.muratcangzm.lunargaze.models.remote.ChannelModel
-import com.muratcangzm.lunargaze.ui.fragments.DisplayFragmentDirections
-import com.muratcangzm.lunargaze.ui.fragments.SearchDisplayFragmentDirections
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 import kotlin.jvm.Throws
@@ -82,18 +81,22 @@ constructor(
 
                 displayCard.setOnClickListener {
 
+                    val bundle = bundleOf("imageData" to data)
+
                     if (currentDestination!!.id == R.id.displayFragment) {
-                        val action =
-                            DisplayFragmentDirections.actionDisplayFragmentToFullScreenImageFragment(data
-                            )
-                        Navigation.findNavController(it).navigate(action)
+
+                        Navigation.findNavController(it).navigate(
+                            R.id.action_displayFragment_to_fullScreenImageFragment,
+                            bundle
+                        )
+
                     } else {
-                        val action1 =
-                            SearchDisplayFragmentDirections.actionSearchDisplayFragmentToFullScreenImageFragment(
-                                data
-                            )
+
                         Navigation.findNavController(it)
-                            .navigate(action1)
+                            .navigate(
+                                R.id.action_searchDisplayFragment_to_fullScreenImageFragment,
+                                bundle
+                            )
                     }
 
 
@@ -104,6 +107,13 @@ constructor(
 
         }
 
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+
+        channelModelList = null
+        currentFragment = null
     }
 
 

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.muratcangzm.lunargaze.databinding.SearchDisplayFragmentLayoutBinding
 import com.muratcangzm.lunargaze.ui.adapters.CategoryAdapter
@@ -31,6 +32,7 @@ class SearchDisplayFragment : Fragment() {
 
 
     private val viewModel: DisplayViewModel by viewModels()
+    private val args: SearchDisplayFragmentArgs by navArgs()
 
     init {
 
@@ -46,7 +48,7 @@ class SearchDisplayFragment : Fragment() {
     ): View {
         _binding = SearchDisplayFragmentLayoutBinding.inflate(inflater, container, false)
 
-        val receivedData = requireArguments().getString("searchData")
+        val receivedData = args.searchData
 
         binding.searchAdapter.adapter = searchAdapter
         binding.searchAdapter.layoutManager =
@@ -54,7 +56,7 @@ class SearchDisplayFragment : Fragment() {
         binding.searchAdapter.hasFixedSize()
 
 
-        viewModel.getChannels(receivedData!!.lowercase())
+        viewModel.getChannels(receivedData.lowercase())
         observeDataChange()
 
 

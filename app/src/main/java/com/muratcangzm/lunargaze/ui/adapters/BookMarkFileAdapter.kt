@@ -4,8 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
+import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.DisplayAdapterFragmentBinding
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import dagger.hilt.android.qualifiers.ActivityContext
@@ -72,9 +75,17 @@ constructor(
 
                 displayCard.setOnClickListener {
 
+                    val bundle =  bundleOf("roomModelData" to favoriteModel)
+                    Navigation.findNavController(it).navigate(R.id.action_favoritedImageFragment_to_fullScreenImageFragment2, bundle)
+
 
                 }
             }
         }
     }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+    }
+
 }

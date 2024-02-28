@@ -84,7 +84,15 @@
         <!--suppress NavigationFile -->
         <argument
             android:name="imageData"
-            app:argType="com.muratcangzm.lunargaze.models.remote.ChannelModel$ChannelData" />
+            app:argType="com.muratcangzm.lunargaze.models.remote.ChannelModel$ChannelData"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <!--suppress NavigationFile -->
+        <argument
+            android:name="roomModelData"
+            app:argType="com.muratcangzm.lunargaze.models.local.FavoriteModel"
+            app:nullable="true"
+            android:defaultValue="@null" />
         <action
             android:id="@+id/action_fullScreenImageFragment_to_displayFragment"
             app:destination="@id/displayFragment"
@@ -93,6 +101,10 @@
             android:id="@+id/action_fullScreenImageFragment_to_searchDisplayFragment"
             app:destination="@id/searchDisplayFragment"
             app:popUpTo="@id/searchDisplayFragment" />
+        <action
+            android:id="@+id/action_fullScreenImageFragment_to_favoritedImageFragment2"
+            app:destination="@id/favoritedImageFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/favoritedImageFragment"
@@ -106,5 +118,8 @@
         <argument
             android:name="roomData"
             app:argType="com.muratcangzm.lunargaze.models.local.FavoriteModel[]" />
+        <action
+            android:id="@+id/action_favoritedImageFragment_to_fullScreenImageFragment2"
+            app:destination="@id/fullScreenImageFragment" />
     </fragment>
 </navigation>

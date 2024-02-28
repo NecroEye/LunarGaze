@@ -74,4 +74,10 @@ constructor(
     }
 
 
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+
+        allFileNames = null
+    }
+
 }

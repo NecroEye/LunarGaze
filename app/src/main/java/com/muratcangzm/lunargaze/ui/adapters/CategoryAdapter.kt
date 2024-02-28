@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
+import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.CategoryRecyclerLayoutBinding
 import com.muratcangzm.lunargaze.models.remote.CategoryModel
 import com.muratcangzm.lunargaze.ui.fragments.HomeFragmentDirections
@@ -79,12 +81,11 @@ class CategoryAdapter
                 categoryCard.setOnClickListener {
 
 
-                    val action =
-                        HomeFragmentDirections.actionHomeFragmentToDisplayFragment(data.name!!)
+                    val bundle = bundleOf("searchData" to data)
 
                     Navigation
                         .findNavController(it)
-                        .navigate(action)
+                        .navigate(R.id.action_homeFragment_to_searchDisplayFragment, bundle)
 
 
                 }
@@ -96,5 +97,11 @@ class CategoryAdapter
 
     }
 
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+
+        categoryList = null
+    }
 
 }

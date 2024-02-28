@@ -26,6 +26,7 @@ import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import android.content.Context
 import android.widget.LinearLayout
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.muratcangzm.lunargaze.R
@@ -60,9 +61,11 @@ class FullScreenImageFragment : Fragment() {
     lateinit var favoriteRepo: FavoriteRepo
 
     private var receivedData: ChannelModel.ChannelData? = null
+    private var roomData: FavoriteModel? = null
     private var alertDialog: AlertDialog? = null
     private var favoriteModel: FavoriteModel? = null
     private var compositeDisposable = CompositeDisposable()
+    private val args: FullScreenImageFragmentArgs by navArgs()
 
 
     init {
@@ -79,10 +82,10 @@ class FullScreenImageFragment : Fragment() {
 
         _binding = ImageFullscreenLayoutBinding.inflate(inflater, container, false)
 
-        receivedData = requireArguments().getParcelable<ChannelModel.ChannelData>("imageData")
+        receivedData = args.imageData
+        roomData = args.roomModelData
+
         Log.d("FullScreenData: ", " $receivedData")
-
-
         setUIComponent()
 
         return binding.root
@@ -99,9 +102,25 @@ class FullScreenImageFragment : Fragment() {
 
         binding.apply {
 
-            glide
-                .load(receivedData!!.user!!.avatarUrl)
-                .into(fullScreenImage)
+            if (roomData == null) {
+                glide
+                    .load(receivedData!!.user!!.avatarUrl)
+                    .into(fullScreenImage)
+
+                bookmarkedButton.visibility = View.VISIBLE
+
+            } else {
+                glide
+                    .load(roomData!!.imageUrl)
+                    .into(fullScreenImage)
+
+                bookmarkedButton.visibility = View.INVISIBLE
+
+            }
+
+
+
+
 
             backButton.setOnClickListener {
                 findNavController().navigateUp()
@@ -111,6 +130,8 @@ class FullScreenImageFragment : Fragment() {
                 showBottomSheet()
 
             }
+
+
 
             bookmarkedButtonCard.setOnClickListener {
 
@@ -136,8 +157,6 @@ class FullScreenImageFragment : Fragment() {
 
                     Toast.makeText(requireContext(), "Successfully Saved", Toast.LENGTH_SHORT)
                         .show()
-                    Log.d("Kayıtlılar: ", "${radioAdapter.whichChecked.size}")
-
 
                     favoriteModel = receivedData?.user?.avatarUrl?.let { image ->
                         FavoriteModel(
@@ -168,8 +187,11 @@ class FullScreenImageFragment : Fragment() {
 
                 val sharedIntent = Intent(Intent.ACTION_SEND)
                 sharedIntent.type = "text/plain"
-                sharedIntent.putExtra(Intent.EXTRA_TEXT, receivedData!!.user!!.avatarUrl)
 
+                if (roomData == null)
+                    sharedIntent.putExtra(Intent.EXTRA_TEXT, receivedData!!.user!!.avatarUrl)
+                else
+                    sharedIntent.putExtra(Intent.EXTRA_TEXT, roomData!!.imageUrl)
                 startActivity(Intent.createChooser(sharedIntent, "Share an image/gif"))
 
             }
@@ -265,36 +287,49 @@ class FullScreenImageFragment : Fragment() {
 
 
 
-        receivedData.apply {
-
-            updateTime.text = this!!.featuredGif?.sharedDateTime ?: "Empty"
-            type.text = this.type ?: "Empty"
-            uploader.text = this.featuredGif?.username ?: "Empty"
-            rating.text = this.featuredGif?.rating ?: "Empty"
-            description.text = this.featuredGif?.title ?: "Empty"
-            link.text = this.featuredGif?.embedUrl ?: "Empty"
-
-            link.setOnClickListener {
-
-                val clipboardManager =
-                    requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-
-                val clip = ClipData.newPlainText("URL", this.featuredGif?.embedUrl)
-                clipboardManager.setPrimaryClip(clip)
-
-                Toast.makeText(requireContext(), "URL Copied", Toast.LENGTH_SHORT).show()
-
-            }
-
-            close.setOnClickListener {
-                bottomSheetDialog.dismiss()
-            }
 
 
+        if (roomData == null) {
+            updateTime.text = receivedData!!.featuredGif?.sharedDateTime ?: "Empty"
+            type.text = receivedData!!.type ?: "Empty"
+            uploader.text = receivedData!!.featuredGif?.username ?: "Empty"
+            rating.text = receivedData!!.featuredGif?.rating ?: "Empty"
+            description.text = receivedData!!.featuredGif?.title ?: "Empty"
+            link.text = receivedData!!.featuredGif?.embedUrl ?: "Empty"
+        } else {
+
+            updateTime.text = roomData!!.updateTime ?: "Empty"
+            type.text = roomData!!.type ?: "Empty"
+            uploader.text = roomData?.userName ?: "Empty"
+            rating.text = roomData!!.rating ?: "Empty"
+            description.text = roomData!!.description ?: "Empty"
+            link.text = roomData!!.imageUrl ?: "Empty"
         }
 
 
+        link.setOnClickListener {
 
+            val clipboardManager =
+                requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+            val clip: ClipData?
+
+            if (roomData == null) {
+                clip = ClipData.newPlainText("URL", receivedData!!.featuredGif?.embedUrl)
+                clipboardManager.setPrimaryClip(clip!!)
+
+            } else {
+                clip = ClipData.newPlainText("URL", roomData!!.imageUrl)
+                clipboardManager.setPrimaryClip(clip!!)
+            }
+
+            Toast.makeText(requireContext(), "URL Copied", Toast.LENGTH_SHORT).show()
+
+        }
+
+        close.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
 
         bottomSheetDialog.setContentView(sheetView)
         bottomSheetDialog.show()
@@ -302,14 +337,20 @@ class FullScreenImageFragment : Fragment() {
     }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        receivedData = null
-        _binding = null
-        alertDialog = null
-        favoriteModel = null
 
-        compositeDisposable.clear()
 
-    }
+
+
+
+
+override fun onDestroyView() {
+    super.onDestroyView()
+    receivedData = null
+    _binding = null
+    alertDialog = null
+    favoriteModel = null
+
+    compositeDisposable.clear()
+
+}
 }
