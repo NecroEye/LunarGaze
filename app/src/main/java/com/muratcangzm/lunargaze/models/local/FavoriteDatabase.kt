@@ -20,7 +20,7 @@ abstract class FavoriteDatabase : RoomDatabase() {
         val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 // if you added a new column, you'd run an ALTER TABLE query without losing old db
-                db.execSQL("ALTER TABLE FavoriteModel ADD COLUMN new_column_name TEXT")
+                db.execSQL("ALTER TABLE favImages ADD COLUMN table_userName TEXT DEFAULT ''")
             }
         }
          */
