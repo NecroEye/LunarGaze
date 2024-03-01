@@ -57,10 +57,17 @@ class FavoritesFragment : Fragment() {
         savedFiles = sharedPreferences.all
         stringList = savedFiles.values.filterIsInstance<String>()
 
-        if(stringList.isEmpty())
+        if (stringList.isEmpty()) {
+
             binding.emptyFavFileText.visibility = View.VISIBLE
-        else
+            binding.lottieArrow.visibility = View.VISIBLE
+        } else {
+
             binding.emptyFavFileText.visibility = View.INVISIBLE
+            binding.lottieArrow.visibility = View.GONE
+        }
+
+
 
         favoriteFileAdapter.submitFileNames(stringList)
         binding.fileRecycler.hasFixedSize()
@@ -117,7 +124,8 @@ class FavoritesFragment : Fragment() {
                     putString(input.text.toString(), input.text.toString())
                         .apply()
 
-                    val updatedList = stringList.toMutableList().apply { add(input.text.toString()) }
+                    val updatedList =
+                        stringList.toMutableList().apply { add(input.text.toString()) }
                     favoriteFileAdapter.submitFileNames(updatedList)
 
 

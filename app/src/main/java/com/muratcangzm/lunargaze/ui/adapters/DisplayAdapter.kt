@@ -26,7 +26,7 @@ constructor(
 ) : RecyclerView.Adapter<DisplayAdapter.DisplayHolder>() {
 
     private lateinit var binding: DisplayAdapterFragmentBinding
-    private var channelModelList: ChannelModel? = null
+    private var channelModels = mutableListOf<ChannelModel.ChannelData>()
     private var currentFragment: Fragment? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisplayHolder {
@@ -38,13 +38,13 @@ constructor(
 
     @Throws(ArrayIndexOutOfBoundsException::class)
     override fun getItemCount(): Int {
-        return channelModelList?.channelData?.size ?: 0
+        return channelModels.size ?: 0
     }
 
     override fun onBindViewHolder(holder: DisplayHolder, position: Int) {
 
 
-        holder.setData(channelModelList?.channelData!![position])
+        holder.setData(channelModels[position])
 
     }
 
@@ -53,12 +53,12 @@ constructor(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitData(channelModels: ChannelModel, fragment: Fragment) {
+    fun submitData(mutableChannels: MutableList<ChannelModel.ChannelData>, fragment: Fragment) {
 
         currentFragment = fragment
 
         channelModels.let {
-            channelModelList = channelModels
+            channelModels = mutableChannels
             notifyDataSetChanged()
         }
 
@@ -112,7 +112,6 @@ constructor(
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
 
-        channelModelList = null
         currentFragment = null
     }
 

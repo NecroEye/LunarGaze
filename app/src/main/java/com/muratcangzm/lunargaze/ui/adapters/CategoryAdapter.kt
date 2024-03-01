@@ -81,7 +81,7 @@ class CategoryAdapter
                 categoryCard.setOnClickListener {
 
 
-                    val bundle = bundleOf("searchData" to data)
+                    val bundle = bundleOf("searchData" to data.name)
 
                     Navigation
                         .findNavController(it)
@@ -89,7 +89,6 @@ class CategoryAdapter
 
 
                 }
-
 
             }
         }
@@ -103,5 +102,6 @@ class CategoryAdapter
 
         categoryList = null
     }
+
 
 }

@@ -2,22 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/night"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/night">
 
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/emptyFavFileText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="300dp"
+        android:fontFamily="@font/acme"
         android:gravity="center"
         android:text="@string/your_favorite_file_list_is_empty"
-        android:fontFamily="@font/acme"
-        android:id="@+id/emptyFavFileText"
         android:textColor="@color/white"
-        android:visibility="invisible"
         android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="invisible" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -26,6 +26,24 @@
         android:layout_height="match_parent"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="64dp" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieArrow"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:layout_alignTop="@id/favButton"
+        android:layout_toStartOf="@id/favButton"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="100dp"
+        android:maxWidth="250dp"
+        android:minWidth="100dp"
+        android:scaleType="center"
+        android:visibility="visible"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/anim_arrow" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/favButton"
@@ -39,7 +57,6 @@
         android:contentDescription="@string/create_favorite_folder"
         android:elevation="8dp"
         android:src="@drawable/add_icon"
-        app:borderWidth="1dp"
         app:fabSize="normal"
         app:rippleColor="@color/deep_blue" />
 

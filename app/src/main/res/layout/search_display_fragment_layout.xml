@@ -5,6 +5,11 @@
     android:background="@color/night">
 
 
+    <include
+        android:id="@+id/searchLoadingScreen"
+        layout="@layout/loading_screen_layout"
+        android:visibility="visible"/>
+
     <TextView
         android:id="@+id/searchFragmentEmpty"
         android:layout_width="match_parent"
@@ -23,6 +28,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchAdapter"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent" />
 
 

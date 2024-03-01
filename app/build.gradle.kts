@@ -23,9 +23,10 @@ android {
     buildTypes {
 
         release {
+
             isMinifyEnabled = true
-            isDebuggable = false
             isShrinkResources = true
+            isDebuggable = false
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -34,9 +35,11 @@ android {
         }
 
         debug {
-            isMinifyEnabled = false
+
             isDebuggable = true
+            isMinifyEnabled = false
             isShrinkResources = false
+
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -54,6 +57,7 @@ android {
 
     buildFeatures{
         viewBinding = true
+        dataBinding = true
     }
 
 }
@@ -64,6 +68,7 @@ dependencies {
     val lifecycle_version = "2.7.0"
     val room_version = "2.6.1"
     val fragment_version = "1.6.2"
+    val lottieVersion = "3.4.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -78,7 +83,6 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
-
 
     //LifeCycle & LiveData
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
@@ -104,13 +108,22 @@ dependencies {
 
     //UI
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.airbnb.android:lottie:$lottieVersion")
+
+    //Google Auth
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+    implementation("com.google.android.gms:play-services-auth-api-phone:18.0.2")
+
+    //Facebook Login
+    implementation("com.facebook.android:facebook-login:latest.release")
+
 
     //Testing
-    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
     implementation("com.google.truth:truth:1.1.4")
     testImplementation("org.mockito:mockito-core:4.7.0")
-    debugImplementation("androidx.fragment:fragment-testing:$fragment_version")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
+    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
+    debugImplementation("androidx.fragment:fragment-testing:$fragment_version")
 
     //Android Testing
     androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")

@@ -12,12 +12,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.muratcangzm.lunargaze.databinding.SearchDisplayFragmentLayoutBinding
+import com.muratcangzm.lunargaze.models.remote.ChannelModel
 import com.muratcangzm.lunargaze.ui.adapters.CategoryAdapter
 import com.muratcangzm.lunargaze.ui.adapters.DisplayAdapter
+import com.muratcangzm.lunargaze.utils.NetworkChecking
 import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class SearchDisplayFragment : Fragment() {
@@ -29,6 +32,9 @@ class SearchDisplayFragment : Fragment() {
 
     @Inject
     lateinit var searchAdapter: DisplayAdapter
+
+    @Inject
+    lateinit var networkChecking: NetworkChecking
 
 
     private val viewModel: DisplayViewModel by viewModels()
@@ -71,23 +77,52 @@ class SearchDisplayFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun observeDataChange() {
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.channelResult.collect {
+        if (networkChecking.isNetworkAvailable()) {
 
-                // if pagination's total count is above 50 then create a random number generator its size demands pagination count and only 50 image picks
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.channelResult.collect {
 
-                it?.let {
-                    if (it.pagination!!.totalCount == 0) {
-                        binding.searchFragmentEmpty.visibility = View.VISIBLE
-                    } else {
-                        binding.searchFragmentEmpty.visibility = View.INVISIBLE
-                        searchAdapter.submitData(it, this@SearchDisplayFragment)
+
+                    // if pagination's total count is above 50 then create a random number generator its size demands pagination count and only 50 image picks
+                    it?.let {
+
+                        if (it.pagination!!.totalCount == 0) {
+                            binding.searchFragmentEmpty.visibility = View.VISIBLE
+                        }  else {
+                            binding.searchFragmentEmpty.visibility = View.INVISIBLE
+                            binding.searchLoadingScreen.loadingScreenLayout.visibility = View.GONE
+                            searchAdapter.submitData(
+                                it.channelData!!.toMutableList(),
+                                this@SearchDisplayFragment
+                            )
+                            binding.searchAdapter.visibility = View.VISIBLE
+                        }
                     }
-
                 }
-
             }
+        } else {
+            binding.searchLoadingScreen.loadingScreenLayout.visibility = View.VISIBLE
+            binding.searchAdapter.visibility = View.GONE
         }
+    }
+
+    //Cannot get more than 50 because of call limit
+    private fun randomizer(channelModel: ChannelModel) {
+
+        val randomModel = mutableListOf<ChannelModel.ChannelData>()
+
+        repeat(49) {
+
+            val random = channelModel.pagination!!.totalCount?.let { Random.nextInt(0, it) }
+            randomModel.add(channelModel.channelData!![random!!])
+
+        }
+
+        binding.searchFragmentEmpty.visibility = View.INVISIBLE
+        binding.searchLoadingScreen.loadingScreenLayout.visibility = View.GONE
+        searchAdapter.submitData(randomModel, this@SearchDisplayFragment)
+        binding.searchAdapter.visibility = View.VISIBLE
+
     }
 
 

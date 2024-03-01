@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.FavoriteFolderLayoutBinding
+import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.repository.FavoriteRepo
 import com.muratcangzm.lunargaze.ui.fragments.FavoritesFragmentDirections
 import dagger.hilt.android.qualifiers.ActivityContext
@@ -25,12 +26,14 @@ class FavoriteFileAdapter
 constructor(
     @ActivityContext private val context: Context,
     private val sharedPreferences: SharedPreferences,
-    private val repo: FavoriteRepo
+    private val repo: FavoriteRepo,
+    private val favoriteRepo: FavoriteRepo
 ) :
     RecyclerView.Adapter<FavoriteFileAdapter.FavFileHolder>() {
 
     private lateinit var binding: FavoriteFolderLayoutBinding
     private var emptyFileName = emptyList<String>()
+    private var deletedOnes = emptyList<FavoriteModel>()
     private var sharedEditor = sharedPreferences.edit()
     private var disposable: Disposable? = null
 
@@ -98,8 +101,9 @@ constructor(
                                 } == true // any'nin döndüreceği boolean eşitse true'ya
                             }
 
-                             val action = FavoritesFragmentDirections.toBookMarked(newData.toTypedArray())
-                             button.findNavController().navigate(action)
+                            val action =
+                                FavoritesFragmentDirections.toBookMarked(newData.toTypedArray())
+                            button.findNavController().navigate(action)
 
                         },
                             { error ->
@@ -119,6 +123,34 @@ constructor(
                             sharedEditor.remove(fileName).apply()
                             emptyFileName = emptyFileName.filter { it != fileName }
                             notifyDataSetChanged()
+
+                            disposable = repo.getAllFavImages()
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe({ roomList ->
+
+                                    deletedOnes = roomList.filter { folderName ->
+                                        folderName.folder!!.any { folder ->
+                                            emptyFileName.contains(
+                                                folder
+                                            )
+                                        }
+                                    }
+
+                                    for (deleted in deletedOnes) {
+                                        favoriteRepo.deleteFavImage(deleted)
+                                            .subscribeOn(Schedulers.io())
+                                            .observeOn(AndroidSchedulers.mainThread())
+                                            .subscribe()
+                                    }
+
+                                },
+                                    { error ->
+                                        error.localizedMessage?.let { Log.d("Bütün oda: ", it) }
+                                    })
+
+
+
                             dialog.dismiss()
 
                         }
@@ -137,6 +169,24 @@ constructor(
 
 
     }
+
+    fun addAnItemToList(position: Int, folderName: String) {
+
+        //emptyFileName.add(position, folderName)
+        notifyItemInserted(position)
+        notifyItemRangeInserted(position, emptyFileName.size)
+
+
+    }
+
+    fun removeAnItemFromList(position: Int) {
+
+        //emptyFileName.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, emptyFileName.size)
+
+    }
+
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)

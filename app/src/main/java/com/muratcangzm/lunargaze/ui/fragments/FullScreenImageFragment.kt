@@ -25,6 +25,8 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import android.content.Context
+import android.view.ScaleGestureDetector
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.button.MaterialButton
@@ -64,6 +66,9 @@ class FullScreenImageFragment : Fragment() {
     private var roomData: FavoriteModel? = null
     private var alertDialog: AlertDialog? = null
     private var favoriteModel: FavoriteModel? = null
+    private var scaleGestureDetector: ScaleGestureDetector? = null
+    private var scaleFactor = 1.0f
+
     private var compositeDisposable = CompositeDisposable()
     private val args: FullScreenImageFragmentArgs by navArgs()
 
@@ -85,7 +90,9 @@ class FullScreenImageFragment : Fragment() {
         receivedData = args.imageData
         roomData = args.roomModelData
 
-        Log.d("FullScreenData: ", " $receivedData")
+        scaleGestureDetector =
+            ScaleGestureDetector(requireContext(), ScaleListener(binding.fullScreenImage))
+
         setUIComponent()
 
         return binding.root
@@ -97,7 +104,7 @@ class FullScreenImageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    @SuppressLint("InflateParams")
+    @SuppressLint("InflateParams", "ClickableViewAccessibility")
     private fun setUIComponent() {
 
         binding.apply {
@@ -120,7 +127,11 @@ class FullScreenImageFragment : Fragment() {
 
 
 
+            fullScreenImage.setOnTouchListener { _, event ->
 
+                scaleGestureDetector?.onTouchEvent(event)
+                true
+            }
 
             backButton.setOnClickListener {
                 findNavController().navigateUp()
@@ -337,20 +348,33 @@ class FullScreenImageFragment : Fragment() {
     }
 
 
+    inner class ScaleListener(private val imageView: ImageView) :
+        ScaleGestureDetector.SimpleOnScaleGestureListener() {
+
+        override fun onScale(detector: ScaleGestureDetector): Boolean {
+
+            scaleFactor *= detector.scaleFactor
+            scaleFactor = scaleFactor.coerceIn(0.1f, 10.0f)
+
+            imageView.scaleX = scaleFactor
+            imageView.scaleY = scaleFactor
+
+            return true
+        }
 
 
+    }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        receivedData = null
+        _binding = null
+        alertDialog = null
+        favoriteModel = null
+        scaleGestureDetector = null
 
+        compositeDisposable.clear()
 
-override fun onDestroyView() {
-    super.onDestroyView()
-    receivedData = null
-    _binding = null
-    alertDialog = null
-    favoriteModel = null
-
-    compositeDisposable.clear()
-
-}
+    }
 }

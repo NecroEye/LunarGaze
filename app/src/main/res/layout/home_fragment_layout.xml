@@ -5,12 +5,17 @@
     android:background="@color/night"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/loadingScreen"
+        layout="@layout/loading_screen_layout"
+        android:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoryRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="64dp"
+        android:visibility="gone"
         android:clipChildren="false" />
 
 

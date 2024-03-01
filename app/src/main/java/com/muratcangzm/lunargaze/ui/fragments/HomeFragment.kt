@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.muratcangzm.lunargaze.databinding.HomeFragmentLayoutBinding
 import com.muratcangzm.lunargaze.ui.adapters.CategoryAdapter
+import com.muratcangzm.lunargaze.utils.NetworkChecking
 import com.muratcangzm.lunargaze.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -27,6 +28,9 @@ class HomeFragment : Fragment() {
 
     @Inject
     lateinit var categoryAdapter: CategoryAdapter
+
+    @Inject
+    lateinit var networkChecking: NetworkChecking
 
     private val binding
         get() = _binding!!
@@ -47,6 +51,8 @@ class HomeFragment : Fragment() {
 
         _binding = HomeFragmentLayoutBinding.inflate(inflater, container, false)
 
+
+
         setupViews()
         observeDataChange()
 
@@ -59,21 +65,31 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun observeDataChange(){
+    private fun observeDataChange() {
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.categoriesResult.collect {
+        if (networkChecking.isNetworkAvailable()) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.categoriesResult.collect {
 
-                it?.let { result ->
+                    it?.let { result ->
 
-                    Log.d("Veri", "Gelen Veri: $result")
-                    categoryAdapter.submitCategory(result)
+                        categoryAdapter.submitCategory(result)
+                        binding.loadingScreen.loadingScreenLayout.visibility = View.GONE
+                        binding.categoryRecycler.visibility = View.VISIBLE
+
+
+                    }
 
                 }
 
             }
+        } else {
+            binding.loadingScreen.loadingScreenLayout.visibility = View.VISIBLE
+            binding.categoryRecycler.visibility = View.GONE
+
 
         }
+
 
     }
 
