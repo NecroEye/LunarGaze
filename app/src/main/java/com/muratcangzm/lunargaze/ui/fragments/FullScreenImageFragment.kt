@@ -361,8 +361,6 @@ class FullScreenImageFragment : Fragment() {
 
             return true
         }
-
-
     }
 
 

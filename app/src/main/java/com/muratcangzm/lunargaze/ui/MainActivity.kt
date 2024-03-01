@@ -39,6 +39,8 @@ class MainActivity : AppCompatActivity() {
 
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
 
+            currentFocus?.clearFocus()
+
             when (destination.id) {
                 R.id.displayFragment -> {
                     binding.bottomNavigation.visibility = View.GONE
@@ -54,9 +56,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.searchDisplayFragment -> {
-                    binding.toolbar.visibility = View.GONE
                     binding.bottomNavigation.visibility = View.GONE
-
+                    binding.toolbar.visibility = View.INVISIBLE
                 }
 
                 R.id.homeFragment -> {
@@ -105,9 +106,9 @@ class MainActivity : AppCompatActivity() {
                         HomeFragmentDirections.actionHomeFragmentToSearchDisplayFragment(query)
                     navController.navigate(action)
 
-
+                    searchItem?.collapseActionView()
                     searchView.clearFocus()
-
+                    return true
                 }
 
                 return false
@@ -121,6 +122,8 @@ class MainActivity : AppCompatActivity() {
 
         return true
     }
+
+
 
 
     override fun onDestroy() {
