@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("androidx.navigation.safeargs")
@@ -10,6 +13,10 @@ android {
     namespace = "com.muratcangzm.lunargaze"
     compileSdk = 34
 
+    val localProperties = Properties().apply {
+        load(FileInputStream(File(rootProject.rootDir, "local.properties")))
+    }
+
     defaultConfig {
         applicationId = "com.muratcangzm.lunargaze"
         minSdk = 28
@@ -18,6 +25,9 @@ android {
         versionName = "1.273642736427364"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
+
     }
 
     buildTypes {
@@ -27,6 +37,9 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             isDebuggable = false
+
+            buildConfigField("String", "API_KEY", localProperties.getProperty("API_KEY"))
+
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -39,6 +52,8 @@ android {
             isDebuggable = true
             isMinifyEnabled = false
             isShrinkResources = false
+
+            buildConfigField("String", "API_KEY", localProperties.getProperty("API_KEY"))
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -58,6 +73,7 @@ android {
     buildFeatures{
         viewBinding = true
         dataBinding = true
+        buildConfig = true
     }
 
 }
