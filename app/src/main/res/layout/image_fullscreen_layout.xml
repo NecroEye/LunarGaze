@@ -103,7 +103,7 @@
         android:id="@+id/bottomSheetPopUp"
         android:layout_width="130dp"
         android:layout_height="25dp"
-        android:layout_alignBottom="@id/saveButtonCard"
+        android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="140dp"
         android:background="@drawable/simple_corner_layout">
 
