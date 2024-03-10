@@ -77,7 +77,6 @@ class HomeFragment : Fragment() {
                         binding.loadingScreen.loadingScreenLayout.visibility = View.GONE
                         binding.categoryRecycler.visibility = View.VISIBLE
 
-
                     }
 
                 }

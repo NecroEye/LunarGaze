@@ -13,6 +13,8 @@
     <color name="light_black">#273130</color>
     <color name="silver">#C0C0C0</color>
     <color name="night_blue">#243F9C</color>
+    <color name="reverse_blue">#006FFF</color>
+    <color name="beyond_blue">#0096FF</color>
     <color name="sun">#F9FE51</color>
     <color name="transparent_half_background">#D9000000</color>
 

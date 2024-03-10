@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.muratcangzm.lunargaze.models.remote.ChannelModel
 import com.muratcangzm.lunargaze.repository.GiphyRepo
+import com.muratcangzm.lunargaze.utils.NetworkChecking
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.cancel
@@ -16,7 +17,9 @@ import javax.inject.Inject
 @HiltViewModel
 class DisplayViewModel
 @Inject
-constructor(private val giphyRepo: GiphyRepo) : ViewModel() {
+constructor(
+    private val giphyRepo: GiphyRepo,
+) : ViewModel() {
 
     private val _mutableChannelResult = MutableStateFlow<ChannelModel?>(null)
     val channelResult
@@ -26,6 +29,8 @@ constructor(private val giphyRepo: GiphyRepo) : ViewModel() {
     val dataLoading
         get() = _mutableDataLoading
 
+
+
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
 
         Log.d("Data Error", "something isnt right: ${throwable.message}")
@@ -33,14 +38,14 @@ constructor(private val giphyRepo: GiphyRepo) : ViewModel() {
     }
 
 
-    fun getChannels(search: String) {
+    fun getChannels(search: String, offset: Int?) {
 
         _mutableDataLoading.value = true
 
         viewModelScope.launch(exceptionHandler) {
             supervisorScope {
 
-                giphyRepo.fetchChannels(search).collect { result ->
+                giphyRepo.fetchChannels(search, offset).collect { result ->
 
                     Log.d("DisplayFragment Data0: ", "$result")
 

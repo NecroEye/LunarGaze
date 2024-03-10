@@ -22,7 +22,8 @@ interface GiphyAPI {
     suspend fun getChannels(
         @Query("api_key") apiKey: String = BuildConfig.API_KEY,
         @Query("q") query: String,
-        @Query("limit") limit: Int = 50
+        @Query("limit") limit: Int = 50,
+        @Query("offset") offset: Int?
     )
             : Response<ChannelModel>
 
@@ -31,7 +32,6 @@ interface GiphyAPI {
         @Query("api_key") apiKey: String = BuildConfig.API_KEY,
         @Query("q") query:String,
         @Query("limit") limit: Int = 50,
-        @Query("offset") offset: Int = 0,
         @Query("rating") rating: String = "g",
         @Query("lang") language: String = "en",
         @Query("bundle") bundle: String = "messaging_non_clips",

@@ -5,7 +5,6 @@ import android.app.AlertDialog
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +20,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class FavoritesFragment : Fragment() {
+
 
     private var _binding: FavoritesFragmentLayoutBinding? = null
     private val binding
@@ -57,17 +57,14 @@ class FavoritesFragment : Fragment() {
         savedFiles = sharedPreferences.all
         stringList = savedFiles.values.filterIsInstance<String>()
 
-        if (stringList.isEmpty()) {
-
+        if(stringList.isEmpty()){
             binding.emptyFavFileText.visibility = View.VISIBLE
             binding.lottieArrow.visibility = View.VISIBLE
-        } else {
-
-            binding.emptyFavFileText.visibility = View.INVISIBLE
-            binding.lottieArrow.visibility = View.GONE
         }
-
-
+        else{
+            binding.emptyFavFileText.visibility = View.INVISIBLE
+            binding.lottieArrow.visibility = View.INVISIBLE
+        }
 
         favoriteFileAdapter.submitFileNames(stringList)
         binding.fileRecycler.hasFixedSize()
@@ -124,11 +121,11 @@ class FavoritesFragment : Fragment() {
                     putString(input.text.toString(), input.text.toString())
                         .apply()
 
-                    val updatedList =
-                        stringList.toMutableList().apply { add(input.text.toString()) }
+                    val updatedList = stringList.toMutableList().apply { add(input.text.toString()) }
                     favoriteFileAdapter.submitFileNames(updatedList)
 
-
+                    binding.lottieArrow.visibility = View.INVISIBLE
+                    binding.emptyFavFileText.visibility = View.INVISIBLE
                 }
 
 

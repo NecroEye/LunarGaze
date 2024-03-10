@@ -31,11 +31,11 @@ class GiphyRepo(private val api: GiphyAPI) {
     }
 
 
-    suspend fun fetchChannels(search: String): Flow<DataResponse<ChannelModel>> = flow {
+    suspend fun fetchChannels(search: String, offset: Int?): Flow<DataResponse<ChannelModel>> = flow {
 
         try {
 
-            val response = api.getChannels(query = search)
+            val response = api.getChannels(query = search, offset = offset)
 
             if (response.isSuccessful)
                 emit(DataResponse.success(response.body()))

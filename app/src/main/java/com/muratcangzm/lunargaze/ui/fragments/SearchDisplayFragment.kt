@@ -36,6 +36,7 @@ class SearchDisplayFragment : Fragment() {
     @Inject
     lateinit var networkChecking: NetworkChecking
 
+    private var offset: Int? = null
 
     private val viewModel: DisplayViewModel by viewModels()
     private val args: SearchDisplayFragmentArgs by navArgs()
@@ -62,7 +63,8 @@ class SearchDisplayFragment : Fragment() {
         binding.searchAdapter.hasFixedSize()
 
 
-        viewModel.getChannels(receivedData.lowercase())
+
+        viewModel.getChannels(receivedData.trim().lowercase(), null)
         observeDataChange()
 
 
@@ -82,13 +84,11 @@ class SearchDisplayFragment : Fragment() {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.channelResult.collect {
 
-
-                    // if pagination's total count is above 50 then create a random number generator its size demands pagination count and only 50 image picks
                     it?.let {
 
                         if (it.pagination!!.totalCount == 0) {
                             binding.searchFragmentEmpty.visibility = View.VISIBLE
-                        }  else {
+                        } else {
                             binding.searchFragmentEmpty.visibility = View.INVISIBLE
                             binding.searchLoadingScreen.loadingScreenLayout.visibility = View.GONE
                             searchAdapter.submitData(
@@ -111,7 +111,7 @@ class SearchDisplayFragment : Fragment() {
 
         val randomModel = mutableListOf<ChannelModel.ChannelData>()
 
-        repeat(49) {
+        repeat(50) {
 
             val random = channelModel.pagination!!.totalCount?.let { Random.nextInt(0, it) }
             randomModel.add(channelModel.channelData!![random!!])
@@ -130,6 +130,8 @@ class SearchDisplayFragment : Fragment() {
         super.onDestroyView()
 
         _binding = null
+        offset = null
+
 
     }
 

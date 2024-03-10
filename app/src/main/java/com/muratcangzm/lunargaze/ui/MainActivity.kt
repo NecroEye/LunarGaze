@@ -1,17 +1,22 @@
 package com.muratcangzm.lunargaze.ui
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.ActivityMainBinding
 import com.muratcangzm.lunargaze.ui.fragments.HomeFragmentDirections
+import com.muratcangzm.lunargaze.utils.NetworkChecking
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -22,11 +27,17 @@ class MainActivity : AppCompatActivity() {
 
     private var searchItem: MenuItem? = null
 
+    @Inject
+    lateinit var networkChecking: NetworkChecking
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        Log.d("DataSpeed1: ", "${networkChecking.getMobileSpeed().first}")
+        Log.d("DataSpeed2: ", "${networkChecking.getMobileSpeed().second}")
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment

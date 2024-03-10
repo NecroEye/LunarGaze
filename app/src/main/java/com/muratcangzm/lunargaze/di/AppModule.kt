@@ -4,9 +4,15 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
+import androidx.datastore.preferences.SharedPreferencesMigration
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.emptyPreferences
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.room.Room
+import androidx.datastore.preferences.preferencesDataStoreFile
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -25,6 +31,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
 @Module
@@ -59,7 +68,6 @@ object AppModule {
         return HomeViewModel(repo)
     }
 
-
     @Provides
     @Singleton
     fun provideRoom(@ApplicationContext context: Context): FavoriteDatabase = Room.databaseBuilder(
@@ -87,13 +95,28 @@ object AppModule {
                     .placeholder(R.drawable.not_found)
                     .error(R.drawable.not_found)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
+
             )
     }
 
     @Provides
     @Singleton
     fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
-        return context.getSharedPreferences("shared_key", Context.MODE_PRIVATE)
+        return context.getSharedPreferences(Constants.SHARED_DB_NAME, Context.MODE_PRIVATE)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideDataStore(@ApplicationContext context: Context): DataStore<androidx.datastore.preferences.core.Preferences> {
+        return PreferenceDataStoreFactory.create(
+            corruptionHandler = ReplaceFileCorruptionHandler(
+                produceNewData = { emptyPreferences() }
+            ),
+            migrations = listOf(SharedPreferencesMigration(context,Constants.SHARED_DB_NAME)),
+            scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
+            produceFile = { context.preferencesDataStoreFile(Constants.SHARED_DB_NAME) }
+        )
     }
 
     @Provides
@@ -102,3 +125,5 @@ object AppModule {
     }
 
 }
+
+

@@ -7,12 +7,13 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/displayCard"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
         android:layout_marginVertical="5dp"
         android:backgroundTint="@color/white"
         android:clickable="true"
+        android:minWidth="120dp"
         android:elevation="3dp"
         android:padding="1dp"
         app:cardCornerRadius="0.5dp"
@@ -24,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/displayImage"
-            android:scaleType="fitXY" />
+            android:scaleType="fitCenter" />
 
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

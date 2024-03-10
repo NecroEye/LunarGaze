@@ -34,6 +34,7 @@
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
         app:endIconMode="clear_text"
+        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
         app:endIconTint="@color/black"
         app:helperText="Cannot be empty*"
         app:counterMaxLength="16"
@@ -56,6 +57,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveButton"
         android:layout_width="100dp"
+        android:backgroundTint="@color/beyond_blue"
         android:layout_height="50dp"
         android:layout_marginVertical="13dp"
         android:layout_marginStart="115dp"

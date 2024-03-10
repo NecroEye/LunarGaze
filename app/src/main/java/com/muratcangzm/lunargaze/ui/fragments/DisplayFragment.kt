@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.muratcangzm.lunargaze.databinding.DisplayFragmentLayoutBinding
 import com.muratcangzm.lunargaze.ui.adapters.DisplayAdapter
+import com.muratcangzm.lunargaze.utils.NetworkChecking
 import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -25,6 +26,11 @@ class DisplayFragment : Fragment() {
     private var _binding: DisplayFragmentLayoutBinding? = null
     private val binding
         get() = _binding!!
+
+    private var offset:Int? = null
+
+    @Inject
+    lateinit var networkChecking: NetworkChecking
 
     @Inject
     lateinit var displayAdapter: DisplayAdapter
@@ -46,7 +52,9 @@ class DisplayFragment : Fragment() {
         val receivedData = requireArguments().getString("channelData")
         setAdapter()
 
-        viewModel.getChannels(receivedData!!.lowercase())
+
+
+        viewModel.getChannels(receivedData!!.lowercase(), null)
         observeDataChange()
 
         return binding.root
@@ -65,20 +73,17 @@ class DisplayFragment : Fragment() {
 
                 it?.let { result ->
 
-
-
                     if(result.pagination!!.totalCount == 0){
                        binding.displayEmptyText.visibility = View.VISIBLE
                     }
                     else{
                     displayAdapter.submitData(result.channelData!!.toMutableList(), this@DisplayFragment)
                     binding.displayEmptyText.visibility = View.INVISIBLE
+
+
                     }
-
                 }
-
             }
-
         }
 
     }
@@ -100,6 +105,7 @@ class DisplayFragment : Fragment() {
         super.onDestroyView()
 
         _binding = null
+        offset = null
 
     }
 

@@ -26,8 +26,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-
-
     }
 
     buildTypes {
@@ -109,7 +107,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
     //RxJava
-    implementation ("io.reactivex.rxjava3:rxjava:3.0.0")
+    implementation ("io.reactivex.rxjava3:rxjava:3.0.2")
     implementation ("io.reactivex.rxjava3:rxandroid:3.0.0")
 
     //Room
@@ -121,6 +119,11 @@ dependencies {
     //Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.48.1")
     kapt("com.google.dagger:hilt-android-compiler:2.48.1")
+
+    //DataStore
+    implementation("androidx.datastore:datastore:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-rxjava3:1.0.0")
 
     //UI
     implementation("com.github.bumptech.glide:glide:4.16.0")

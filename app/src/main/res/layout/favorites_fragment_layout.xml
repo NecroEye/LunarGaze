@@ -28,36 +28,45 @@
         android:layout_marginTop="64dp" />
 
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieArrow"
-        android:layout_width="250dp"
-        android:layout_height="70dp"
-        android:layout_alignTop="@id/favButton"
-        android:layout_toStartOf="@id/favButton"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="100dp"
-        android:maxWidth="250dp"
-        android:minWidth="100dp"
-        android:scaleType="center"
-        android:visibility="visible"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/anim_arrow" />
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/favButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_marginBottom="140dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="55dp"
-        android:layout_marginBottom="145dp"
-        android:backgroundTint="@color/light_blue"
-        android:contentDescription="@string/create_favorite_folder"
-        android:elevation="8dp"
-        android:src="@drawable/add_icon"
-        app:fabSize="normal"
-        app:rippleColor="@color/deep_blue" />
+        android:orientation="horizontal">
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieArrow"
+            android:layout_width="230dp"
+            android:layout_height="105dp"
+            android:layout_marginEnd="10dp"
+            android:maxWidth="250dp"
+            android:minWidth="100dp"
+            android:layout_marginBottom="40dp"
+            android:scaleType="center"
+            android:visibility="visible"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/anim_arrow" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/favButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="35dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/light_blue"
+            android:contentDescription="@string/create_favorite_folder"
+            android:elevation="8dp"
+            android:src="@drawable/add_icon"
+            app:fabSize="normal"
+            app:rippleColor="@color/deep_blue" />
+
+    </LinearLayout>
+
 
 </RelativeLayout>

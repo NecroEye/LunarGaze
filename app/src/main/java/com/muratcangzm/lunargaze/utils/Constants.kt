@@ -1,8 +1,10 @@
 package com.muratcangzm.lunargaze.utils
 
+import androidx.datastore.preferences.core.stringPreferencesKey
+
 object Constants {
 
-    const val API_KEY = "00OYOh871nJ0XtRFIbWgQzvORuV7M3kx"
+    const val SHARED_DB_NAME = "Lunar_DB"
 
     const val BASE_URL = "https://api.giphy.com/v1/"
 
