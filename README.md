@@ -43,6 +43,7 @@ This project is trying to use the latest Android tech stacks.
   <img src="./.github/assets/lunarGaze3.jpg?raw=true" alt="Favorite folders" width="30%" />
   <img src="./.github/assets/lunarGaze4.jpg?raw=true" alt="Full screen" width="30%" />
   <img src="./.github/assets/lunarGaze5.jpg?raw=true" alt="Full screen details" width="30%" />
+  <img src="./.github/assets/lunarGaze6.jpg?raw=true" alt="Full screen details" width="30%" />
 </p>
 
 
