@@ -1,10 +1,12 @@
 package com.muratcangzm.lunargaze.ui.fragments
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.ClipData
 import android.content.Intent
 import android.content.ClipboardManager
+import android.content.ContentResolver
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -25,6 +27,9 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.view.ScaleGestureDetector
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -42,6 +47,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import javax.inject.Inject
 
@@ -72,6 +78,10 @@ class FullScreenImageFragment : Fragment() {
     private var compositeDisposable = CompositeDisposable()
     private val args: FullScreenImageFragmentArgs by navArgs()
 
+
+    companion object {
+        private const val REQUEST_CODE = 1
+    }
 
     init {
 
@@ -166,8 +176,10 @@ class FullScreenImageFragment : Fragment() {
 
                 saveButton.setOnClickListener {
 
+
                     Toast.makeText(requireContext(), "Successfully Saved", Toast.LENGTH_SHORT)
                         .show()
+
 
                     favoriteModel = receivedData?.user?.avatarUrl?.let { image ->
                         FavoriteModel(
@@ -192,6 +204,7 @@ class FullScreenImageFragment : Fragment() {
                     alertDialog?.dismiss()
                 }
 
+
             }
 
             shareButtonCard.setOnClickListener {
@@ -209,7 +222,10 @@ class FullScreenImageFragment : Fragment() {
 
             saveButtonCard.setOnClickListener {
 
-                requestPermissionIfHasnt()
+
+                val convertedUri = Uri.parse(receivedData!!.user!!.avatarUrl)
+
+                requestPermissionIfHasnt(convertedUri, receivedData!!.displayName!!)
 
             }
 
@@ -224,63 +240,69 @@ class FullScreenImageFragment : Fragment() {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    private fun requestPermissionIfHasnt() {
-
+    private fun requestPermissionIfHasnt(image: Uri, fileName: String) {
 
         if (!hasStoragePermission()) {
 
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                1
+            requireActivity().requestPermissions(
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                REQUEST_CODE
             )
         } else {
 
-            downloadImage(receivedData!!.user!!.avatarUrl)
+            saveUrlToExternalStorage(image, fileName)
 
         }
-
-
     }
 
-    private fun downloadImage(imageUrl: String?) {
 
-        if (imageUrl.isNullOrEmpty()) {
-            Log.e("DownloadImage", "Image URL is null or empty")
-            return
-        }
+    @SuppressLint("Recycle")
+    private fun uriToBitmap(contentResolver: ContentResolver, uri: Uri): Bitmap? {
 
-        val target = object : CustomTarget<File>() {
-            override fun onResourceReady(resource: File, transition: Transition<in File>?) {
-                saveUrlToExternalStorage(resource)
-            }
-
-            override fun onLoadCleared(placeholder: Drawable?) {
-                Log.e("DownloadImage", "Failed to download image")
-            }
-        }
-
-        glide.downloadOnly().load(imageUrl).into(target)
-
-    }
-
-    private fun saveUrlToExternalStorage(gifFile: File) {
-
-        val filename = "lunar_gaze_download"
-        val externalStoragePublicDirectory =
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-
-        val file = File(externalStoragePublicDirectory, filename)
+        var bitmap: Bitmap? = null
 
         try {
-            gifFile.copyTo(file)
-            Toast.makeText(requireContext(), "Saved successfully", Toast.LENGTH_SHORT).show()
+
+            val inputStream = contentResolver.openInputStream(uri)
+            bitmap = BitmapFactory.decodeStream(inputStream)
+
+            inputStream?.close()
+
         } catch (e: IOException) {
-            e.printStackTrace()
-            Toast.makeText(requireContext(), "Failed to save", Toast.LENGTH_SHORT).show()
+            Log.d("Error while saving", "${e.message}")
         }
 
+        return bitmap
     }
+
+
+    private fun saveUrlToExternalStorage(imageUri: Uri, fileName: String) {
+
+
+        val bitmapImage = uriToBitmap(requireActivity().contentResolver, imageUri)
+
+        val directory =
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+
+        val file = File(directory, fileName)
+        var fos: FileOutputStream? = null
+
+        try {
+
+            fos = FileOutputStream(file)
+            bitmapImage?.compress(Bitmap.CompressFormat.PNG, 100, fos)
+            fos.flush()
+
+
+        } catch (e: IOException) {
+            Log.d("save error", "${e.message}")
+        } finally {
+            fos?.close()
+        }
+
+
+    }
+
 
     @SuppressLint("InflateParams")
     private fun showBottomSheet() {
