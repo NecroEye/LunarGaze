@@ -30,11 +30,15 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.provider.Settings
 import android.view.ScaleGestureDetector
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.ImageFullscreenLayoutBinding
@@ -75,6 +79,8 @@ class FullScreenImageFragment : Fragment() {
     private var scaleGestureDetector: ScaleGestureDetector? = null
     private var scaleFactor = 1.0f
 
+    private lateinit var activityResultLauncher: ActivityResultLauncher<String>
+
     private var compositeDisposable = CompositeDisposable()
     private val args: FullScreenImageFragmentArgs by navArgs()
 
@@ -102,6 +108,7 @@ class FullScreenImageFragment : Fragment() {
 
         scaleGestureDetector =
             ScaleGestureDetector(requireContext(), ScaleListener(binding.fullScreenImage))
+
 
         setUIComponent()
 
@@ -236,7 +243,7 @@ class FullScreenImageFragment : Fragment() {
 
         return ContextCompat.checkSelfPermission(
             requireContext(),
-            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
         ) == PackageManager.PERMISSION_GRANTED
     }
 
@@ -248,10 +255,40 @@ class FullScreenImageFragment : Fragment() {
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                 REQUEST_CODE
             )
-        } else {
+        } else if (hasStoragePermission()) {
 
             saveUrlToExternalStorage(image, fileName)
 
+        } else {
+
+            activityResultLauncher = registerForActivityResult(
+                ActivityResultContracts.RequestPermission()
+            ) { isGranted ->
+
+                if (isGranted) {
+
+                    saveUrlToExternalStorage(image, fileName)
+
+                } else {
+
+                    Snackbar.make(
+                        binding.root,
+                        "You must give permission",
+                        Snackbar.LENGTH_INDEFINITE
+                    )
+                        .setAction("Manage the permissions") {
+
+                            val intent = Intent()
+                            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                            val uri = Uri.fromParts("package", requireActivity().packageName, null)
+                            intent.setData(uri)
+                            requireActivity().startActivity(intent)
+
+                        }.show()
+
+
+                }
+            }
         }
     }
 
