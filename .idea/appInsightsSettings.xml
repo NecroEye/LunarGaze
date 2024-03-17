@@ -27,10 +27,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.muratcangzm.lunargaze" />
+                  <option name="mobileSdkAppId" value="1:761322954204:android:fbac8ee505f65f344dc319" />
+                  <option name="projectId" value="lunar-gaze" />
+                  <option name="projectNumber" value="761322954204" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

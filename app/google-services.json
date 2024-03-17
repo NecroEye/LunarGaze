@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "761322954204",
+    "project_id": "lunar-gaze",
+    "storage_bucket": "lunar-gaze.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761322954204:android:fbac8ee505f65f344dc319",
+        "android_client_info": {
+          "package_name": "com.muratcangzm.lunargaze"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwXkAJgQOTD1TvC5bqFs9pg-ZaNV2-6og"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

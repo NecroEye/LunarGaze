@@ -120,6 +120,7 @@ object AppModule {
     }
 
     @Provides
+    @Singleton
     fun provideNavController(@ActivityContext activity: Activity): NavController {
         return Navigation.findNavController(activity, R.id.fragmentContainerView)
     }

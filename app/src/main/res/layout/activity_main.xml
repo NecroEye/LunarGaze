@@ -16,6 +16,7 @@
         app:title="   Lunar Gaze"
         app:logo="@drawable/toolbar_icon2"
         app:logoScaleType="centerInside"
+        android:tooltipText="Developed by Muratcan Gözüm"
         app:logoAdjustViewBounds="true"
         android:layout_alignParentTop="true"
         app:menu="@menu/toolbar_icons"

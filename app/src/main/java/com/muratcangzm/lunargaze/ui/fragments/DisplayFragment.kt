@@ -75,6 +75,7 @@ class DisplayFragment : Fragment() {
 
                     if(result.pagination!!.totalCount == 0){
                        binding.displayEmptyText.visibility = View.VISIBLE
+
                     }
                     else{
                     displayAdapter.submitData(result.channelData!!.toMutableList(), this@DisplayFragment)

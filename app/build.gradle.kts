@@ -7,6 +7,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -124,6 +125,9 @@ dependencies {
     implementation("androidx.datastore:datastore:1.0.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation("androidx.datastore:datastore-rxjava3:1.0.0")
+
+    //FireBase Analytics
+    implementation("com.google.firebase:firebase-analytics:21.5.1")
 
     //UI
     implementation("com.github.bumptech.glide:glide:4.16.0")

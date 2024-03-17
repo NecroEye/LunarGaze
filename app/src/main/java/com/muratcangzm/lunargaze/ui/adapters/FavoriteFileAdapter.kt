@@ -56,7 +56,7 @@ constructor(
 
     override fun onBindViewHolder(holder: FavFileHolder, position: Int) {
 
-        holder.setData(emptyFileName[position])
+        holder.setData(emptyFileName[position], position)
 
     }
 
@@ -80,7 +80,7 @@ constructor(
 
 
         @SuppressLint("NotifyDataSetChanged")
-        fun setData(fileName: String) {
+        fun setData(fileName: String, position: Int) {
 
             binding.apply {
                 customFolderName.text = fileName
@@ -122,7 +122,8 @@ constructor(
 
                             sharedEditor.remove(fileName).apply()
                             emptyFileName = emptyFileName.filter { it != fileName }
-                            notifyDataSetChanged()
+                            removeAnItemFromList(position)
+
 
                             disposable = repo.getAllFavImages()
                                 .subscribeOn(Schedulers.io())
@@ -170,7 +171,7 @@ constructor(
 
     }
 
-    fun addAnItemToList(position: Int, folderName: String) {
+    fun addAnItemToList(position: Int) {
 
         //emptyFileName.add(position, folderName)
         notifyItemInserted(position)

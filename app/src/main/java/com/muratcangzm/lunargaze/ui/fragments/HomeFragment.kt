@@ -71,13 +71,16 @@ class HomeFragment : Fragment() {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.categoriesResult.collect {
 
+
+
                     it?.let { result ->
 
                         categoryAdapter.submitCategory(result)
-                        binding.loadingScreen.loadingScreenLayout.visibility = View.GONE
                         binding.categoryRecycler.visibility = View.VISIBLE
+                        binding.loadingScreen.loadingScreenLayout.visibility = View.GONE
 
                     }
+
 
                 }
 

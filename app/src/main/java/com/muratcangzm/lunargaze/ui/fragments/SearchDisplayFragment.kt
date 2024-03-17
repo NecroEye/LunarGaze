@@ -88,6 +88,7 @@ class SearchDisplayFragment : Fragment() {
 
                         if (it.pagination!!.totalCount == 0) {
                             binding.searchFragmentEmpty.visibility = View.VISIBLE
+                            binding.searchLoadingScreen.loadingScreenLayout.visibility = View.GONE
                         } else {
                             binding.searchFragmentEmpty.visibility = View.INVISIBLE
                             binding.searchLoadingScreen.loadingScreenLayout.visibility = View.GONE
