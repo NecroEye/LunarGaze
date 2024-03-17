@@ -14,6 +14,7 @@ import retrofit2.Response
 class GiphyRepo(private val api: GiphyAPI) {
 
     suspend fun fetchCategories(): Flow<DataResponse<CategoryModel>> = flow {
+
         try {
 
             val response = api.getCategory()

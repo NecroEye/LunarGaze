@@ -56,6 +56,8 @@ class SearchDisplayFragment : Fragment() {
 
         val receivedData = args.searchData
 
+        binding.browseWord.text = receivedData
+
         binding.searchAdapter.adapter = searchAdapter
         binding.searchAdapter.layoutManager =
             StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
