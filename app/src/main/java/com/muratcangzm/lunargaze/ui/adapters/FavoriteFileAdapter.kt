@@ -12,12 +12,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.FavoriteFolderLayoutBinding
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
+import com.muratcangzm.lunargaze.repository.DataStoreRepo
 import com.muratcangzm.lunargaze.repository.FavoriteRepo
 import com.muratcangzm.lunargaze.ui.fragments.FavoritesFragmentDirections
 import dagger.hilt.android.qualifiers.ActivityContext
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.jvm.Throws
 
@@ -25,7 +29,7 @@ class FavoriteFileAdapter
 @Inject
 constructor(
     @ActivityContext private val context: Context,
-    private val sharedPreferences: SharedPreferences,
+    private val dataStoreRepo: DataStoreRepo,
     private val repo: FavoriteRepo,
     private val favoriteRepo: FavoriteRepo
 ) :
@@ -34,7 +38,6 @@ constructor(
     private lateinit var binding: FavoriteFolderLayoutBinding
     private var emptyFileName = emptyList<String>()
     private var deletedOnes = emptyList<FavoriteModel>()
-    private var sharedEditor = sharedPreferences.edit()
     private var disposable: Disposable? = null
 
 
@@ -120,7 +123,11 @@ constructor(
                         .setIcon(R.drawable.baseline_warning_amber_24)
                         .setPositiveButton("Delete") { dialog, _ ->
 
-                            sharedEditor.remove(fileName).apply()
+                            CoroutineScope(Dispatchers.IO).launch{
+                                dataStoreRepo.deleteNameFromPreferences(fileName.uppercase())
+
+                            }
+
                             emptyFileName = emptyFileName.filter { it != fileName }
                             removeAnItemFromList(position)
 

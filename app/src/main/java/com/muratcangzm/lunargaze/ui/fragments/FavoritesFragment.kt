@@ -5,17 +5,23 @@ import android.app.AlertDialog
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.FavoritesFragmentLayoutBinding
+import com.muratcangzm.lunargaze.repository.DataStoreRepo
 import com.muratcangzm.lunargaze.ui.adapters.FavoriteFileAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -27,14 +33,16 @@ class FavoritesFragment : Fragment() {
         get() = _binding!!
     private var overlayView: View? = null
     private var alertDialog: AlertDialog? = null
-    private lateinit var savedFiles: Map<String, *>
-    private lateinit var stringList: List<String>
+    private var stringList: List<String>? = null
 
     @Inject
     lateinit var favoriteFileAdapter: FavoriteFileAdapter
 
+   // @Inject
+   // lateinit var sharedPreferences: SharedPreferences
+
     @Inject
-    lateinit var sharedPreferences: SharedPreferences
+    lateinit var dataStoreRepo: DataStoreRepo
 
     init {
 
@@ -54,19 +62,34 @@ class FavoritesFragment : Fragment() {
         binding.fileRecycler.layoutManager =
             GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
 
-        savedFiles = sharedPreferences.all
-        stringList = savedFiles.values.filterIsInstance<String>()
+        //savedFiles = sharedPreferences.all
+        //stringList = savedFiles.values.filterIsInstance<String>()
 
-        if(stringList.isEmpty()){
-            binding.emptyFavFileText.visibility = View.VISIBLE
-            binding.lottieArrow.visibility = View.VISIBLE
-        }
-        else{
-            binding.emptyFavFileText.visibility = View.INVISIBLE
-            binding.lottieArrow.visibility = View.INVISIBLE
+        viewLifecycleOwner.lifecycleScope.launch {
+            withContext(Dispatchers.Main){
+                stringList = dataStoreRepo.getAllValues()?.toList() as List<String>
+
+                for (deger in stringList!!){
+                    Log.d("Değer: ", deger)
+                }
+
+                Log.d("Boyutu: ", "${stringList?.size}")
+
+
+
+                    if (stringList!!.isEmpty()) {
+                        binding.emptyFavFileText.visibility = View.VISIBLE
+                        binding.lottieArrow.visibility = View.VISIBLE
+                    } else {
+                        binding.emptyFavFileText.visibility = View.INVISIBLE
+                        binding.lottieArrow.visibility = View.INVISIBLE
+                    }
+
+                favoriteFileAdapter.submitFileNames(stringList!!)
+
+            }
         }
 
-        favoriteFileAdapter.submitFileNames(stringList)
         binding.fileRecycler.hasFixedSize()
 
         binding.favButton.setOnClickListener {
@@ -116,17 +139,23 @@ class FavoritesFragment : Fragment() {
 
         saveButton.setOnClickListener {
 
-            if (input.text.toString().isNotEmpty())
-                with(sharedPreferences.edit()) {
-                    putString(input.text.toString(), input.text.toString())
-                        .apply()
+            if (input.text.toString().isNotEmpty()) {
 
-                    val updatedList = stringList.toMutableList().apply { add(input.text.toString()) }
-                    favoriteFileAdapter.submitFileNames(updatedList)
+               viewLifecycleOwner.lifecycleScope.launch{
+                   withContext(Dispatchers.IO){
+                       dataStoreRepo.saveDataStore(
+                           input.text.toString().uppercase(),
+                           input.text.toString()
+                       )
+                   }
+               }
 
-                    binding.lottieArrow.visibility = View.INVISIBLE
-                    binding.emptyFavFileText.visibility = View.INVISIBLE
-                }
+                val updatedList = stringList!!.toMutableList().apply { add(input.text.toString()) }
+                favoriteFileAdapter.submitFileNames(updatedList)
+
+                binding.lottieArrow.visibility = View.INVISIBLE
+                binding.emptyFavFileText.visibility = View.INVISIBLE
+            }
 
 
 
@@ -142,6 +171,7 @@ class FavoritesFragment : Fragment() {
         _binding = null
         overlayView = null
         alertDialog = null
+        stringList = null
 
     }
 

@@ -44,6 +44,7 @@ import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.ImageFullscreenLayoutBinding
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.models.remote.ChannelModel
+import com.muratcangzm.lunargaze.repository.DataStoreRepo
 import com.muratcangzm.lunargaze.repository.FavoriteRepo
 import com.muratcangzm.lunargaze.ui.adapters.RadioButtonAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -193,11 +194,11 @@ class FullScreenImageFragment : Fragment() {
                             null,
                             radioAdapter.whichChecked,
                             image,
-                            receivedData!!.featuredGif!!.username,
-                            receivedData!!.featuredGif!!.rating,
-                            receivedData!!.featuredGif!!.type,
-                            receivedData!!.featuredGif!!.sharedDateTime,
-                            receivedData!!.featuredGif!!.title
+                            receivedData!!.featuredGif?.username,
+                            receivedData!!.featuredGif?.rating,
+                            receivedData!!.featuredGif?.type,
+                            receivedData!!.featuredGif?.sharedDateTime,
+                            receivedData!!.featuredGif?.title
                         )
                     }
 
@@ -222,7 +223,7 @@ class FullScreenImageFragment : Fragment() {
                 if (roomData == null)
                     sharedIntent.putExtra(Intent.EXTRA_TEXT, receivedData!!.user!!.avatarUrl)
                 else
-                    sharedIntent.putExtra(Intent.EXTRA_TEXT, roomData!!.imageUrl)
+                    sharedIntent.putExtra(Intent.EXTRA_TEXT, roomData?.imageUrl)
                 startActivity(Intent.createChooser(sharedIntent, "Share an image/gif"))
 
             }

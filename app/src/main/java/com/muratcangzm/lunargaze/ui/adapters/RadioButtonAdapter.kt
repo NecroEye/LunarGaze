@@ -1,12 +1,18 @@
 package com.muratcangzm.lunargaze.ui.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.muratcangzm.lunargaze.databinding.RadiobuttonAdapterLayoutBinding
+import com.muratcangzm.lunargaze.repository.DataStoreRepo
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.jvm.Throws
 
@@ -14,17 +20,18 @@ class RadioButtonAdapter
 @Inject
 constructor(
     @ApplicationContext private val context: Context,
-    private val sharedPreferences: SharedPreferences
+    private val dataStoreRepo: DataStoreRepo
 ) :
     RecyclerView.Adapter<RadioButtonAdapter.RadioButtonHolder>() {
 
     private lateinit var binding: RadiobuttonAdapterLayoutBinding
-    private val savedLists: Map<String, *> = sharedPreferences.all
     private var allFileNames: List<String>? = null
     var whichChecked = mutableListOf<String>()
 
     init {
-        allFileNames = savedLists.values.filterIsInstance<String>()
+
+        loadData()
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RadioButtonHolder {
@@ -47,6 +54,16 @@ constructor(
 
     override fun getItemViewType(position: Int): Int {
         return super.getItemViewType(position)
+    }
+
+    private fun loadData() {
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            val values = dataStoreRepo.getAllValues()
+            allFileNames = values?.mapNotNull { it as? String }
+
+        }
     }
 
 

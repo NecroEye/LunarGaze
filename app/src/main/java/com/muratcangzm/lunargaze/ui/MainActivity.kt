@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
         searchItem = menu!!.findItem(R.id.search_icon)
         val searchView = searchItem?.actionView as SearchView
 
-        searchView.tooltipText = "Search whatever you want"
+        searchView.queryHint = "Search whatever you want"
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
