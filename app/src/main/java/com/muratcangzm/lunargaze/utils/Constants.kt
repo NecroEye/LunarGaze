@@ -6,6 +6,8 @@ object Constants {
 
     const val SHARED_DB_NAME = "Lunar_DB"
 
+    const val DATASTORE_KEY = "FileKey"
+
     const val BASE_URL = "https://api.giphy.com/v1/"
 
     const val TRENDS = "trending"
