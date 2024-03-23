@@ -357,24 +357,21 @@ class FullScreenImageFragment : Fragment() {
         val link = sheetView.findViewById<MaterialTextView>(R.id.imageLinkText)
 
 
-
-
-
         if (roomData == null) {
-            updateTime.text = (receivedData!!.featuredGif?.sharedDateTime ?: R.string.empty).toString()
-            type.text = (receivedData!!.type ?: R.string.empty).toString()
-            uploader.text = (receivedData!!.featuredGif?.username ?: R.string.empty).toString()
-            rating.text = (receivedData!!.featuredGif?.rating ?: R.string.empty).toString()
-            description.text = (receivedData!!.featuredGif?.title ?: R.string.empty).toString()
-            link.text = (receivedData!!.featuredGif?.embedUrl ?: R.string.empty).toString()
+            updateTime.text = receivedData!!.featuredGif?.sharedDateTime ?: resources.getString(R.string.empty)
+            type.text = receivedData!!.type ?: resources.getString(R.string.empty)
+            uploader.text = receivedData!!.featuredGif?.username ?: resources.getString(R.string.empty)
+            rating.text = receivedData!!.featuredGif?.rating ?: resources.getString(R.string.empty)
+            description.text = receivedData!!.featuredGif?.title ?: resources.getString(R.string.empty)
+            link.text = receivedData!!.featuredGif?.embedUrl ?: resources.getString(R.string.empty)
         } else {
 
-            updateTime.text = (roomData!!.updateTime ?: R.string.empty).toString()
-            type.text = (roomData!!.type ?: R.string.empty).toString()
-            uploader.text = (roomData?.userName ?: R.string.empty).toString()
-            rating.text = (roomData!!.rating ?: R.string.empty).toString()
-            description.text = (roomData!!.description ?: R.string.empty).toString()
-            link.text = (roomData!!.imageUrl ?: R.string.empty).toString()
+            updateTime.text = roomData!!.updateTime ?: resources.getString(R.string.empty)
+            type.text = roomData!!.type ?: resources.getString(R.string.empty)
+            uploader.text = roomData?.userName ?: resources.getString(R.string.empty)
+            rating.text = roomData!!.rating ?: resources.getString(R.string.empty)
+            description.text = roomData!!.description ?: resources.getString(R.string.empty)
+            link.text = roomData!!.imageUrl ?: resources.getString(R.string.empty)
         }
 
 
