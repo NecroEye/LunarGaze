@@ -361,20 +361,20 @@ class FullScreenImageFragment : Fragment() {
 
 
         if (roomData == null) {
-            updateTime.text = receivedData!!.featuredGif?.sharedDateTime ?: "Empty"
-            type.text = receivedData!!.type ?: "Empty"
-            uploader.text = receivedData!!.featuredGif?.username ?: "Empty"
-            rating.text = receivedData!!.featuredGif?.rating ?: "Empty"
-            description.text = receivedData!!.featuredGif?.title ?: "Empty"
-            link.text = receivedData!!.featuredGif?.embedUrl ?: "Empty"
+            updateTime.text = (receivedData!!.featuredGif?.sharedDateTime ?: R.string.empty).toString()
+            type.text = (receivedData!!.type ?: R.string.empty).toString()
+            uploader.text = (receivedData!!.featuredGif?.username ?: R.string.empty).toString()
+            rating.text = (receivedData!!.featuredGif?.rating ?: R.string.empty).toString()
+            description.text = (receivedData!!.featuredGif?.title ?: R.string.empty).toString()
+            link.text = (receivedData!!.featuredGif?.embedUrl ?: R.string.empty).toString()
         } else {
 
-            updateTime.text = roomData!!.updateTime ?: "Empty"
-            type.text = roomData!!.type ?: "Empty"
-            uploader.text = roomData?.userName ?: "Empty"
-            rating.text = roomData!!.rating ?: "Empty"
-            description.text = roomData!!.description ?: "Empty"
-            link.text = roomData!!.imageUrl ?: "Empty"
+            updateTime.text = (roomData!!.updateTime ?: R.string.empty).toString()
+            type.text = (roomData!!.type ?: R.string.empty).toString()
+            uploader.text = (roomData?.userName ?: R.string.empty).toString()
+            rating.text = (roomData!!.rating ?: R.string.empty).toString()
+            description.text = (roomData!!.description ?: R.string.empty).toString()
+            link.text = (roomData!!.imageUrl ?: R.string.empty).toString()
         }
 
 

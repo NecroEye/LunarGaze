@@ -6,6 +6,7 @@ import android.app.AlertDialog
 import android.content.ComponentCallbacks2
 import android.content.Context
 import android.content.res.Configuration
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -100,15 +101,15 @@ constructor(
                     dialog.setMessage("Do you wanna delete?")
 
                     dialog.setPositiveButton("Delete") { _, _ ->
-
                         disposable = favoriteRepo.deleteFavImage(favoriteModel)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({
-                                notifyItemRemoved(position) // Notify after successful deletion
+                                Log.d("Adapter", "Image deleted from database for position: $position")
+                                notifyItemRemoved(position)
+                                roomList = roomList.filter { it.id != favoriteModel.id }.toTypedArray() // Update internal data structure
                             }, { error ->
                                 error.printStackTrace()
-                                // Handle deletion error (optional)
                             })
 
                     }

@@ -20,5 +20,4 @@ interface FavoriteDao {
     @Query("SELECT * FROM favImages")
     fun getAllFavImages() : Flowable<List<FavoriteModel>>
 
-
 }

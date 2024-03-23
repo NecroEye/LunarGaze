@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -37,8 +38,8 @@ class FavoritesFragment : Fragment() {
     @Inject
     lateinit var favoriteFileAdapter: FavoriteFileAdapter
 
-   // @Inject
-   // lateinit var sharedPreferences: SharedPreferences
+    // @Inject
+    // lateinit var sharedPreferences: SharedPreferences
 
     @Inject
     lateinit var dataStoreRepo: DataStoreRepo
@@ -65,22 +66,22 @@ class FavoritesFragment : Fragment() {
         //stringList = savedFiles.values.filterIsInstance<String>()
 
         viewLifecycleOwner.lifecycleScope.launch {
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 stringList = dataStoreRepo.getAllValues()?.toList() as List<String>
 
-                for (deger in stringList!!){
+                for (deger in stringList!!) {
                     Log.d("Değer: ", deger)
                 }
 
                 Log.d("Boyutu: ", "${stringList?.size}")
 
-                    if (stringList!!.isEmpty()) {
-                        binding.emptyFavFileText.visibility = View.VISIBLE
-                        binding.lottieArrow.visibility = View.VISIBLE
-                    } else {
-                        binding.emptyFavFileText.visibility = View.INVISIBLE
-                        binding.lottieArrow.visibility = View.INVISIBLE
-                    }
+                if (stringList!!.isEmpty()) {
+                    binding.emptyFavFileText.visibility = View.VISIBLE
+                    binding.lottieArrow.visibility = View.VISIBLE
+                } else {
+                    binding.emptyFavFileText.visibility = View.INVISIBLE
+                    binding.lottieArrow.visibility = View.INVISIBLE
+                }
 
                 favoriteFileAdapter.submitFileNames(stringList!!)
 
@@ -138,17 +139,23 @@ class FavoritesFragment : Fragment() {
 
             if (input.text.toString().isNotEmpty()) {
 
-               viewLifecycleOwner.lifecycleScope.launch{
-                   withContext(Dispatchers.IO){
-                       dataStoreRepo.saveDataStore(
-                           input.text.toString().uppercase(),
-                           input.text.toString()
-                       )
-                   }
-               }
+                viewLifecycleOwner.lifecycleScope.launch {
+                    withContext(Dispatchers.IO) {
+                        dataStoreRepo.saveDataStore(
+                            input.text.toString().uppercase(),
+                            input.text.toString()
+                        )
+                    }
+                }
 
                 val updatedList = stringList!!.toMutableList().apply { add(input.text.toString()) }
                 favoriteFileAdapter.submitFileNames(updatedList)
+
+                Toast.makeText(
+                    requireContext(),
+                    "Successfully ${input.text.toString()} file is created.",
+                    Toast.LENGTH_SHORT
+                ).show()
 
                 binding.lottieArrow.visibility = View.INVISIBLE
                 binding.emptyFavFileText.visibility = View.INVISIBLE
