@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.FavoriteFolderLayoutBinding
@@ -68,19 +69,7 @@ constructor(
         return super.getItemViewType(position)
     }
 
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun submitFileNames(files: List<String>) {
-
-        files.let {
-            emptyFileName = files
-        }
-        notifyDataSetChanged()
-
-    }
-
     inner class FavFileHolder() : RecyclerView.ViewHolder(binding.root) {
-
 
         @SuppressLint("NotifyDataSetChanged")
         fun setData(fileName: String, position: Int) {
@@ -176,6 +165,35 @@ constructor(
         }
 
 
+    }
+
+    inner class FavoriteFileDiffCallback(
+        private val oldList: List<String>,
+        private val newList: List<String>
+    ) : DiffUtil.Callback() {
+
+        override fun getOldListSize(): Int = oldList.size
+
+        override fun getNewListSize(): Int = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            // Check if items are the same by comparing their positions (assuming unique positions)
+            return oldList[oldItemPosition] == newList[newItemPosition]
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            // Check if content (file names) are the same
+            return oldList[oldItemPosition] == newList[newItemPosition]
+        }
+    }
+
+    fun submitFileNames(files: List<String>) {
+        val diffResult = DiffUtil.calculateDiff(
+            FavoriteFileDiffCallback(emptyFileName, files),
+            false // Batch updates for better performance
+        )
+        emptyFileName = files
+        diffResult.dispatchUpdatesTo(this@FavoriteFileAdapter)
     }
 
     fun addAnItemToList(position: Int) {

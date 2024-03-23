@@ -74,8 +74,6 @@ class FavoritesFragment : Fragment() {
 
                 Log.d("Boyutu: ", "${stringList?.size}")
 
-
-
                     if (stringList!!.isEmpty()) {
                         binding.emptyFavFileText.visibility = View.VISIBLE
                         binding.lottieArrow.visibility = View.VISIBLE

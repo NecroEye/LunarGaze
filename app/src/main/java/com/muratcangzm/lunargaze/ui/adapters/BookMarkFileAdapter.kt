@@ -1,13 +1,18 @@
 package com.muratcangzm.lunargaze.ui.adapters
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.ComponentCallbacks2
 import android.content.Context
+import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.DisplayAdapterFragmentBinding
@@ -35,6 +40,7 @@ constructor(
     private var roomList = emptyArray<FavoriteModel>()
     private var compositeDisposable = CompositeDisposable()
     private var disposable: Disposable? = null
+    private var componentCallbacks: ComponentCallbacks2? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookMarkFileHolder {
@@ -60,16 +66,6 @@ constructor(
         return super.getItemViewType(position)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun bindRoomArray(array: Array<FavoriteModel>) {
-
-        if (array.isNotEmpty()) {
-            roomList = array
-            notifyDataSetChanged()
-        }
-    }
-
-
     inner class BookMarkFileHolder : RecyclerView.ViewHolder(binding.root) {
 
 
@@ -77,6 +73,8 @@ constructor(
         fun setData(favoriteModel: FavoriteModel, position: Int) {
 
             binding.apply {
+
+                Glide.get(context).clearMemory()
 
                 glide
                     .load(favoriteModel.imageUrl)
@@ -106,10 +104,12 @@ constructor(
                         disposable = favoriteRepo.deleteFavImage(favoriteModel)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe()
-
-                        notifyItemRemoved(position)
-                        notifyDataSetChanged()
+                            .subscribe({
+                                notifyItemRemoved(position) // Notify after successful deletion
+                            }, { error ->
+                                error.printStackTrace()
+                                // Handle deletion error (optional)
+                            })
 
                     }
 
@@ -127,8 +127,62 @@ constructor(
         }
     }
 
+    inner class BookMarkDiffCallback(
+        private val oldList: Array<FavoriteModel>,
+        private val newList: Array<FavoriteModel>
+    ) : DiffUtil.Callback() {
+
+        override fun getOldListSize(): Int = oldList.size
+
+        override fun getNewListSize(): Int = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            // Check for same item based on unique identifier (e.g., model ID)
+            return oldList[oldItemPosition].id == newList[newItemPosition].id
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            val oldModel = oldList[oldItemPosition]
+            val newModel = newList[newItemPosition]
+            // Check if content (image URL, title, etc.) is the same
+            return oldModel.imageUrl == newModel.imageUrl &&
+                    oldModel.id == newModel.id
+        }
+    }
+
+    fun bindRoomArray(array: Array<FavoriteModel>) {
+        val diffResult = DiffUtil.calculateDiff(
+            BookMarkDiffCallback(roomList, array),
+            true // Batch updates for better performance
+        )
+        roomList = array
+        diffResult.dispatchUpdatesTo(this@BookMarkFileAdapter)
+    }
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+
+        componentCallbacks = object : ComponentCallbacks2 {
+            override fun onTrimMemory(level: Int) {
+                Glide.get(context).onTrimMemory(level)
+            }
+
+            override fun onConfigurationChanged(newConfig: Configuration) {
+                // Not implemented
+            }
+
+            override fun onLowMemory() {
+                Glide.get(context).clearDiskCache()
+                Glide.get(context).clearMemory()
+            }
+        }
+
+    }
+
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
+
+        (context as Activity).applicationContext.unregisterComponentCallbacks(componentCallbacks)
 
         if (disposable!!.isDisposed) {
             compositeDisposable.add(disposable!!)

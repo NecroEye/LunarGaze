@@ -1,7 +1,11 @@
 package com.muratcangzm.lunargaze.ui.adapters
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.ComponentCallbacks
+import android.content.ComponentCallbacks2
 import android.content.Context
+import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -9,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.DisplayAdapterFragmentBinding
@@ -28,6 +33,7 @@ constructor(
     private lateinit var binding: DisplayAdapterFragmentBinding
     private var channelModels = mutableListOf<ChannelModel.ChannelData>()
     private var currentFragment: Fragment? = null
+    private var  componentCallbacks: ComponentCallbacks2? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisplayHolder {
 
@@ -61,7 +67,6 @@ constructor(
             channelModels = mutableChannels
             notifyDataSetChanged()
         }
-
     }
 
 
@@ -101,17 +106,32 @@ constructor(
 
 
                 }
+            }
+        }
+    }
 
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
 
+          componentCallbacks = object : ComponentCallbacks2 {
+            override fun onTrimMemory(level: Int) {
+                Glide.get(context).onTrimMemory(level)
             }
 
-        }
+            override fun onConfigurationChanged(newConfig: Configuration) {
+                // Not implemented
+            }
 
+            override fun onLowMemory() {
+                Glide.get(context).clearDiskCache()
+                Glide.get(context).clearMemory()
+            }
+        }
     }
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
-
+        (context as Activity).applicationContext.unregisterComponentCallbacks(componentCallbacks)
         currentFragment = null
     }
 
