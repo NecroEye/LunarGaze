@@ -20,7 +20,7 @@ This project is trying to use the latest Android tech stacks.
 - User Interface: [Android Jetpack](https://developer.android.com/jetpack?hl=tr)
 - Concurrency: [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) & [RxJava3](https://reactivex.io/RxJava/3.x/javadoc/)
 - Dependency Injection: [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android?hl=tr)
-- Local Database: [Room](https://developer.android.com/training/data-storage/room)
+- Local Database: [Room](https://developer.android.com/training/data-storage/room) & [DataStore](https://developer.android.com/jetpack/androidx/releases/datastore)
 - Networking: [Retrofit](https://square.github.io/retrofit/) & [OkHttp](https://square.github.io/okhttp/)
 - Image Loading: [Glide](https://github.com/bumptech/glide)
 - Others:
