@@ -30,4 +30,5 @@
     <string name="loading_screen">loading screen</string>
     <string name="file_name">File Name</string>
     <string name="browse">Browse:</string>
+    <string name="current_folder_in">Current folder in:</string>
 </resources>

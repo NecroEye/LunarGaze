@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.room.Room
 import androidx.datastore.preferences.preferencesDataStoreFile
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -25,6 +26,7 @@ import com.muratcangzm.lunargaze.repository.GiphyRepo
 import com.muratcangzm.lunargaze.service.GiphyAPI
 import com.muratcangzm.lunargaze.utils.Constants
 import com.muratcangzm.lunargaze.viewmodels.HomeViewModel
+import com.muratcangzm.lunargaze.viewmodels.ViewModelFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -113,7 +115,7 @@ object AppModule {
             corruptionHandler = ReplaceFileCorruptionHandler(
                 produceNewData = { emptyPreferences() }
             ),
-            migrations = listOf(SharedPreferencesMigration(context,Constants.SHARED_DB_NAME)),
+            migrations = listOf(SharedPreferencesMigration(context, Constants.SHARED_DB_NAME)),
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
             produceFile = { context.preferencesDataStoreFile(Constants.SHARED_DB_NAME) }
         )
@@ -123,6 +125,12 @@ object AppModule {
     @Singleton
     fun provideNavController(@ActivityContext activity: Activity): NavController {
         return Navigation.findNavController(activity, R.id.fragmentContainerView)
+    }
+
+    @Provides
+    @Singleton
+    fun provideViewModelFactory(giphyRepo: GiphyRepo): ViewModelProvider.Factory {
+        return ViewModelFactory.provideFactory(giphyRepo)
     }
 
 }

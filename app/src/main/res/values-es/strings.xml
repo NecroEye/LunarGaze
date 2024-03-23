@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Lunar Gaze</string>
+    <string name="category_image">Imagen de categoría</string>
+    <string name="empty">Vacío</string>
+    <string name="favorites">Favoritos</string>
+    <string name="home">Inicio</string>
+    <string name="search">Buscar</string>
+    <string name="create_favorite_folder">Crear carpeta de favoritos</string>
+    <string name="displayImage">Imágenes buscadas</string>
+    <string name="displayEmpty">No hay nada que mostrar</string>
+    <string name="displaySearchEmpty">No se encontró nada</string>
+    <string name="favorite_folders">Carpetas favoritas</string>
+    <string name="default_folder_name">Mis imágenes favoritas</string>
+    <string name="full_screen_image">Imagen en pantalla completa</string>
+    <string name="save_button_icon">Icono del botón Guardar</string>
+    <string name="share_button_icon">Icono del botón Compartir</string>
+    <string name="create_favorite_file">Crear archivo favorito</string>
+    <string name="save">Guardar</string>
+    <string name="enter_a_name_for_your_file">Ingrese un nombre para su archivo</string>
+    <string name="your_favorite_file_list_is_empty">Su lista de archivos favoritos está vacía</string>
+    <string name="bin">Papelera</string>
+    <string name="select_a_file_to_save_your_image">Seleccione un archivo para guardar su imagen</string>
+    <string name="there_is_nothing_in_your_file">No hay nada en su marcador</string>
+    <string name="information">Información</string>
+    <string name="type">Tipo</string>
+    <string name="uploaded_by">Subido por</string>
+    <string name="rating">Calificación</string>
+    <string name="lorem_ipsum">Lorem Ipsum es simplemente un texto de relleno.</string>
+    <string name="description">Descripción</string>
+    <string name="loading_screen">Pantalla de carga</string>
+    <string name="file_name">Nombre del archivo</string>
+    <string name="browse">Examinar:</string>
+    <string name="current_folder_in">Carpeta actual en:</string>
+</resources>

@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Lunar Gaze</string>
+    <string name="category_image">Kategori Görseli</string>
+    <string name="empty">Boş</string>
+    <string name="favorites">Favoriler</string>
+    <string name="home">Ana Sayfa</string>
+    <string name="search">Ara</string>
+    <string name="create_favorite_folder">Favori Klasör Oluştur</string>
+    <string name="displayImage">Aranan Görseller</string>
+    <string name="displayEmpty">Gösterilecek bir şey yok</string>
+    <string name="displaySearchEmpty">Hiçbir şey bulunamadı</string>
+    <string name="favorite_folders">Favori Klasörler</string>
+    <string name="default_folder_name">Favori Görsellerim</string>
+    <string name="full_screen_image">Tam Ekran Görsel</string>
+    <string name="save_button_icon">Kaydet Düğmesi Simgesi</string>
+    <string name="share_button_icon">Paylaş Düğmesi Simgesi</string>
+    <string name="create_favorite_file">Favori Dosyası Oluştur</string>
+    <string name="save">Kaydet</string>
+    <string name="enter_a_name_for_your_file">Dosyanız için bir isim girin</string>
+    <string name="your_favorite_file_list_is_empty">Favori dosya listeniz boş</string>
+    <string name="bin">Sil</string>
+    <string name="select_a_file_to_save_your_image">Görselinizi kaydetmek için bir dosya seçin</string>
+    <string name="there_is_nothing_in_your_file">Yer im işaretinizde hiçbir şey yok</string>
+    <string name="information">Bilgi</string>
+    <string name="type">Tür</string>
+    <string name="uploaded_by">Yükleyen</string>
+    <string name="rating">Puan</string>
+    <string name="lorem_ipsum">Lorem Ipsum, sadece denemelik bir metindir.</string>
+    <string name="description">Açıklama</string>
+    <string name="loading_screen">Yükleniyor ekranı</string>
+    <string name="file_name">Dosya Adı</string>
+    <string name="browse">Gözat:</string>
+    <string name="current_folder_in">İçindeki Şimdiki Klasör:</string>
+</resources>

@@ -52,11 +52,8 @@ constructor(private val repo: GiphyRepo) : ViewModel() {
 
 
                 }
-
             }
-
         }
-
     }
 
     override fun onCleared() {

@@ -2,12 +2,13 @@ package com.muratcangzm.lunargaze.ui.fragments
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,16 +25,19 @@ class HomeFragment : Fragment() {
 
 
     private var _binding: HomeFragmentLayoutBinding? = null
-    val viewModel: HomeViewModel by viewModels()
+    private val binding
+        get() = _binding!!
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @get:VisibleForTesting
+    val viewModel: HomeViewModel by viewModels { viewModelFactory }
 
     @Inject
     lateinit var categoryAdapter: CategoryAdapter
 
     @Inject
     lateinit var networkChecking: NetworkChecking
-
-    private val binding
-        get() = _binding!!
 
     init {
         //Empty Constructor
@@ -51,11 +55,8 @@ class HomeFragment : Fragment() {
 
         _binding = HomeFragmentLayoutBinding.inflate(inflater, container, false)
 
-
-
         setupViews()
         observeDataChange()
-
 
         return binding.root
     }
@@ -70,7 +71,6 @@ class HomeFragment : Fragment() {
         if (networkChecking.isNetworkAvailable()) {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.categoriesResult.collect {
-
 
 
                     it?.let { result ->
@@ -91,8 +91,6 @@ class HomeFragment : Fragment() {
 
 
         }
-
-
     }
 
     fun setupViews() {
@@ -106,13 +104,10 @@ class HomeFragment : Fragment() {
             hasFixedSize()
 
         }
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

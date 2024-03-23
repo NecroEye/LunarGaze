@@ -39,25 +39,26 @@ class FavoritedImageFragment : Fragment() {
     ): View {
         _binding = FavoritedImageLayoutBinding.inflate(inflater, container, false)
 
-        val receivedData = requireArguments().getParcelableArray("roomData") as Array<FavoriteModel>?
+        val receivedData =
+            requireArguments().getParcelableArray("roomData") as Array<FavoriteModel>?
 
         Log.d("Yerel Data: ", "${receivedData?.size}")
 
-        if(receivedData!!.isNotEmpty()){
+        if (receivedData!!.isNotEmpty()) {
             bookmarkAdapter.bindRoomArray(receivedData)
             binding.favoritedText.visibility = View.INVISIBLE
-        }
-        else{
+        } else {
             bookmarkAdapter.bindRoomArray(emptyArray())
             binding.favoritedText.visibility = View.VISIBLE
         }
         binding.bookmarkRecycler.adapter = bookmarkAdapter
-        binding.bookmarkRecycler.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        binding.bookmarkRecycler.layoutManager =
+            StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         binding.bookmarkRecycler.hasFixedSize()
 
 
 
-     return binding.root
+        return binding.root
 
     }
 

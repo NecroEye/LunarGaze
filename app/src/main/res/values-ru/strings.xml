@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Lunar Gaze</string>
+    <string name="category_image">Изображение категории</string>
+    <string name="empty">Пустой</string>
+    <string name="favorites">Избранное</string>
+    <string name="home">Главная</string>
+    <string name="search">Поиск</string>
+    <string name="create_favorite_folder">Создать избранную папку</string>
+    <string name="displayImage">Найденные изображения</string>
+    <string name="displayEmpty">Нечего показывать</string>
+    <string name="displaySearchEmpty">Ничего не найдено</string>
+    <string name="favorite_folders">Избранные папки</string>
+    <string name="default_folder_name">Мои любимые изображения</string>
+    <string name="full_screen_image">Изображение на весь экран</string>
+    <string name="save_button_icon">Значок кнопки сохранения</string>
+    <string name="share_button_icon">Значок кнопки «Поделиться»</string>
+    <string name="create_favorite_file">Создать избранный файл</string>
+    <string name="save">Сохранить</string>
+    <string name="enter_a_name_for_your_file">Введите имя для вашего файла</string>
+    <string name="your_favorite_file_list_is_empty">Ваш список избранных файлов пуст</string>
+    <string name="bin">Корзина</string>
+    <string name="select_a_file_to_save_your_image">Выберите файл для сохранения изображения</string>
+    <string name="there_is_nothing_in_your_file">В вашем файле ничего нет</string>
+    <string name="information">Информация</string>
+    <string name="type">Тип</string>
+    <string name="uploaded_by">Загружено</string>
+    <string name="rating">Рейтинг</string>
+    <string name="lorem_ipsum">Lorem Ipsum - это просто текст-наполнитель.</string>
+    <string name="description">Описание</string>
+    <string name="loading_screen">Экран загрузки</string>
+    <string name="file_name">Имя файла</string>
+    <string name="browse">Обзор:</string>
+    <string name="current_folder_in">Текущая папка в:</string>
+</resources>

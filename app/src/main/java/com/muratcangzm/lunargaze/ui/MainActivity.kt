@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
-                if (query!!.isNotEmpty()) {
+                if (!query.isNullOrEmpty()) {
 
                     val navHostFragment =
                         supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment

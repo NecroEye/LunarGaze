@@ -8,6 +8,7 @@ import com.muratcangzm.lunargaze.utils.Constants
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.util.Locale
 
 interface GiphyAPI {
 
@@ -16,7 +17,6 @@ interface GiphyAPI {
         @Query("api_key") apiKey: String = BuildConfig.API_KEY
     )
             : Response<CategoryModel>
-
 
     @GET(Constants.CHANNELS)
     suspend fun getChannels(
@@ -33,7 +33,7 @@ interface GiphyAPI {
         @Query("q") query:String,
         @Query("limit") limit: Int = 50,
         @Query("rating") rating: String = "g",
-        @Query("lang") language: String = "en",
+        @Query("lang") language: String = Locale.getDefault().language.lowercase(),
         @Query("bundle") bundle: String = "messaging_non_clips",
     )
             : Response<SearchModel>

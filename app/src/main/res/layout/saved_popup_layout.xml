@@ -51,6 +51,8 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/acme"
         android:text="@string/save"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textSize="17sp"
         android:textStyle="bold"
         app:cornerRadius="5dp"

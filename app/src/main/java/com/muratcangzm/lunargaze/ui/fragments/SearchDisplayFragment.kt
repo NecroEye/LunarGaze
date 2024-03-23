@@ -5,14 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.muratcangzm.lunargaze.databinding.SearchDisplayFragmentLayoutBinding
 import com.muratcangzm.lunargaze.models.remote.ChannelModel
-import com.muratcangzm.lunargaze.ui.adapters.CategoryAdapter
 import com.muratcangzm.lunargaze.ui.adapters.DisplayAdapter
 import com.muratcangzm.lunargaze.utils.NetworkChecking
 import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
@@ -35,10 +36,17 @@ class SearchDisplayFragment : Fragment() {
     @Inject
     lateinit var networkChecking: NetworkChecking
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @get:VisibleForTesting
+    val viewModel: DisplayViewModel by viewModels() { viewModelFactory }
+
     private var offset: Int? = null
 
-    private val viewModel: DisplayViewModel by viewModels()
+
     private val args: SearchDisplayFragmentArgs by navArgs()
+
 
     init {
 
@@ -65,7 +73,7 @@ class SearchDisplayFragment : Fragment() {
 
 
 
-        viewModel.getChannels(receivedData.trim().lowercase(), null)
+        viewModel.getChannels(receivedData.trim().lowercase(), offset)
         observeDataChange()
 
 

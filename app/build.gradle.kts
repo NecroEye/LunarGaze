@@ -25,6 +25,7 @@ android {
         versionCode = 1
         versionName = "1.273642736427364"
 
+        resourceConfigurations += listOf("tr","ru","fr","de","es")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     }
@@ -38,7 +39,6 @@ android {
             isDebuggable = false
 
             buildConfigField("String", "API_KEY", localProperties.getProperty("API_KEY"))
-
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -68,11 +68,14 @@ android {
         jvmTarget = "17"
     }
 
-
     buildFeatures{
         viewBinding = true
         dataBinding = true
         buildConfig = true
+    }
+
+    hilt {
+        enableAggregatingTask = true
     }
 
 }
@@ -85,6 +88,7 @@ dependencies {
     val fragment_version = "1.6.2"
     val lottieVersion = "3.4.0"
 
+    //AndroidX
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")

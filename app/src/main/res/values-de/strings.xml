@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Lunar Gaze</string>
+    <string name="category_image">Kategoriebild</string>
+    <string name="empty">Leer</string>
+    <string name="favorites">Favoriten</string>
+    <string name="home">Startseite</string>
+    <string name="search">Suche</string>
+    <string name="create_favorite_folder">Favoritenordner erstellen</string>
+    <string name="displayImage">Gesuchte Bilder</string>
+    <string name="displayEmpty">Es gibt nichts anzuzeigen</string>
+    <string name="displaySearchEmpty">Nichts gefunden</string>
+    <string name="favorite_folders">Favoritenordner</string>
+    <string name="default_folder_name">Meine Lieblingsbilder</string>
+    <string name="full_screen_image">Vollbild</string>
+    <string name="save_button_icon">Symbol für Speichern-Button</string>
+    <string name="share_button_icon">Symbol für Teilen-Button</string>
+    <string name="create_favorite_file">Favoritendatei erstellen</string>
+    <string name="save">Speichern</string>
+    <string name="enter_a_name_for_your_file">Geben Sie einen Namen für Ihre Datei ein</string>
+    <string name="your_favorite_file_list_is_empty">Ihre Liste mit Favoritendateien ist leer</string>
+    <string name="bin">Papierkorb</string>
+    <string name="select_a_file_to_save_your_image">Wählen Sie eine Datei aus, um Ihr Bild zu speichern</string>
+    <string name="there_is_nothing_in_your_file">Es gibt nichts in Ihrem Lesezeichen</string>
+    <string name="information">Information</string>
+    <string name="type">Typ</string>
+    <string name="uploaded_by">Hochgeladen von</string>
+    <string name="rating">Bewertung</string>
+    <string name="lorem_ipsum">Lorem Ipsum ist einfach nur Blindtext.</string>
+    <string name="description">Beschreibung</string>
+    <string name="loading_screen">Ladebildschirm</string>
+    <string name="file_name">Dateiname</string>
+    <string name="browse">Durchsuchen:</string>
+    <string name="current_folder_in">Aktueller Ordner in:</string>
+</resources>
