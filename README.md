@@ -3,6 +3,8 @@
 
 An image board (Giphy) viewer for android, made from Android Jetpack 🚀.
 
+Lunar Gaze supports six languages: English, French, Spanish, Turkish, Russian, and German.
+
 **Supported Giphy providers:**
 
 _Note: all providers are filtered as rated safe (general & sensitive)._
@@ -31,7 +33,7 @@ This project is trying to use the latest Android tech stacks.
 
 | variant  | date       | latest version                                                                | link                                                                                             |
 |----------|------------|-------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| v1-alpha | 13-03-2024 | [v1.27-alpha](https://github.com/NecroEye/LunarGaze/releases/tag/v1.27-alpha) | [direct APK](https://github.com/NecroEye/LunarGaze/releases/download/v1.27-alpha/lunar_gaze.apk) |
+| v1-alpha | 13-03-2024 | [v1.28-alpha](https://github.com/NecroEye/LunarGaze/releases/tag/v1.28-alpha) | [direct APK](https://github.com/NecroEye/LunarGaze/releases/download/v1.28-alpha/lunar_gaze.apk) |
 
 > _Check out [Releases](https://github.com/NecroEye/LunarGaze/releases) section for more._
 
