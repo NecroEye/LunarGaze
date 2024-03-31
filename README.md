@@ -3,7 +3,7 @@
 
 An image board (Giphy) viewer for android, made from Android Jetpack 🚀.
 
-Lunar Gaze supports six languages: English, French, Spanish, Turkish, Russian, and German.
+Lunar Gaze supports six languages: English(as default), French, Spanish, Turkish, Russian, and German.
 
 **Supported Giphy providers:**
 
