@@ -26,6 +26,7 @@ This project is trying to use the latest Android tech stacks.
 - Networking: [Retrofit](https://square.github.io/retrofit/) & [OkHttp](https://square.github.io/okhttp/)
 - Image Loading: [Glide](https://github.com/bumptech/glide)
 - Others:
+    - [Timber](https://github.com/JakeWharton/timber) (Logger)
     - [Truth](https://github.com/google/truth) (Testing)
     - [Navigation Component](https://developer.android.com/guide/navigation) (Navigation)
 
