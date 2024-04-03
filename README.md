@@ -10,15 +10,15 @@ Lunar Gaze supports six languages: English(as default), French, Spanish, Turkish
 _Note: all providers are filtered as rated safe (general & sensitive)._
 
 - [Giphy](https://giphy.com)
-- [Gelbooru](https://gelbooru.com)
-- [Danbooru](https://danbooru.donmai.us)
+- [Tenor](https://tenor.com/tr/)
+- [Danbooru](https://danbooru.donmai.us) - in future plan.
 
 ## Tech Stacks
 
 This project is trying to use the latest Android tech stacks.
 
 - Language: [Kotlin](https://kotlinlang.org)
-- Architecture: [Android App Architecture](https://developer.android.com/topic/architecture)
+- Architecture: [Model-View-ViewModel (MVVM)](https://developer.android.com/topic/architecture)
 - User Interface: [Android Jetpack](https://developer.android.com/jetpack?hl=tr)
 - Concurrency: [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) & [RxJava3](https://reactivex.io/RxJava/3.x/javadoc/)
 - Dependency Injection: [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android?hl=tr)
