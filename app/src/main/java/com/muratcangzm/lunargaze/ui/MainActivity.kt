@@ -16,6 +16,7 @@ import com.muratcangzm.lunargaze.databinding.ActivityMainBinding
 import com.muratcangzm.lunargaze.ui.fragments.HomeFragmentDirections
 import com.muratcangzm.lunargaze.utils.NetworkChecking
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -36,8 +37,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        Log.d("DataSpeed1: ", "${networkChecking.getMobileSpeed().first}")
-        Log.d("DataSpeed2: ", "${networkChecking.getMobileSpeed().second}")
+        Timber.tag("DataSpeed1: ").d(""+networkChecking.getMobileSpeed().first)
+        Timber.tag("DataSpeed2: ").d(""+networkChecking.getMobileSpeed().second)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment

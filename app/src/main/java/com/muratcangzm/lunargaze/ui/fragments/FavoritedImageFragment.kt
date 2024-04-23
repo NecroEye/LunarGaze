@@ -12,6 +12,7 @@ import com.muratcangzm.lunargaze.databinding.FavoritedImageLayoutBinding
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.ui.adapters.BookMarkFileAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -42,7 +43,7 @@ class FavoritedImageFragment : Fragment() {
         val receivedData =
             requireArguments().getParcelableArray("roomData") as Array<FavoriteModel>?
 
-        Log.d("Yerel Data: ", "${receivedData?.size}")
+        Timber.tag("Yerel Data: ").d("${receivedData?.size}")
 
         if (receivedData!!.isNotEmpty()) {
             bookmarkAdapter.bindRoomArray(receivedData)

@@ -12,6 +12,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,7 +34,7 @@ constructor(
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
 
-        Log.d("Data Error", "something isnt right: ${throwable.message}")
+        Timber.tag("Data Error").d("something isnt right: " + throwable.message)
 
     }
 
@@ -47,7 +48,7 @@ constructor(
 
                 giphyRepo.fetchChannels(search, offset).collect { result ->
 
-                    Log.d("DisplayFragment Data0: ", "$result")
+                    Timber.tag("DisplayFragment Data0: ").d("$result")
 
 
                     _mutableChannelResult.value = result.data

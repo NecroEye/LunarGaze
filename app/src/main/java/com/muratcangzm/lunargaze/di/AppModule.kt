@@ -25,6 +25,9 @@ import com.muratcangzm.lunargaze.repository.FavoriteRepo
 import com.muratcangzm.lunargaze.repository.GiphyRepo
 import com.muratcangzm.lunargaze.service.GiphyAPI
 import com.muratcangzm.lunargaze.utils.Constants
+import com.muratcangzm.lunargaze.utils.DefaultDispatcher
+import com.muratcangzm.lunargaze.utils.IoDispatcher
+import com.muratcangzm.lunargaze.utils.MainDispatcher
 import com.muratcangzm.lunargaze.viewmodels.HomeViewModel
 import com.muratcangzm.lunargaze.viewmodels.ViewModelFactory
 import dagger.Module
@@ -33,15 +36,29 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import okhttp3.Dispatcher
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+
+    @Provides
+    @DefaultDispatcher
+    fun provideDefaultDispatcher() : CoroutineDispatcher = Dispatchers.Default
+
+    @Provides
+    @IoDispatcher
+    fun provideIoDispatcher() : CoroutineDispatcher = Dispatchers.IO
+
+    @Provides
+    @MainDispatcher
+    fun provideMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
 
     @Provides
     @Singleton

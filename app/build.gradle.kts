@@ -22,7 +22,7 @@ android {
         applicationId = "com.muratcangzm.lunargaze"
         minSdk = 28
         targetSdk = 34
-        versionCode = 1
+        versionCode = 3
         versionName = "1.273642736427364"
 
         resourceConfigurations += listOf("tr","ru","fr","de","es")
@@ -126,30 +126,33 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.48.1")
 
     //DataStore
-    implementation("androidx.datastore:datastore:1.0.0")
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore:1.1.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.0")
     implementation("androidx.datastore:datastore-rxjava3:1.0.0")
 
     //FireBase Analytics
-    implementation("com.google.firebase:firebase-analytics:21.5.1")
+    implementation("com.google.firebase:firebase-analytics:21.6.2")
 
     //UI
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.airbnb.android:lottie:$lottieVersion")
 
     //Google Auth
-    implementation("com.google.android.gms:play-services-auth:21.0.0")
+    implementation("com.google.android.gms:play-services-auth:21.1.0")
     implementation("com.google.android.gms:play-services-auth-api-phone:18.0.2")
 
     //Facebook Login
     implementation("com.facebook.android:facebook-login:latest.release")
+
+    //Timber
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
 
     //Testing
     implementation("com.google.truth:truth:1.1.4")
     testImplementation("org.mockito:mockito-core:4.7.0")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
-    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
+    testImplementation ("org.mockito.kotlin:mockito-kotlin:4.0.0")
     debugImplementation("androidx.fragment:fragment-testing:$fragment_version")
 
     //Android Testing
@@ -159,6 +162,9 @@ dependencies {
     androidTestImplementation("com.google.truth:truth:1.1.4")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.44")
+    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
+
+
 
 }
 

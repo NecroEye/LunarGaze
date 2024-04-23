@@ -7,6 +7,7 @@ import com.muratcangzm.lunargaze.models.local.FavoriteDao
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
+import timber.log.Timber
 import java.util.prefs.Preferences
 import javax.inject.Inject
 
@@ -14,6 +15,7 @@ class FavoriteRepo
 @Inject
 constructor(private val favoriteDao: FavoriteDao) {
 
+    //RxJava3 used for roomdb
     fun insertFavImage(favoriteModel: FavoriteModel) : Completable{
         return favoriteDao.insertFavImage(favoriteModel)
     }
@@ -21,7 +23,7 @@ constructor(private val favoriteDao: FavoriteDao) {
     fun deleteFavImage(favoriteModel: FavoriteModel) : Completable{
         return favoriteDao.deleteFavImageOne(favoriteModel)
             .doOnComplete {
-                Log.d("FavoriteRepo", "Image deleted from database: ${favoriteModel.id}")
+                Timber.tag("FavoriteRepo").d("Image deleted from database: " + favoriteModel.id)
         }
     }
 

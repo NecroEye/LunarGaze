@@ -24,6 +24,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.jvm.Throws
 
@@ -105,7 +106,8 @@ constructor(
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({
-                                Log.d("Adapter", "Image deleted from database for position: $position")
+                                Timber.tag("Adapter")
+                                    .d("Image deleted from database for position: %s", position)
                                 notifyItemRemoved(position)
                                 roomList = roomList.filter { it.id != favoriteModel.id }.toTypedArray() // Update internal data structure
                             }, { error ->

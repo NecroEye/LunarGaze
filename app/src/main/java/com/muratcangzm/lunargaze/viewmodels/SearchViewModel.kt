@@ -11,6 +11,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,7 +24,7 @@ class SearchViewModel
         get() = mutableSearchResult
 
     private val exceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        Log.d("something occurred bad", "${throwable.message}")
+        Timber.tag("something occurred bad").d(throwable.message)
     }
 
     fun fetchSearchData(search: String) {

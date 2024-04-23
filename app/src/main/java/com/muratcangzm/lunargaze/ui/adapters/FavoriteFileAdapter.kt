@@ -23,6 +23,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.jvm.Throws
 
@@ -85,7 +86,7 @@ constructor(
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({ roomList ->
 
-                            Log.d("Bütün oda: ", "${roomList.size}")
+                            Timber.tag("Bütün oda: ").d("${roomList.size}")
 
                             val newData = roomList.filter { favorite ->
                                 favorite.folder?.any { folderName ->
@@ -99,7 +100,7 @@ constructor(
 
                         },
                             { error ->
-                                error.localizedMessage?.let { Log.d("Bütün oda: ", it) }
+                                error.localizedMessage?.let { Timber.tag("Bütün oda: ").d(it) }
                             })
 
                 }
@@ -143,7 +144,8 @@ constructor(
 
                                 },
                                     { error ->
-                                        error.localizedMessage?.let { Log.d("Bütün oda: ", it) }
+                                        error.localizedMessage?.let {
+                                            Timber.tag("Bütün oda: ").d(it) }
                                     })
 
 

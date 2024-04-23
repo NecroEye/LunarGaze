@@ -51,6 +51,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -307,7 +308,7 @@ class FullScreenImageFragment : Fragment() {
             inputStream?.close()
 
         } catch (e: IOException) {
-            Log.d("Error while saving", "${e.message}")
+            Timber.tag("Error while saving").d(e)
         }
 
         return bitmap
@@ -333,7 +334,7 @@ class FullScreenImageFragment : Fragment() {
 
 
         } catch (e: IOException) {
-            Log.d("save error", "${e.message}")
+            Timber.tag("save error").d(e)
         } finally {
             fos?.close()
         }

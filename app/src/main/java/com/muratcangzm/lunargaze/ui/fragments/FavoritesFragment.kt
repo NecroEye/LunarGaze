@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -70,10 +71,10 @@ class FavoritesFragment : Fragment() {
                 stringList = dataStoreRepo.getAllValues()?.toList() as List<String>
 
                 for (deger in stringList!!) {
-                    Log.d("Değer: ", deger)
+                    Timber.tag("Değer: ").d(deger)
                 }
 
-                Log.d("Boyutu: ", "${stringList?.size}")
+                Timber.tag("Boyutu: ").d("${stringList?.size}")
 
                 if (stringList!!.isEmpty()) {
                     binding.emptyFavFileText.visibility = View.VISIBLE

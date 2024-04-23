@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,7 +31,7 @@ constructor(private val repo: GiphyRepo) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
 
-        Log.d("Data Error", "something isnt right: ${throwable.message}")
+        Timber.tag("Data Error").d("something isnt right: %s", throwable.message)
 
     }
 

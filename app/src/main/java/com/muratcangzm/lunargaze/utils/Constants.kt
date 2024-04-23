@@ -10,6 +10,8 @@ object Constants {
 
     const val BASE_URL = "https://api.giphy.com/v1/"
 
+    const val DEBUG = true
+
     const val TRENDS = "trending"
 
     const val RANDOMS = "gifs/random"

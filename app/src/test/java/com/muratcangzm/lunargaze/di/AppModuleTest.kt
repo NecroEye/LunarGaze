@@ -6,6 +6,9 @@ import android.content.SharedPreferences
 import com.muratcangzm.lunargaze.models.local.FavoriteDatabase
 import com.muratcangzm.lunargaze.repository.GiphyRepo
 import com.muratcangzm.lunargaze.service.GiphyAPI
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.mockito.Mockito.`when`
 import org.junit.Assert.assertNotNull
@@ -15,6 +18,7 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
+
 
 class AppModuleTest {
 
@@ -41,6 +45,27 @@ class AppModuleTest {
         `when`(mockContext.getSharedPreferences(anyString(), anyInt())).thenReturn(mockSharedPreferences)
     }
 
+
+    @Test
+    @ExperimentalCoroutinesApi
+    fun testDefaultCoroutineDispatcher(){
+        val dispatcher = AppModule.provideDefaultDispatcher()
+        assertEquals(Dispatchers.Default, dispatcher)
+    }
+
+    @Test
+    @ExperimentalCoroutinesApi
+    fun testIODispatcher(){
+        val dispatcher = AppModule.provideIoDispatcher()
+        assertEquals(Dispatchers.IO, dispatcher)
+    }
+
+    @Test
+    @ExperimentalCoroutinesApi
+    fun testMainDispatcher(){
+        val dispatcher = AppModule.provideMainDispatcher()
+        assertEquals(Dispatchers.Main, dispatcher)
+    }
 
     @Test
     fun testApplicationContext() {
