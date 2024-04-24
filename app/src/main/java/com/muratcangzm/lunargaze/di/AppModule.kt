@@ -50,11 +50,11 @@ object AppModule {
 
     @Provides
     @DefaultDispatcher
-    fun provideDefaultDispatcher() : CoroutineDispatcher = Dispatchers.Default
+    fun provideDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 
     @Provides
     @IoDispatcher
-    fun provideIoDispatcher() : CoroutineDispatcher = Dispatchers.IO
+    fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     @Provides
     @MainDispatcher
@@ -69,8 +69,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideGiphyRepository(api: GiphyAPI): GiphyRepo {
-        return GiphyRepo(api)
+    fun provideGiphyRepository(
+        api: GiphyAPI,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher,
+    ): GiphyRepo {
+        return GiphyRepo(api, ioDispatcher)
     }
 
     @Provides

@@ -15,7 +15,7 @@ class FavoriteRepo
 @Inject
 constructor(private val favoriteDao: FavoriteDao) {
 
-    //RxJava3 used for roomdb
+    //RxJava3 used for RoomDB
     fun insertFavImage(favoriteModel: FavoriteModel) : Completable{
         return favoriteDao.insertFavImage(favoriteModel)
     }
@@ -23,7 +23,7 @@ constructor(private val favoriteDao: FavoriteDao) {
     fun deleteFavImage(favoriteModel: FavoriteModel) : Completable{
         return favoriteDao.deleteFavImageOne(favoriteModel)
             .doOnComplete {
-                Timber.tag("FavoriteRepo").d("Image deleted from database: " + favoriteModel.id)
+                Timber.tag("FavoriteRepo").d("Image deleted from database: %s", favoriteModel.id)
         }
     }
 
