@@ -89,7 +89,7 @@ dependencies {
     val lottieVersion = "3.4.0"
 
     //AndroidX
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:1.13.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -128,7 +128,7 @@ dependencies {
     //DataStore
     implementation("androidx.datastore:datastore:1.1.0")
     implementation("androidx.datastore:datastore-preferences:1.1.0")
-    implementation("androidx.datastore:datastore-rxjava3:1.0.0")
+    implementation("androidx.datastore:datastore-rxjava3:1.1.0")
 
     //FireBase Analytics
     implementation("com.google.firebase:firebase-analytics:21.6.2")
@@ -141,11 +141,12 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:21.1.0")
     implementation("com.google.android.gms:play-services-auth-api-phone:18.0.2")
 
-    //Facebook Login
-    implementation("com.facebook.android:facebook-login:latest.release")
 
     //Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
+
+    //Splash Screen
+    implementation("androidx.core:core-splashscreen:1.0.1")
 
 
     //Testing

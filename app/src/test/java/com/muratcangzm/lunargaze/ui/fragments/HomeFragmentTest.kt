@@ -1,75 +1,61 @@
-package com.muratcangzm.lunargaze.ui.fragments
-
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.fragment.app.testing.FragmentScenario
-import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.ViewModelProvider
+import androidx.test.core.app.ApplicationProvider
+import com.muratcangzm.lunargaze.R
+import com.muratcangzm.lunargaze.models.remote.CategoryModel
 import com.muratcangzm.lunargaze.ui.adapters.CategoryAdapter
+import com.muratcangzm.lunargaze.ui.fragments.HomeFragment
+import com.muratcangzm.lunargaze.utils.NetworkChecking
 import com.muratcangzm.lunargaze.viewmodels.HomeViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
-import org.junit.After
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
-import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.Mockito
 
-@RunWith(MockitoJUnitRunner::class)
+@ExperimentalCoroutinesApi
 class HomeFragmentTest {
 
-
-    @Mock
-    private lateinit var mockViewModel: HomeViewModel
-
-    @Mock
-    private lateinit var mockCategoryAdapter: CategoryAdapter
-
-    @Mock
-    private lateinit var fragmentScenario: FragmentScenario<HomeFragment>
+    private lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModel: HomeViewModel
+    private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var networkChecking: NetworkChecking
+    private lateinit var mockCategoryModel: CategoryModel
 
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Before
-    fun setUp(){
+    fun setup() {
+        viewModelFactory = Mockito.mock(ViewModelProvider.Factory::class.java)
+        viewModel = Mockito.mock(HomeViewModel::class.java)
+        categoryAdapter = Mockito.mock(CategoryAdapter::class.java)
+        networkChecking = Mockito.mock(NetworkChecking::class.java)
 
-        Dispatchers.setMain(Dispatchers.Unconfined)
-
-        fragmentScenario = launchFragmentInContainer {
-            HomeFragment().apply {
-                mockViewModel = viewModel
-                mockCategoryAdapter = categoryAdapter
-            }
-        }
-    }
-
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    @After
-    fun tearDown(){
-        Dispatchers.resetMain()
+        // Mocking viewModel's result flow
+        Mockito.`when`(viewModel.categoriesResult).thenReturn(MutableStateFlow(null))
     }
 
     @Test
-    fun testFragmentViews(){
+    fun `test fragment_view_created`() = runBlockingTest {
+        // Mocking network availability
+        Mockito.`when`(networkChecking.isNetworkAvailable()).thenReturn(true)
 
+        // Launch the fragment
+        val scenario = FragmentScenario.launchInContainer(
+            HomeFragment::class.java,
+            null,
+            R.style.Theme_LunarGaze,
+            null
+        )
 
-        val recyclerView = mock(RecyclerView::class.java)
+        scenario.onFragment { fragment ->
+            fragment.viewModel.categoriesResult.value = mockCategoryModel
 
-        fragmentScenario.onFragment{ fragment ->
-            fragment.setupViews()
-        }
-
-
-        verify(recyclerView).apply {
-            adapter = mockCategoryAdapter
-            hasFixedSize()
+            // assertNotNull(fragment.binding.categoryRecycler)
+            Mockito.verify(categoryAdapter).submitCategory(mockCategoryModel)
         }
     }
-
-
-
 }

@@ -7,8 +7,12 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.annotation.StringRes
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.muratcangzm.lunargaze.R
@@ -37,8 +41,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        Timber.tag("DataSpeed1: ").d(""+networkChecking.getMobileSpeed().first)
-        Timber.tag("DataSpeed2: ").d(""+networkChecking.getMobileSpeed().second)
+        Timber.tag("DataSpeed1: ").d("" + networkChecking.getMobileSpeed().first)
+        Timber.tag("DataSpeed2: ").d("" + networkChecking.getMobileSpeed().second)
+
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
@@ -48,6 +53,31 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+
+        val toggle = ActionBarDrawerToggle(
+            this,
+            binding.drawerLayout,
+            binding.toolbar,
+            R.string.open_nav,
+            R.string.close_nav
+        )
+        toggle.drawerArrowDrawable.color = resources.getColor(R.color.white)
+        binding.drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        binding.navView.setNavigationItemSelectedListener { menuItem ->
+
+            when(menuItem){
+                binding.navView.menu.findItem(R.id.googleSignIn) -> {
+                    //navHostFragment.navController.navigate(R.id.homeFragment)
+                    Toast.makeText(this, "Google sign in clicked", Toast.LENGTH_SHORT).show()
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
+                }
+            }
+
+            true
+        }
 
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
 
@@ -134,6 +164,7 @@ class MainActivity : AppCompatActivity() {
 
         return true
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

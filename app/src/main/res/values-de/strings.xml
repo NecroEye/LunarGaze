@@ -31,4 +31,5 @@
     <string name="file_name">Dateiname</string>
     <string name="browse">Durchsuchen:</string>
     <string name="current_folder_in">Aktueller Ordner in:</string>
+    <string name="google_sign_in">Mit Google anmelden</string>
 </resources>

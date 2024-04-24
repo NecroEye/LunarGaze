@@ -31,4 +31,11 @@
     <string name="file_name">File Name</string>
     <string name="browse">Browse:</string>
     <string name="current_folder_in">Current folder in:</string>
+    <string name="google_sign_in">Google Sign In</string>
+
+    <!-- don't translate these-->
+    <string name="open_nav" translatable="false">Open Navigation</string>
+    <string name="close_nav" translatable="false">Close Navigation</string>
+
+
 </resources>

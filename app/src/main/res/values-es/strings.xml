@@ -31,4 +31,5 @@
     <string name="file_name">Nombre del archivo</string>
     <string name="browse">Examinar:</string>
     <string name="current_folder_in">Carpeta actual en:</string>
+    <string name="google_sign_in">Iniciar sesión con Google</string>
 </resources>

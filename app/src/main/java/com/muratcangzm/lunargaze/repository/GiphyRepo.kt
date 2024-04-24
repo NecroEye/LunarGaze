@@ -6,6 +6,7 @@ import com.muratcangzm.lunargaze.models.remote.ChannelModel
 import com.muratcangzm.lunargaze.models.remote.SearchModel
 import com.muratcangzm.lunargaze.service.GiphyAPI
 import com.muratcangzm.lunargaze.utils.DataResponse
+import com.muratcangzm.lunargaze.utils.log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
@@ -64,7 +65,7 @@ class GiphyRepo(private val api: GiphyAPI) {
 
         }
         catch (e:Exception){
-            Timber.tag("Api Error").d(e)
+            log(e.message.toString())
 
         }
 
