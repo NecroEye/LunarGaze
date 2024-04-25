@@ -26,7 +26,7 @@ constructor(private val repo: GiphyRepo) : ViewModel() {
         get() = _categoriesResult
 
     private val _mutableDataLoading = MutableStateFlow<Boolean>(false)
-    val liveDataLoading =
+    val mutableDataLoading =
         _mutableDataLoading
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->

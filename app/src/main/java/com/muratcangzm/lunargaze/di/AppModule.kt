@@ -66,7 +66,6 @@ object AppModule {
         return application.applicationContext
     }
 
-
     @Provides
     @Singleton
     fun provideGiphyRepository(
@@ -81,7 +80,6 @@ object AppModule {
     fun provideFavoriteRepo(dao: FavoriteDao): FavoriteRepo {
         return FavoriteRepo(dao)
     }
-
 
     @Provides
     @Singleton

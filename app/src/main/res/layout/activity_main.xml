@@ -63,9 +63,12 @@
     android:id="@+id/nav_view"
     android:layout_gravity="start"
     app:headerLayout="@layout/drawer_header"
-    android:background="@color/night_blue"
+    android:background="@color/white"
+    app:itemShapeFillColor="@color/black"
+    app:itemRippleColor="@color/grey"
     app:elevation="6dp"
     app:itemTextColor="@color/white"
+    app:itemIconTint="@color/white"
     app:menu="@menu/drawer_menu" />
 
 

@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="176dp"
-    android:padding="16dp"
-    android:background="@color/beyond_blue"
+    android:layout_height="240dp"
+    android:background="@color/white"
+    android:orientation="vertical"
     android:theme="@style/Base.Theme.LunarGaze">
 
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/empty"
+        android:paddingBottom="35dp"
+        android:src="@drawable/header_image" />
 
 
 </LinearLayout>

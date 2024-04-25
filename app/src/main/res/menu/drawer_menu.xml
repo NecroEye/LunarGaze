@@ -4,18 +4,18 @@
     tools:showIn="navigation_view">
 
 
-
-<group
-    android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
 
 
-    <item
-        android:id="@+id/googleSignIn"
-        android:icon="@drawable/gmail"
-        android:title="@string/google_sign_in"/>
 
-</group>
+        <item
+            android:id="@+id/googleSignIn"
+            android:visible="true"
+            android:icon="@drawable/baseline_email_24"
+            android:paddingTop="@dimen/great_padding"
+            android:title="@string/google_sign_in" />
 
 
+    </group>
 
 </menu>
