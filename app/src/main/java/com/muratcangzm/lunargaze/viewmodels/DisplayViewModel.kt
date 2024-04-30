@@ -1,15 +1,14 @@
 package com.muratcangzm.lunargaze.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.muratcangzm.lunargaze.models.remote.ChannelModel
 import com.muratcangzm.lunargaze.repository.GiphyRepo
-import com.muratcangzm.lunargaze.utils.NetworkChecking
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 import timber.log.Timber
@@ -23,21 +22,17 @@ constructor(
 ) : ViewModel() {
 
     private val _mutableChannelResult = MutableStateFlow<ChannelModel?>(null)
-    val channelResult
+    val channelResult: StateFlow<ChannelModel?>
         get() = _mutableChannelResult
 
     private val _mutableDataLoading = MutableStateFlow<Boolean>(false)
-    val dataLoading
+    val dataLoading: StateFlow<Boolean>
         get() = _mutableDataLoading
 
 
-
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-
-        Timber.tag("Data Error").d("something isnt right: " + throwable.message)
-
+        Timber.tag("Data Error").d("something isnt right: %s", throwable.message)
     }
-
 
     fun getChannels(search: String, offset: Int?) {
 
@@ -64,6 +59,4 @@ constructor(
         super.onCleared()
         viewModelScope.cancel()
     }
-
-
 }

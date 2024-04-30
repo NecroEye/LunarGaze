@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.muratcangzm.lunargaze.databinding.FavoritedImageLayoutBinding
+import com.muratcangzm.lunargaze.extensions.hideView
+import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.ui.adapters.BookMarkFileAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,10 +49,10 @@ class FavoritedImageFragment : Fragment() {
 
         if (receivedData!!.isNotEmpty()) {
             bookmarkAdapter.bindRoomArray(receivedData)
-            binding.favoritedText.visibility = View.INVISIBLE
+            binding.favoritedText.hideView()
         } else {
             bookmarkAdapter.bindRoomArray(emptyArray())
-            binding.favoritedText.visibility = View.VISIBLE
+            binding.favoritedText.showView()
         }
         binding.bookmarkRecycler.adapter = bookmarkAdapter
         binding.bookmarkRecycler.layoutManager =

@@ -18,6 +18,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.ActivityMainBinding
+import com.muratcangzm.lunargaze.extensions.goneView
+import com.muratcangzm.lunargaze.extensions.hideView
+import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.ui.fragments.HomeFragmentDirections
 import com.muratcangzm.lunargaze.utils.NetworkChecking
 import dagger.hilt.android.AndroidEntryPoint
@@ -72,7 +75,8 @@ class MainActivity : AppCompatActivity() {
             when(menuItem){
                 binding.navView.menu.findItem(R.id.googleSignIn) -> {
                     //navHostFragment.navController.navigate(R.id.homeFragment)
-                    Toast.makeText(this, "Google sign in clicked", Toast.LENGTH_SHORT).show()
+                    //TODO("Google sign in")
+                    Toast.makeText(this, "Google sign in clicked", Toast.LENGTH_SHORT).show() //Temporally tost
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                 }
             }
@@ -86,39 +90,39 @@ class MainActivity : AppCompatActivity() {
 
             when (destination.id) {
                 R.id.displayFragment -> {
-                    binding.bottomNavigation.visibility = View.GONE
-                    binding.toolbar.visibility = View.GONE
+                    binding.bottomNavigation.goneView()
+                    binding.toolbar.goneView()
 
                 }
 
                 R.id.favoritesFragment -> {
-                    binding.toolbar.visibility = View.VISIBLE
-                    binding.bottomNavigation.visibility = View.VISIBLE
+                    binding.toolbar.showView()
+                    binding.bottomNavigation.showView()
                     searchItem?.isVisible = false
 
                 }
 
                 R.id.searchDisplayFragment -> {
-                    binding.bottomNavigation.visibility = View.GONE
-                    binding.toolbar.visibility = View.INVISIBLE
+                    binding.bottomNavigation.goneView()
+                    binding.toolbar.hideView()
                 }
 
                 R.id.homeFragment -> {
-                    binding.bottomNavigation.visibility = View.VISIBLE
-                    binding.toolbar.visibility = View.VISIBLE
+                    binding.bottomNavigation.showView()
+                    binding.toolbar.showView()
                     searchItem?.isVisible = true
 
                 }
 
                 R.id.fullScreenImageFragment -> {
-                    binding.toolbar.visibility = View.GONE
-                    binding.bottomNavigation.visibility = View.GONE
+                    binding.toolbar.goneView()
+                    binding.bottomNavigation.goneView()
                 }
 
                 R.id.favoritedImageFragment -> {
 
-                    binding.toolbar.visibility = View.GONE
-                    binding.bottomNavigation.visibility = View.GONE
+                    binding.toolbar.goneView()
+                    binding.bottomNavigation.goneView()
                 }
 
                 else -> throw Exception("There isn't any destination")

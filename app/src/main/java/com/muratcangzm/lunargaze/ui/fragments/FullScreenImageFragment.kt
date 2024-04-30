@@ -42,6 +42,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.ImageFullscreenLayoutBinding
+import com.muratcangzm.lunargaze.extensions.goneView
+import com.muratcangzm.lunargaze.extensions.hideView
+import com.muratcangzm.lunargaze.extensions.showSnackBarWithAction
+import com.muratcangzm.lunargaze.extensions.showView
+import com.muratcangzm.lunargaze.extensions.tost
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.models.remote.ChannelModel
 import com.muratcangzm.lunargaze.repository.DataStoreRepo
@@ -133,14 +138,14 @@ class FullScreenImageFragment : Fragment() {
                     .load(receivedData!!.user!!.avatarUrl)
                     .into(fullScreenImage)
 
-                bookmarkedButton.visibility = View.VISIBLE
+                bookmarkedButtonCard.showView()
 
             } else {
                 glide
                     .load(roomData!!.imageUrl)
                     .into(fullScreenImage)
 
-                bookmarkedButton.visibility = View.INVISIBLE
+                bookmarkedButtonCard.goneView()
 
             }
 
@@ -185,10 +190,7 @@ class FullScreenImageFragment : Fragment() {
 
                 saveButton.setOnClickListener {
 
-
-                    Toast.makeText(requireContext(), "Successfully Saved", Toast.LENGTH_SHORT)
-                        .show()
-
+                      tost(R.string.successful_save)
 
                     favoriteModel = receivedData?.user?.avatarUrl?.let { image ->
                         FavoriteModel(
@@ -212,8 +214,6 @@ class FullScreenImageFragment : Fragment() {
 
                     alertDialog?.dismiss()
                 }
-
-
             }
 
             shareButtonCard.setOnClickListener {
@@ -230,12 +230,12 @@ class FullScreenImageFragment : Fragment() {
             }
 
             saveButtonCard.setOnClickListener {
+                     //TODO: Fix this
+                     receivedData?.user?.let {
+                         val convertedUri = Uri.parse(receivedData!!.user!!.avatarUrl)
+                         requestPermissionIfHasnt(convertedUri, receivedData!!.displayName!!)
 
-
-                val convertedUri = Uri.parse(receivedData!!.user!!.avatarUrl)
-
-                requestPermissionIfHasnt(convertedUri, receivedData!!.displayName!!)
-
+                     }
             }
 
         }
@@ -273,20 +273,17 @@ class FullScreenImageFragment : Fragment() {
 
                 } else {
 
-                    Snackbar.make(
-                        binding.root,
-                        "You must give permission",
-                        Snackbar.LENGTH_INDEFINITE
-                    )
-                        .setAction("Manage the permissions") {
-
-                            val intent = Intent()
-                            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                            val uri = Uri.fromParts("package", requireActivity().packageName, null)
-                            intent.setData(uri)
-                            requireActivity().startActivity(intent)
-
-                        }.show()
+                     //Snackbar extension
+                    showSnackBarWithAction(
+                        R.string.permission_denied,
+                        R.string.manage_permission
+                    ) {
+                        val intent = Intent()
+                        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                        val uri = Uri.fromParts("package", requireActivity().packageName, null)
+                        intent.setData(uri)
+                        requireActivity().startActivity(intent)
+                    }
 
 
                 }
@@ -359,11 +356,14 @@ class FullScreenImageFragment : Fragment() {
 
 
         if (roomData == null) {
-            updateTime.text = receivedData!!.featuredGif?.sharedDateTime ?: resources.getString(R.string.empty)
+            updateTime.text =
+                receivedData!!.featuredGif?.sharedDateTime ?: resources.getString(R.string.empty)
             type.text = receivedData!!.type ?: resources.getString(R.string.empty)
-            uploader.text = receivedData!!.featuredGif?.username ?: resources.getString(R.string.empty)
+            uploader.text =
+                receivedData!!.featuredGif?.username ?: resources.getString(R.string.empty)
             rating.text = receivedData!!.featuredGif?.rating ?: resources.getString(R.string.empty)
-            description.text = receivedData!!.featuredGif?.title ?: resources.getString(R.string.empty)
+            description.text =
+                receivedData!!.featuredGif?.title ?: resources.getString(R.string.empty)
             link.text = receivedData!!.featuredGif?.embedUrl ?: resources.getString(R.string.empty)
         } else {
 
@@ -392,7 +392,7 @@ class FullScreenImageFragment : Fragment() {
                 clipboardManager.setPrimaryClip(clip!!)
             }
 
-            Toast.makeText(requireContext(), "URL Copied", Toast.LENGTH_SHORT).show()
+            tost(R.string.copy_url)
 
         }
 

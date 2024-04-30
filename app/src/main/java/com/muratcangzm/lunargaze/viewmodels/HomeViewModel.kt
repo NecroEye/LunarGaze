@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
@@ -22,12 +23,12 @@ constructor(private val repo: GiphyRepo) : ViewModel() {
 
 
     private val _categoriesResult = MutableStateFlow<CategoryModel?>(null)
-    val categoriesResult
+    val categoriesResult : StateFlow<CategoryModel?>
         get() = _categoriesResult
 
     private val _mutableDataLoading = MutableStateFlow<Boolean>(false)
-    val mutableDataLoading =
-        _mutableDataLoading
+    val mutableDataLoading : StateFlow<Boolean>
+        get() = _mutableDataLoading
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
 

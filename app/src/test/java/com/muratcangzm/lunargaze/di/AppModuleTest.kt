@@ -77,8 +77,10 @@ class AppModuleTest {
     @Test
     fun testGiphyRepository() {
 
-        val repository = AppModule.provideGiphyRepository(mockGiphyApi)
+        val dispatcher = AppModule.provideMainDispatcher()
+        val repository = AppModule.provideGiphyRepository(mockGiphyApi, dispatcher)
         assertNotNull(repository)
+
     }
 
 

@@ -18,6 +18,8 @@ import kotlinx.coroutines.launch
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
+import com.muratcangzm.lunargaze.extensions.hideView
+import com.muratcangzm.lunargaze.extensions.showView
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -79,14 +81,14 @@ class DisplayFragment : Fragment() {
                 it?.let { result ->
 
                     if (result.pagination!!.totalCount == 0) {
-                        binding.displayEmptyText.visibility = View.VISIBLE
+                        binding.displayEmptyText.showView()
 
                     } else {
                         displayAdapter.submitData(
                             result.channelData!!.toMutableList(),
                             this@DisplayFragment
                         )
-                        binding.displayEmptyText.visibility = View.INVISIBLE
+                        binding.displayEmptyText.hideView()
 
 
                     }

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Lunar Gaze</string>
     <string name="category_image">Category Image</string>
     <string name="empty">Empty</string>
@@ -32,6 +32,11 @@
     <string name="browse">Browse:</string>
     <string name="current_folder_in">Current folder in:</string>
     <string name="google_sign_in">Google Sign In</string>
+    <string name="google_sign_out" tools:ignore="MissingTranslation">Google Sign Out</string>
+    <string name="permission_denied" tools:ignore="MissingTranslation">You must give permission</string>
+    <string name="manage_permission" tools:ignore="MissingTranslation">Manage the permissions</string>
+    <string name="successful_save" tools:ignore="MissingTranslation">Successfully Saved</string>
+    <string name="copy_url" tools:ignore="MissingTranslation">URL Copied</string>
 
     <!-- don't translate these-->
     <string name="open_nav" translatable="false">Open Navigation</string>

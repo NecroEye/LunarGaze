@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 import timber.log.Timber
@@ -16,15 +17,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel
-@Inject constructor(private val repo:GiphyRepo) : ViewModel() {
+@Inject constructor(private val repo: GiphyRepo) : ViewModel() {
 
 
     private val mutableSearchResult = MutableStateFlow<SearchModel?>(null)
-    val searchResult
+    val searchResult: StateFlow<SearchModel?>
         get() = mutableSearchResult
 
-    private val exceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        Timber.tag("something occurred bad").d(throwable.message)
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        Timber.tag("something occurred bad").d(throwable)
     }
 
     fun fetchSearchData(search: String) {
@@ -32,7 +33,7 @@ class SearchViewModel
         viewModelScope.launch(exceptionHandler) {
             supervisorScope {
 
-                repo.fetchSearch(search).collect{
+                repo.fetchSearch(search).collect {
 
                     mutableSearchResult.value = it.data
 

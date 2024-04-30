@@ -1,0 +1,131 @@
+[versions]
+appcompat = "1.6.1"
+constraintlayout = "2.1.4"
+coreKtx = "1.13.0"
+coreSplashscreen = "1.0.1"
+datastore = "1.1.0"
+firebaseAnalytics = "21.6.2"
+glide = "4.16.0"
+googleServices = "4.4.1"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+lifecycleViewmodelKtx = "2.7.0"
+lottieVersion = "3.4.0"
+material = "1.11.0"
+espresso = "3.5.1"
+navigationFragmentKtx = "2.7.7"
+navigationUiKtx = "2.7.7"
+okhttp = "4.12.0"
+retrofit = "2.9.0"
+roomRuntime = "2.6.1"
+rxandroid = "3.0.0"
+rxjava = "3.0.2"
+timberVersion = "5.0.1"
+androidApp = "8.4.0-rc02"
+androidLib = "8.1.2"
+daggerHilt = "2.48.1"
+kotlinAndroid = "1.7.0"
+
+
+[libraries]
+
+#AndroidX
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
+junit = { module = "junit:junit", version.ref = "junit" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
+
+#Retrofit
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+
+#Life-Cycle
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleViewmodelKtx" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+
+#Navigation
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationUiKtx" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+
+#RxJava3
+rxandroid = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxandroid" }
+rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
+
+#Room
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+androidx-room-rxjava3 = { module = "androidx.room:room-rxjava3", version.ref = "roomRuntime" }
+
+#Firebase-analytics
+firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebaseAnalytics" }
+
+#DataStore
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+androidx-datastore-rxjava3 = { module = "androidx.datastore:datastore-rxjava3", version.ref = "datastore" }
+
+#UI - Glide, Lottie and SplashScreen
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottieVersion" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+
+#Timber
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timberVersion" }
+
+[bundles]
+androidx = [
+    "androidx-appcompat",
+    "androidx-constraintlayout",
+    "androidx-core-ktx",
+    "androidx-junit",
+    "junit",
+    "material",
+    "espresso-core"
+]
+retrofit = [
+    "retrofit",
+    "okhttp",
+    "converter-gson"
+]
+life-cycle = [
+    "androidx-lifecycle-livedata-ktx",
+    "androidx-lifecycle-viewmodel-ktx"
+]
+navigation = [
+    "androidx-navigation-fragment-ktx",
+    "androidx-navigation-ui-ktx"
+]
+rxjava3 = [
+    "rxandroid",
+    "rxjava"
+]
+room = [
+    "androidx-room-compiler",
+    "androidx-room-runtime",
+    "androidx-room-rxjava3"
+]
+datastore = [
+    "androidx-datastore",
+    "androidx-datastore-preferences",
+    "androidx-datastore-rxjava3"
+]
+ui = [
+    "androidx-core-splashscreen",
+    "glide",
+    "lottie"
+]
+
+
+
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidApp" }
+android-library = { id = "com.android.library", version.ref = "androidLib" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "daggerHilt" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid"}
+safe-navigation = { id = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationFragmentKtx" }
+google-services = { id = "com.google.gms:google-services", version.ref = "googleServices" }

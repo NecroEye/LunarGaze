@@ -13,12 +13,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.muratcangzm.lunargaze.databinding.SearchDisplayFragmentLayoutBinding
+import com.muratcangzm.lunargaze.extensions.goneView
+import com.muratcangzm.lunargaze.extensions.hideView
+import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.models.remote.ChannelModel
 import com.muratcangzm.lunargaze.ui.adapters.DisplayAdapter
 import com.muratcangzm.lunargaze.utils.NetworkChecking
 import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -96,23 +100,23 @@ class SearchDisplayFragment : Fragment() {
                     it?.let {
 
                         if (it.pagination!!.totalCount == 0) {
-                            binding.searchFragmentEmpty.visibility = View.VISIBLE
-                            binding.searchLoadingScreen.loadingScreenLayout.visibility = View.GONE
+                            binding.searchFragmentEmpty.showView()
+                            binding.searchLoadingScreen.loadingScreenLayout.goneView()
                         } else {
-                            binding.searchFragmentEmpty.visibility = View.INVISIBLE
-                            binding.searchLoadingScreen.loadingScreenLayout.visibility = View.GONE
+                            binding.searchFragmentEmpty.hideView()
+                            binding.searchLoadingScreen.loadingScreenLayout.goneView()
                             searchAdapter.submitData(
                                 it.channelData!!.toMutableList(),
                                 this@SearchDisplayFragment
                             )
-                            binding.searchAdapter.visibility = View.VISIBLE
+                            binding.searchAdapter.showView()
                         }
                     }
                 }
             }
         } else {
-            binding.searchLoadingScreen.loadingScreenLayout.visibility = View.VISIBLE
-            binding.searchAdapter.visibility = View.GONE
+            binding.searchLoadingScreen.loadingScreenLayout.showView()
+            binding.searchAdapter.goneView()
         }
     }
 
@@ -128,10 +132,10 @@ class SearchDisplayFragment : Fragment() {
 
         }
 
-        binding.searchFragmentEmpty.visibility = View.INVISIBLE
-        binding.searchLoadingScreen.loadingScreenLayout.visibility = View.GONE
+        binding.searchFragmentEmpty.hideView()
+        binding.searchLoadingScreen.loadingScreenLayout.goneView()
         searchAdapter.submitData(randomModel, this@SearchDisplayFragment)
-        binding.searchAdapter.visibility = View.VISIBLE
+        binding.searchAdapter.showView()
 
     }
 

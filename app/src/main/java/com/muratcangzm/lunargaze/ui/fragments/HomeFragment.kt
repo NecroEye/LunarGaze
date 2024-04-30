@@ -13,6 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.muratcangzm.lunargaze.databinding.HomeFragmentLayoutBinding
+import com.muratcangzm.lunargaze.extensions.goneView
+import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.ui.adapters.CategoryAdapter
 import com.muratcangzm.lunargaze.utils.NetworkChecking
 import com.muratcangzm.lunargaze.viewmodels.HomeViewModel
@@ -71,13 +73,11 @@ class HomeFragment : Fragment() {
         if (networkChecking.isNetworkAvailable()) {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.categoriesResult.collect {
-
-
                     it?.let { result ->
 
                         categoryAdapter.submitCategory(result)
-                        binding.categoryRecycler.visibility = View.VISIBLE
-                        binding.loadingScreen.loadingScreenLayout.visibility = View.GONE
+                        binding.categoryRecycler.showView()
+                        binding.loadingScreen.loadingScreenLayout.goneView()
 
                     }
 
@@ -86,14 +86,14 @@ class HomeFragment : Fragment() {
 
             }
         } else {
-            binding.loadingScreen.loadingScreenLayout.visibility = View.VISIBLE
-            binding.categoryRecycler.visibility = View.GONE
+            binding.loadingScreen.loadingScreenLayout.showView()
+            binding.categoryRecycler.goneView()
 
 
         }
     }
 
-    fun setupViews() {
+    private fun setupViews() {
 
         binding.categoryRecycler.apply {
 

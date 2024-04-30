@@ -16,6 +16,9 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.FavoritesFragmentLayoutBinding
+import com.muratcangzm.lunargaze.extensions.goneView
+import com.muratcangzm.lunargaze.extensions.hideView
+import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.repository.DataStoreRepo
 import com.muratcangzm.lunargaze.ui.adapters.FavoriteFileAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -77,11 +80,11 @@ class FavoritesFragment : Fragment() {
                 Timber.tag("Boyutu: ").d("${stringList?.size}")
 
                 if (stringList!!.isEmpty()) {
-                    binding.emptyFavFileText.visibility = View.VISIBLE
-                    binding.lottieArrow.visibility = View.VISIBLE
+                    binding.emptyFavFileText.showView()
+                    binding.lottieArrow.showView()
                 } else {
-                    binding.emptyFavFileText.visibility = View.INVISIBLE
-                    binding.lottieArrow.visibility = View.INVISIBLE
+                    binding.emptyFavFileText.hideView()
+                    binding.lottieArrow.hideView()
                 }
 
                 favoriteFileAdapter.submitFileNames(stringList!!)
@@ -158,8 +161,8 @@ class FavoritesFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
 
-                binding.lottieArrow.visibility = View.INVISIBLE
-                binding.emptyFavFileText.visibility = View.INVISIBLE
+                binding.lottieArrow.hideView()
+                binding.emptyFavFileText.hideView()
             }
 
 

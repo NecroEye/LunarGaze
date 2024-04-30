@@ -77,7 +77,6 @@ android {
     hilt {
         enableAggregatingTask = true
     }
-
 }
 
 dependencies {
