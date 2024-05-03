@@ -3,6 +3,7 @@ package com.muratcangzm.lunargaze.ui.fragments
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.DownloadManager
 import android.content.ClipData
 import android.content.Intent
 import android.content.ClipboardManager
@@ -36,6 +37,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
@@ -47,6 +49,7 @@ import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showSnackBarWithAction
 import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.extensions.tost
+import com.muratcangzm.lunargaze.helper.Downloader
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.models.remote.ChannelModel
 import com.muratcangzm.lunargaze.repository.DataStoreRepo
@@ -63,7 +66,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FullScreenImageFragment : Fragment() {
+class FullScreenImageFragment : Fragment(), Downloader {
 
 
     private var _binding: ImageFullscreenLayoutBinding? = null
@@ -90,6 +93,8 @@ class FullScreenImageFragment : Fragment() {
 
     private var compositeDisposable = CompositeDisposable()
     private val args: FullScreenImageFragmentArgs by navArgs()
+
+    private val downloadManager by lazy { requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager }
 
 
     companion object {
@@ -190,7 +195,7 @@ class FullScreenImageFragment : Fragment() {
 
                 saveButton.setOnClickListener {
 
-                      tost(R.string.successful_save)
+                    tost(R.string.successful_save)
 
                     favoriteModel = receivedData?.user?.avatarUrl?.let { image ->
                         FavoriteModel(
@@ -230,14 +235,47 @@ class FullScreenImageFragment : Fragment() {
             }
 
             saveButtonCard.setOnClickListener {
-                     //TODO: Fix this
-                     receivedData?.user?.let {
-                         val convertedUri = Uri.parse(receivedData!!.user!!.avatarUrl)
-                         requestPermissionIfHasnt(convertedUri, receivedData!!.displayName!!)
+                if (receivedData != null)
+                    requestPermissionIfHasnt(channelModel = receivedData, roomModel = null)
+                else
+                    requestPermissionIfHasnt(roomModel = roomData, channelModel = null)
 
-                     }
+
             }
 
+        }
+    }
+
+
+    private fun requestPermissionIfHasnt(
+        channelModel: ChannelModel.ChannelData?,
+        roomModel: FavoriteModel?
+    ) {
+
+        if (hasStoragePermission()) {
+
+            channelModel?.let {
+
+                val type = it.user!!.avatarUrl!!.substring(it.user.avatarUrl!!.length - 3)
+                Timber.tag("Channel Resmin tipi:").d(type)
+                downloadFile(it.user.avatarUrl, "image/".plus(type), it.featuredGif?.username!!)
+            }
+            roomModel?.let {
+
+                val type = it.imageUrl.substring(it.imageUrl.length - 3)
+                Timber.tag("Room Resmin tipi:").d(type)
+                downloadFile(it.imageUrl, "image/".plus(type), it.userName!!)
+            }
+
+        } else {
+
+            requireActivity().requestPermissions(
+                arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ),
+                REQUEST_CODE
+            )
         }
     }
 
@@ -249,94 +287,20 @@ class FullScreenImageFragment : Fragment() {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    private fun requestPermissionIfHasnt(image: Uri, fileName: String) {
+    override fun downloadFile(url: String, imageType: String, imageName: String): Long {
 
-        if (!hasStoragePermission()) {
 
-            requireActivity().requestPermissions(
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                REQUEST_CODE
+        val request = DownloadManager.Request(url.toUri())
+            .setMimeType("image/jpg")
+            .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            .setTitle(imageName.plus(imageType))
+            .setDestinationInExternalPublicDir(
+                Environment.DIRECTORY_DOWNLOADS,
+                imageName.plus(imageType)
             )
-        } else if (hasStoragePermission()) {
 
-            saveUrlToExternalStorage(image, fileName)
-
-        } else {
-
-            activityResultLauncher = registerForActivityResult(
-                ActivityResultContracts.RequestPermission()
-            ) { isGranted ->
-
-                if (isGranted) {
-
-                    saveUrlToExternalStorage(image, fileName)
-
-                } else {
-
-                     //Snackbar extension
-                    showSnackBarWithAction(
-                        R.string.permission_denied,
-                        R.string.manage_permission
-                    ) {
-                        val intent = Intent()
-                        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                        val uri = Uri.fromParts("package", requireActivity().packageName, null)
-                        intent.setData(uri)
-                        requireActivity().startActivity(intent)
-                    }
-
-
-                }
-            }
-        }
-    }
-
-
-    @SuppressLint("Recycle")
-    private fun uriToBitmap(contentResolver: ContentResolver, uri: Uri): Bitmap? {
-
-        var bitmap: Bitmap? = null
-
-        try {
-
-            val inputStream = contentResolver.openInputStream(uri)
-            bitmap = BitmapFactory.decodeStream(inputStream)
-
-            inputStream?.close()
-
-        } catch (e: IOException) {
-            Timber.tag("Error while saving").d(e)
-        }
-
-        return bitmap
-    }
-
-
-    private fun saveUrlToExternalStorage(imageUri: Uri, fileName: String) {
-
-
-        val bitmapImage = uriToBitmap(requireActivity().contentResolver, imageUri)
-
-        val directory =
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-
-        val file = File(directory, fileName)
-        var fos: FileOutputStream? = null
-
-        try {
-
-            fos = FileOutputStream(file)
-            bitmapImage?.compress(Bitmap.CompressFormat.PNG, 100, fos)
-            fos.flush()
-
-
-        } catch (e: IOException) {
-            Timber.tag("save error").d(e)
-        } finally {
-            fos?.close()
-        }
-
-
+        return downloadManager.enqueue(request)
     }
 
 
@@ -433,4 +397,6 @@ class FullScreenImageFragment : Fragment() {
         compositeDisposable.clear()
 
     }
+
+
 }

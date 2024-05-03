@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.CategoryRecyclerLayoutBinding
+import com.muratcangzm.lunargaze.extensions.navigateWithArgs
 import com.muratcangzm.lunargaze.models.remote.CategoryModel
 import com.muratcangzm.lunargaze.ui.fragments.HomeFragmentDirections
 import dagger.hilt.android.qualifiers.ActivityContext
@@ -91,7 +92,6 @@ class CategoryAdapter
                     Navigation
                         .findNavController(it)
                         .navigate(R.id.action_homeFragment_to_searchDisplayFragment, bundle)
-
 
                 }
 

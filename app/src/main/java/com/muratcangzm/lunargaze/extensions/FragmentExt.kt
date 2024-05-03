@@ -1,11 +1,22 @@
 package com.muratcangzm.lunargaze.extensions
 
 import android.widget.Toast
+import androidx.annotation.IdRes
 import androidx.annotation.StringRes
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.muratcangzm.lunargaze.R
 
+
+inline fun <reified T : Fragment> Fragment.navigateWithArgs(
+    @IdRes actionId: Int,
+    vararg args: Pair<String, Any>
+) {
+    val bundle = bundleOf(*args.map { it.first to it.second }.toTypedArray())
+    findNavController().navigate(actionId, bundle)
+}
 
 fun Fragment.snackBarWithText(
     snackBarText: String?,

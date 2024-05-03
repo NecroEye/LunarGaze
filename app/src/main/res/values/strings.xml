@@ -32,11 +32,11 @@
     <string name="browse">Browse:</string>
     <string name="current_folder_in">Current folder in:</string>
     <string name="google_sign_in">Google Sign In</string>
-    <string name="google_sign_out" tools:ignore="MissingTranslation">Google Sign Out</string>
-    <string name="permission_denied" tools:ignore="MissingTranslation">You must give permission</string>
-    <string name="manage_permission" tools:ignore="MissingTranslation">Manage the permissions</string>
-    <string name="successful_save" tools:ignore="MissingTranslation">Successfully Saved</string>
-    <string name="copy_url" tools:ignore="MissingTranslation">URL Copied</string>
+    <string name="google_sign_out" >Google Sign Out</string>
+    <string name="permission_denied" >You must give permission</string>
+    <string name="manage_permission" >Manage the permissions</string>
+    <string name="successful_save" >Successfully Saved</string>
+    <string name="copy_url" >URL Copied</string>
 
     <!-- don't translate these-->
     <string name="open_nav" translatable="false">Open Navigation</string>

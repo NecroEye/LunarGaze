@@ -32,4 +32,9 @@
     <string name="browse">Durchsuchen:</string>
     <string name="current_folder_in">Aktueller Ordner in:</string>
     <string name="google_sign_in">Mit Google anmelden</string>
+    <string name="google_sign_out">Google Abmelden</string>
+    <string name="permission_denied">Sie müssen die Berechtigung geben</string>
+    <string name="manage_permission">Berechtigungen verwalten</string>
+    <string name="successful_save">Erfolgreich gespeichert</string>
+    <string name="copy_url">URL kopiert</string>
 </resources>

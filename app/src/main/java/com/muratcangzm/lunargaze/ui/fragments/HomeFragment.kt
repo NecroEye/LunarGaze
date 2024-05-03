@@ -80,15 +80,11 @@ class HomeFragment : Fragment() {
                         binding.loadingScreen.loadingScreenLayout.goneView()
 
                     }
-
-
                 }
-
             }
         } else {
             binding.loadingScreen.loadingScreenLayout.showView()
             binding.categoryRecycler.goneView()
-
 
         }
     }

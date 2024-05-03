@@ -22,12 +22,21 @@ class GiphyRepo @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
 
+    private var categoryCache: DataResponse<CategoryModel>? = null
+
     suspend fun fetchCategories(): Flow<DataResponse<CategoryModel>> = flow {
         try {
             val response = api.getCategory()
 
-            if (response.isSuccessful)
+            if (response.isSuccessful){
+                categoryCache = DataResponse.success(response.body())
+
+                categoryCache?.let {
+                    emit(categoryCache!!)
+                    return@let
+                }
                 emit(DataResponse.success(response.body()))
+            }
             else
                 emit(DataResponse.error("Network error, please try again later!"))
 
