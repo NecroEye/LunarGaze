@@ -78,7 +78,6 @@ class SearchDisplayFragment : Fragment() {
 
 
         viewModel.getChannels(receivedData.trim().lowercase(), offset)
-        observeDataChange()
 
 
         return binding.root
@@ -87,6 +86,9 @@ class SearchDisplayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        observeDataChange()
+
     }
 
     @SuppressLint("SetTextI18n")

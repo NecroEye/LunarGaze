@@ -16,6 +16,7 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.MenuItemCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.ActivityMainBinding
 import com.muratcangzm.lunargaze.extensions.goneView
@@ -168,6 +169,10 @@ class MainActivity : AppCompatActivity() {
 
 
         return true
+    }
+
+    fun getBottomNavigationView() : BottomNavigationView{
+        return binding.bottomNavigation
     }
 
 

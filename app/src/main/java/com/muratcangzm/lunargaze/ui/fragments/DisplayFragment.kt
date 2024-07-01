@@ -1,6 +1,7 @@
 package com.muratcangzm.lunargaze.ui.fragments
 
 import android.annotation.SuppressLint
+import android.nfc.Tag
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,16 +19,16 @@ import kotlinx.coroutines.launch
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
+import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showView
+import com.muratcangzm.lunargaze.ui.fragments.core.BaseFragment
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DisplayFragment : Fragment() {
+class DisplayFragment : BaseFragment<DisplayFragmentLayoutBinding>() {
 
-    private var _binding: DisplayFragmentLayoutBinding? = null
-    private val binding
-        get() = _binding!!
 
     private var offset: Int? = null
 
@@ -43,6 +44,13 @@ class DisplayFragment : Fragment() {
     @get:VisibleForTesting
     val viewModel: DisplayViewModel by viewModels { viewModelFactory }
 
+    override val layoutId: Int
+        get() = R.layout.display_fragment_layout
+
+
+    companion object{
+        private const val TAG = "DisplayFragment"
+    }
 
     init {
         //Empty Constructor
@@ -54,11 +62,8 @@ class DisplayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = DisplayFragmentLayoutBinding.inflate(inflater, container, false)
-
         val receivedData = requireArguments().getString("channelData")
         setAdapter()
-
 
 
         viewModel.getChannels(receivedData!!.lowercase(), offset)
@@ -69,6 +74,18 @@ class DisplayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): DisplayFragmentLayoutBinding {
+        return DisplayFragmentLayoutBinding.inflate(inflater, container, false)
+    }
+
+    override fun DisplayFragmentLayoutBinding.initializeViews() {
+        //not necessary rn either.
     }
 
 
@@ -88,6 +105,8 @@ class DisplayFragment : Fragment() {
                             result.channelData!!.toMutableList(),
                             this@DisplayFragment
                         )
+                        Timber.tag(TAG).d("Gelen Data ${result.pagination.totalCount}")
+
                         binding.displayEmptyText.hideView()
 
 
@@ -114,7 +133,6 @@ class DisplayFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        _binding = null
         offset = null
 
     }

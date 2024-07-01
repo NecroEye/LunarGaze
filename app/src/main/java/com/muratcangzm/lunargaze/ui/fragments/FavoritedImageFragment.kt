@@ -28,6 +28,10 @@ class FavoritedImageFragment : Fragment() {
     @Inject
     lateinit var bookmarkAdapter: BookMarkFileAdapter
 
+    companion object{
+        private const val TAG = "FavoriteImageFragment"
+    }
+
     init {
 
         //Empty Constructor
@@ -45,7 +49,7 @@ class FavoritedImageFragment : Fragment() {
         val receivedData =
             requireArguments().getParcelableArray("roomData") as Array<FavoriteModel>?
 
-        Timber.tag("Yerel Data: ").d("${receivedData?.size}")
+        Timber.tag(TAG).d("Yerel Data: ${receivedData?.size}")
 
         if (receivedData!!.isNotEmpty()) {
             bookmarkAdapter.bindRoomArray(receivedData)

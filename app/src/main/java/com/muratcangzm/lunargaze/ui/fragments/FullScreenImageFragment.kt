@@ -99,6 +99,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
     companion object {
         private const val REQUEST_CODE = 1
+        private const val TAG = "FullScreenFragment"
     }
 
     init {
@@ -257,13 +258,13 @@ class FullScreenImageFragment : Fragment(), Downloader {
             channelModel?.let {
 
                 val type = it.user!!.avatarUrl!!.substring(it.user.avatarUrl!!.length - 3)
-                Timber.tag("Channel Resmin tipi:").d(type)
+                Timber.tag(TAG).d("Channel Resmin tipi: $type")
                 downloadFile(it.user.avatarUrl, "image/".plus(type), it.featuredGif?.username!!)
             }
             roomModel?.let {
 
                 val type = it.imageUrl.substring(it.imageUrl.length - 3)
-                Timber.tag("Room Resmin tipi:").d(type)
+                Timber.tag(TAG).d("Room Resmin tipi: $type")
                 downloadFile(it.imageUrl, "image/".plus(type), it.userName!!)
             }
 

@@ -48,6 +48,10 @@ class FavoritesFragment : Fragment() {
     @Inject
     lateinit var dataStoreRepo: DataStoreRepo
 
+    companion object{
+        private const val TAG = "FavoritesFragment"
+    }
+
     init {
 
         //Empty Constructor
@@ -74,7 +78,7 @@ class FavoritesFragment : Fragment() {
                 stringList = dataStoreRepo.getAllValues()?.toList() as List<String>
 
                 for (deger in stringList!!) {
-                    Timber.tag("Değer: ").d(deger)
+                    Timber.tag(TAG).d("Değer: $deger")
                 }
 
                 Timber.tag("Boyutu: ").d("${stringList?.size}")

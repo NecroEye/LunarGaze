@@ -141,7 +141,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth-api-phone:18.0.2")
 
 
-    //Timber
+    //Timber - Logger
     implementation("com.jakewharton.timber:timber:5.0.1")
 
     //Splash Screen
