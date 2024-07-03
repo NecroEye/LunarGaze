@@ -67,8 +67,6 @@ class CategoryAdapter
         }
 
     }
-
-
     inner class CategoryViewHolder : RecyclerView.ViewHolder(binding.root) {
 
 
