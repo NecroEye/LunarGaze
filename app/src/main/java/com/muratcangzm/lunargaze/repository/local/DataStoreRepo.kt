@@ -1,4 +1,4 @@
-package com.muratcangzm.lunargaze.repository
+package com.muratcangzm.lunargaze.repository.local
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

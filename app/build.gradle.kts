@@ -38,7 +38,9 @@ android {
             isShrinkResources = true
             isDebuggable = false
 
-            buildConfigField("String", "API_KEY", localProperties.getProperty("API_KEY"))
+            buildConfigField("String", "GIPHY_KEY", localProperties.getProperty("GIPHY_KEY"))
+            buildConfigField("String", "TENOR_KEY", localProperties.getProperty("TENOR_KEY"))
+
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -52,7 +54,8 @@ android {
             isMinifyEnabled = false
             isShrinkResources = false
 
-            buildConfigField("String", "API_KEY", localProperties.getProperty("API_KEY"))
+            buildConfigField("String", "GIPHY_KEY", localProperties.getProperty("GIPHY_KEY"))
+            buildConfigField("String", "TENOR_KEY", localProperties.getProperty("TENOR_KEY"))
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

@@ -1,4 +1,4 @@
-package com.muratcangzm.lunargaze.models.remote
+package com.muratcangzm.lunargaze.models.remote.giphy
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

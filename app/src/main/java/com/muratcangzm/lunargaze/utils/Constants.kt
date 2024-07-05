@@ -1,16 +1,23 @@
 package com.muratcangzm.lunargaze.utils
 
-import androidx.datastore.preferences.core.stringPreferencesKey
 
 object Constants {
+
+
+    //App
 
     const val SHARED_DB_NAME = "Lunar_DB"
 
     const val DATASTORE_KEY = "FileKey"
 
-    const val BASE_URL = "https://api.giphy.com/v1/"
-
     const val DEBUG = true
+
+    const val ENCODE_QUALITY = 100
+
+
+    //Giphy
+
+    const val BASE_URL = "https://api.giphy.com/v1/"
 
     const val TRENDS = "trending"
 
@@ -22,8 +29,14 @@ object Constants {
 
     const val CHANNELS = "channels/search"
 
-    const val ENCODE_QUALITY = 100
 
+    //Tenor
+
+    const val TENOR_BASE = "https://tenor.googleapis.com/v2/"
+
+    const val TENOR_CATEGORY = "categories?"
+
+    const val TENOR_SEARCH = "search?"
 
 
 }

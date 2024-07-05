@@ -1,4 +1,4 @@
-package com.muratcangzm.lunargaze.repository
+package com.muratcangzm.lunargaze.repository.local
 
 import android.content.Context
 import android.util.Log

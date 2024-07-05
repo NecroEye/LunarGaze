@@ -2,7 +2,6 @@ package com.muratcangzm.lunargaze.ui.adapters
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ComponentCallbacks
 import android.content.ComponentCallbacks2
 import android.content.Context
 import android.content.res.Configuration
@@ -17,7 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.DisplayAdapterFragmentBinding
-import com.muratcangzm.lunargaze.models.remote.ChannelModel
+import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 import kotlin.jvm.Throws

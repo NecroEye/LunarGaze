@@ -1,8 +1,8 @@
-package com.muratcangzm.lunargaze.repository
+package com.muratcangzm.lunargaze.repository.remote
 
-import com.muratcangzm.lunargaze.models.remote.CategoryModel
-import com.muratcangzm.lunargaze.models.remote.ChannelModel
-import com.muratcangzm.lunargaze.models.remote.SearchModel
+import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
+import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
+import com.muratcangzm.lunargaze.models.remote.giphy.SearchModel
 import com.muratcangzm.lunargaze.service.GiphyAPI
 import com.muratcangzm.lunargaze.utils.DataResponse
 import com.muratcangzm.lunargaze.utils.IoDispatcher
@@ -11,7 +11,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton

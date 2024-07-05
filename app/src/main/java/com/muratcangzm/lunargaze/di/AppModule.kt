@@ -21,9 +21,11 @@ import com.bumptech.glide.request.RequestOptions
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.models.local.FavoriteDao
 import com.muratcangzm.lunargaze.models.local.FavoriteDatabase
-import com.muratcangzm.lunargaze.repository.FavoriteRepo
-import com.muratcangzm.lunargaze.repository.GiphyRepo
+import com.muratcangzm.lunargaze.repository.local.FavoriteRepo
+import com.muratcangzm.lunargaze.repository.remote.GiphyRepo
+import com.muratcangzm.lunargaze.repository.remote.TenorRepo
 import com.muratcangzm.lunargaze.service.GiphyAPI
+import com.muratcangzm.lunargaze.service.TenorAPI
 import com.muratcangzm.lunargaze.utils.Constants
 import com.muratcangzm.lunargaze.utils.DefaultDispatcher
 import com.muratcangzm.lunargaze.utils.IoDispatcher
@@ -40,7 +42,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import okhttp3.Dispatcher
 import javax.inject.Singleton
 
 @Module
@@ -77,15 +78,24 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideTenorRepository(
+        api:TenorAPI,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
+    ) : TenorRepo {
+        return TenorRepo(api, ioDispatcher)
+    }
+
+    @Provides
+    @Singleton
     fun provideFavoriteRepo(dao: FavoriteDao): FavoriteRepo {
         return FavoriteRepo(dao)
     }
 
     @Provides
     @Singleton
-    fun provideHomeViewModel(repo: GiphyRepo): HomeViewModel {
+    fun provideHomeViewModel(repo: GiphyRepo, tenorRepo: TenorRepo): HomeViewModel {
 
-        return HomeViewModel(repo)
+        return HomeViewModel(repo, tenorRepo)
     }
 
     @Provides
@@ -147,8 +157,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideViewModelFactory(giphyRepo: GiphyRepo): ViewModelProvider.Factory {
-        return ViewModelFactory.provideFactory(giphyRepo)
+    fun provideViewModelFactory(giphyRepo: GiphyRepo, tenorRepo: TenorRepo): ViewModelProvider.Factory {
+        return ViewModelFactory.provideFactory(giphyRepo, tenorRepo)
     }
 
 }

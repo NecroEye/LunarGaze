@@ -1,6 +1,7 @@
 package com.muratcangzm.lunargaze.models.remote
 
 import android.os.Parcel
+import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

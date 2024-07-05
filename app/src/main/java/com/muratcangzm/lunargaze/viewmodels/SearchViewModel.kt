@@ -1,15 +1,16 @@
 package com.muratcangzm.lunargaze.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.muratcangzm.lunargaze.models.remote.SearchModel
-import com.muratcangzm.lunargaze.repository.GiphyRepo
+import com.muratcangzm.lunargaze.models.remote.giphy.SearchModel
+import com.muratcangzm.lunargaze.repository.remote.GiphyRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 import timber.log.Timber
@@ -22,7 +23,7 @@ class SearchViewModel
 
     private val mutableSearchResult = MutableStateFlow<SearchModel?>(null)
     val searchResult: StateFlow<SearchModel?>
-        get() = mutableSearchResult
+        get() = mutableSearchResult.asStateFlow()
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Timber.tag("something occurred bad").d(throwable)
@@ -33,7 +34,7 @@ class SearchViewModel
         viewModelScope.launch(exceptionHandler) {
             supervisorScope {
 
-                repo.fetchSearch(search).collect {
+                repo.fetchSearch(search).collectLatest {
 
                     mutableSearchResult.value = it.data
 

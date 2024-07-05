@@ -1,4 +1,4 @@
-package com.muratcangzm.lunargaze.models.remote
+package com.muratcangzm.lunargaze.models.remote.giphy
 
 import android.os.Parcel
 import android.os.Parcelable

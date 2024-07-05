@@ -3,8 +3,6 @@ package com.muratcangzm.lunargaze.ui.adapters
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
-import android.content.SharedPreferences
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -13,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.FavoriteFolderLayoutBinding
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
-import com.muratcangzm.lunargaze.repository.DataStoreRepo
-import com.muratcangzm.lunargaze.repository.FavoriteRepo
+import com.muratcangzm.lunargaze.repository.local.DataStoreRepo
+import com.muratcangzm.lunargaze.repository.local.FavoriteRepo
 import com.muratcangzm.lunargaze.ui.fragments.FavoritesFragmentDirections
 import dagger.hilt.android.qualifiers.ActivityContext
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

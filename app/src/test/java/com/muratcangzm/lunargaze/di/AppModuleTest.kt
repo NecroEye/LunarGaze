@@ -4,7 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.muratcangzm.lunargaze.models.local.FavoriteDatabase
-import com.muratcangzm.lunargaze.repository.GiphyRepo
+import com.muratcangzm.lunargaze.repository.remote.GiphyRepo
+import com.muratcangzm.lunargaze.repository.remote.TenorRepo
 import com.muratcangzm.lunargaze.service.GiphyAPI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -88,7 +89,8 @@ class AppModuleTest {
     fun testHomeViewModel(){
 
         val mockRepo = mock(GiphyRepo::class.java)
-        val viewModel = AppModule.provideHomeViewModel(mockRepo)
+        val mockTenorRepo = mock(TenorRepo::class.java)
+        val viewModel = AppModule.provideHomeViewModel(mockRepo, mockTenorRepo)
 
         assertNotNull(viewModel)
 

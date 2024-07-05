@@ -1,0 +1,10 @@
+package com.muratcangzm.lunargaze.models.remote.tenor
+
+enum class ContentFilter {
+
+    off,
+    low,
+    medium,
+    high;
+
+}

@@ -47,7 +47,7 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
         get() = R.layout.home_fragment_layout
 
 
-    companion object{
+    companion object {
         private const val TAG = "HomeFragment"
     }
 
@@ -66,7 +66,7 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
 
         val mainActivity = activity as? MainActivity
 
-        if(mainActivity != null)
+        if (mainActivity != null)
             bottomNavigation = mainActivity.getBottomNavigationView()
         else
             Timber.tag(TAG).d("not initialized :/ ")
@@ -91,6 +91,15 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
 
         if (networkChecking.isNetworkAvailable()) {
             viewLifecycleOwner.lifecycleScope.launch {
+
+                launch {
+                    viewModel.tenorCategoryResult.collect {
+                        it?.let { result ->
+                            Timber.tag("Tenor Data:").d("${result.tags.size}")
+                        }
+                    }
+                }
+
                 viewModel.categoriesResult.collect {
                     it?.let { result ->
 
@@ -121,15 +130,15 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
             hasFixedSize()
 
 
-            binding.categoryRecycler.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            binding.categoryRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
 
-                    if(dy > 0){
-                        bottomNavigation.animate().translationY(bottomNavigation.height.toFloat()).duration = 300
-                    }
-                    else if(dy < 0){
+                    if (dy > 0) {
+                        bottomNavigation.animate()
+                            .translationY(bottomNavigation.height.toFloat()).duration = 300
+                    } else if (dy < 0) {
                         bottomNavigation.animate().translationY(0f).duration = 300
                     }
 

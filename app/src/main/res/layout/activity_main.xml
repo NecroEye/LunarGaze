@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -54,7 +53,6 @@
             app:itemIconTint="@color/silver"
             app:itemRippleColor="@color/grey"
             app:menu="@menu/menu" />
-
     </RelativeLayout>
 
 <com.google.android.material.navigation.NavigationView

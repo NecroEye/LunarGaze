@@ -1,19 +1,13 @@
 package com.muratcangzm.lunargaze.ui
 
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.annotation.StringRes
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
-import androidx.core.view.MenuItemCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -46,8 +40,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        Timber.tag("DataSpeed1: ").d("" + networkChecking.getMobileSpeed().first)
-        Timber.tag("DataSpeed2: ").d("" + networkChecking.getMobileSpeed().second)
+        Timber.tag("DataSpeed1: ").d("%s", networkChecking.getMobileSpeed().first)
+        Timber.tag("DataSpeed2: ").d("%s", networkChecking.getMobileSpeed().second)
 
 
         val navHostFragment =

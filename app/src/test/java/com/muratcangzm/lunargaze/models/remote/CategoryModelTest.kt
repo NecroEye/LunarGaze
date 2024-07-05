@@ -1,5 +1,6 @@
 package com.muratcangzm.lunargaze.models.remote
 
+import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

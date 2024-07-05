@@ -44,7 +44,7 @@ class NetworkModuleTest {
 
     @Test
     fun testProvideBaseUrl() {
-        val baseUrl = networkModuleTest.provideBaseUrl()
+        val baseUrl = networkModuleTest.provideGiphyBaseUrl()
         assertEquals(Constants.BASE_URL, baseUrl)
     }
 
@@ -68,7 +68,7 @@ class NetworkModuleTest {
         val mockGiphyApi = mock(GiphyAPI::class.java)
         `when`(mockRetrofit.create(GiphyAPI::class.java)).thenReturn(mockGiphyApi)
 
-        val api = NetworkModule.provideApi(Constants.BASE_URL, mockGson, mockOkkHttpClient)
+        val api = NetworkModule.provideGiphyApi(Constants.BASE_URL, mockGson, mockOkkHttpClient)
         assertEquals(api, mockGiphyApi)
 
     }

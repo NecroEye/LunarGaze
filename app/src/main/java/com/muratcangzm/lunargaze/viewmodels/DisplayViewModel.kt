@@ -2,13 +2,15 @@ package com.muratcangzm.lunargaze.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.muratcangzm.lunargaze.models.remote.ChannelModel
-import com.muratcangzm.lunargaze.repository.GiphyRepo
+import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
+import com.muratcangzm.lunargaze.repository.remote.GiphyRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 import timber.log.Timber
@@ -23,11 +25,11 @@ constructor(
 
     private val _mutableChannelResult = MutableStateFlow<ChannelModel?>(null)
     val channelResult: StateFlow<ChannelModel?>
-        get() = _mutableChannelResult
+        get() = _mutableChannelResult.asStateFlow()
 
     private val _mutableDataLoading = MutableStateFlow<Boolean>(false)
     val dataLoading: StateFlow<Boolean>
-        get() = _mutableDataLoading
+        get() = _mutableDataLoading.asStateFlow()
 
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
@@ -41,7 +43,7 @@ constructor(
         viewModelScope.launch(exceptionHandler) {
             supervisorScope {
 
-                giphyRepo.fetchChannels(search, offset).collect { result ->
+                giphyRepo.fetchChannels(search, offset).collectLatest { result ->
 
                     Timber.tag("DisplayFragment Data0: ").d("$result")
 

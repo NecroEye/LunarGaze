@@ -16,13 +16,12 @@ import com.muratcangzm.lunargaze.databinding.SearchDisplayFragmentLayoutBinding
 import com.muratcangzm.lunargaze.extensions.goneView
 import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showView
-import com.muratcangzm.lunargaze.models.remote.ChannelModel
+import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
 import com.muratcangzm.lunargaze.ui.adapters.DisplayAdapter
 import com.muratcangzm.lunargaze.utils.NetworkChecking
 import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.random.Random
 

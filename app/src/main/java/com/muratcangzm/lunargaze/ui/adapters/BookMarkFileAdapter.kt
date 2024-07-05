@@ -2,11 +2,9 @@ package com.muratcangzm.lunargaze.ui.adapters
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.ComponentCallbacks2
 import android.content.Context
 import android.content.res.Configuration
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -18,7 +16,7 @@ import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.DisplayAdapterFragmentBinding
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
-import com.muratcangzm.lunargaze.repository.FavoriteRepo
+import com.muratcangzm.lunargaze.repository.local.FavoriteRepo
 import dagger.hilt.android.qualifiers.ActivityContext
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable

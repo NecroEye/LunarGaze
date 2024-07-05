@@ -1,18 +1,15 @@
 package com.muratcangzm.lunargaze.ui.adapters
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.muratcangzm.lunargaze.databinding.RadiobuttonAdapterLayoutBinding
-import com.muratcangzm.lunargaze.repository.DataStoreRepo
+import com.muratcangzm.lunargaze.repository.local.DataStoreRepo
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.jvm.Throws
 

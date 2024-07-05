@@ -16,7 +16,6 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 abstract class BaseActivity<DB : ViewDataBinding> : AppCompatActivity() {
 
 
-
     open val compositeDisposable by lazy(LazyThreadSafetyMode.NONE){
         CompositeDisposable()
     }
