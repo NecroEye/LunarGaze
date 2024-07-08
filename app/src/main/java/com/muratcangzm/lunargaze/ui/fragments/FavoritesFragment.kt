@@ -19,7 +19,9 @@ import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.repository.local.DataStoreRepo
 import com.muratcangzm.lunargaze.ui.adapters.FavoriteFileAdapter
+import com.muratcangzm.lunargaze.utils.log
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -50,6 +52,10 @@ class FavoritesFragment : Fragment() {
         private const val TAG = "FavoritesFragment"
     }
 
+    private val exceptionHandler = CoroutineExceptionHandler{_, throwable ->
+        log("FavoritesFragment Coroutine Error ${throwable.message.toString()}")
+    }
+
     init {
 
         //Empty Constructor
@@ -71,7 +77,7 @@ class FavoritesFragment : Fragment() {
         //savedFiles = sharedPreferences.all
         //stringList = savedFiles.values.filterIsInstance<String>()
 
-        viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch(exceptionHandler) {
             withContext(Dispatchers.Main) {
                 stringList = dataStoreRepo.getAllValues()?.toList() as List<String>
 

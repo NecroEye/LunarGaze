@@ -14,7 +14,7 @@ interface GiphyAPI {
 
     @GET(Constants.CATEGORIES)
     suspend fun getCategory(
-        @Query("api_key") apiKey: String = BuildConfig.GIPHY_KEY
+        @Query("api_key") apiKey: String = BuildConfig.GIPHY_KEY,
     )
             : Response<CategoryModel>
 

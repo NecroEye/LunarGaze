@@ -60,11 +60,12 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
         super.onCreate(savedInstanceState)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val mainActivity = activity as? MainActivity
+
+        fragmentName = "HomeFragment"
 
         if (mainActivity != null)
             bottomNavigation = mainActivity.getBottomNavigationView()
@@ -90,7 +91,7 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
     private fun observeDataChange() {
 
         if (networkChecking.isNetworkAvailable()) {
-            viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycleScope.launch(exceptionHandler) {
 
                 launch {
                     viewModel.tenorCategoryResult.collect {
@@ -118,7 +119,7 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
     }
 
 
-    //TODO:while downloading picture or gif add a progress bar
+    //TODO: while downloading picture or gif add a progress bar
     private fun setupViews() {
 
         binding.categoryRecycler.apply {

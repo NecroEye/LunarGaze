@@ -2,23 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/night"
     android:orientation="vertical">
 
+
     <include
-        android:id="@+id/loadingScreen"
+        android:id="@+id/tenorLoading"
         layout="@layout/loading_screen_layout"
         android:visibility="visible" />
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/categoryRecycler"
+        android:id="@+id/tenorRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="64dp"
-        android:clipChildren="false"
+        android:clipChildren="true"
         android:padding="1dp"
         android:visibility="gone" />
-
 
 </LinearLayout>

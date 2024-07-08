@@ -19,8 +19,10 @@ import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
 import com.muratcangzm.lunargaze.ui.adapters.DisplayAdapter
 import com.muratcangzm.lunargaze.utils.NetworkChecking
+import com.muratcangzm.lunargaze.utils.log
 import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.random.Random
@@ -47,6 +49,9 @@ class SearchDisplayFragment : Fragment() {
 
     private var offset: Int? = null
 
+    private val exceptionHandler = CoroutineExceptionHandler{_, throwable ->
+        log("SearchDisplayFragment Coroutine Error ${throwable.message.toString()}")
+    }
 
     private val args: SearchDisplayFragmentArgs by navArgs()
 
@@ -95,7 +100,7 @@ class SearchDisplayFragment : Fragment() {
 
         if (networkChecking.isNetworkAvailable()) {
 
-            viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycleScope.launch(exceptionHandler) {
                 viewModel.channelResult.collect {
 
                     it?.let {

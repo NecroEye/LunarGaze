@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.LunarGaze" parent="Theme.Material3.Light.NoActionBar">
 
-       <item name="colorPrimary">@color/deep_blue</item>
+        <item name="colorPrimary">@color/deep_blue</item>
 
     </style>
 
@@ -28,11 +28,12 @@
             @color/black
         </item>
     </style>
-    
+
     <style name="BottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
         <item name="bottomSheetStyle">
-             @style/BottomSheetStyle
+            @style/BottomSheetStyle
         </item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <style name="Theme.LunarGaze" parent="Base.Theme.LunarGaze" />

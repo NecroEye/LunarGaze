@@ -27,6 +27,8 @@ import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.net.toUri
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.animation.AnimationUtils
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.muratcangzm.lunargaze.R
@@ -168,7 +170,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
                 radioRecycler.adapter = radioAdapter
                 radioRecycler.hasFixedSize()
 
-
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setView(popupSave)
                 alertDialog = builder.create()
@@ -216,6 +217,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
             }
 
+            //TODO: Add an toast message when it started to download successfully
             saveButtonCard.setOnClickListener {
                 if (receivedData != null)
                     requestPermissionIfHasnt(channelModel = receivedData, roomModel = null)
@@ -272,6 +274,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
     override fun downloadFile(url: String, imageType: String, imageName: String): Long {
 
 
+
         val request = DownloadManager.Request(url.toUri())
             .setMimeType("image/jpg")
             .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
@@ -291,6 +294,31 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
         val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
         val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+
+        val parentView = sheetView.parent as? View
+
+        parentView?.let {
+            val behavior = BottomSheetBehavior.from(it)
+
+            behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback(){
+                override fun onStateChanged(p0: View, p1: Int) {
+                    if(p1 == BottomSheetBehavior.STATE_HIDDEN){
+                        sheetView.startAnimation(android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.slide_down))
+
+                        sheetView.postDelayed({
+                            bottomSheetDialog.dismiss()
+                        },300)
+                    }
+                }
+
+                override fun onSlide(p0: View, p1: Float) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        }
+
+
 
         val updateTime = sheetView.findViewById<MaterialTextView>(R.id.updateTime)
         val description = sheetView.findViewById<MaterialTextView>(R.id.descriptionText)
@@ -343,7 +371,13 @@ class FullScreenImageFragment : Fragment(), Downloader {
         }
 
         close.setOnClickListener {
-            bottomSheetDialog.dismiss()
+
+            sheetView.startAnimation(android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.slide_down))
+
+            sheetView.postDelayed({
+                bottomSheetDialog.dismiss()
+            },300)
+
         }
 
         bottomSheetDialog.setContentView(sheetView)
@@ -376,7 +410,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
         favoriteModel = null
         scaleGestureDetector = null
 
-        compositeDisposable.clear()
+        compositeDisposable.dispose()
 
     }
 

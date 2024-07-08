@@ -18,6 +18,7 @@ object ViewModelFactory {
                 DisplayViewModel::class.java -> DisplayViewModel(giphyRepo) as T
                 HomeViewModel::class.java -> HomeViewModel(giphyRepo, tenorRepo) as T
                 SearchViewModel::class.java -> SearchViewModel(giphyRepo) as T
+                TenorViewModel::class.java -> TenorViewModel(tenorRepo) as T
                 else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.simpleName}")
             }
         }

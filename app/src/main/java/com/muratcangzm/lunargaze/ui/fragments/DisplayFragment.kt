@@ -23,6 +23,7 @@ import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.ui.fragments.core.BaseFragment
+import kotlinx.coroutines.flow.collectLatest
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -92,8 +93,8 @@ class DisplayFragment : BaseFragment<DisplayFragmentLayoutBinding>() {
     @SuppressLint("SetTextI18n", "SuspiciousIndentation")
     private fun observeDataChange() {
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.channelResult.collect {
+        viewLifecycleOwner.lifecycleScope.launch(exceptionHandler) {
+            viewModel.channelResult.collectLatest {
 
                 it?.let { result ->
 
