@@ -19,6 +19,9 @@ import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.ui.fragments.HomeFragmentDirections
 import com.muratcangzm.lunargaze.utils.NetworkChecking
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -27,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val binding
-        get() = _binding!!
+        by lazy(LazyThreadSafetyMode.NONE) { _binding!! }
 
     private var searchItem: MenuItem? = null
 

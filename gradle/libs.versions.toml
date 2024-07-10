@@ -1,30 +1,33 @@
 [versions]
-appcompat = "1.6.1"
+appcompat = "1.7.0"
 constraintlayout = "2.1.4"
-coreKtx = "1.13.0"
+coreKtx = "1.13.1"
 coreSplashscreen = "1.0.1"
-datastore = "1.1.0"
-firebaseAnalytics = "21.6.2"
+datastore = "1.1.1"
+firebaseAnalytics = "22.0.2"
 glide = "4.16.0"
 googleServices = "4.4.1"
 junit = "4.13.2"
-junitVersion = "1.1.5"
-lifecycleViewmodelKtx = "2.7.0"
-lottieVersion = "3.4.0"
-material = "1.11.0"
-espresso = "3.5.1"
+junitVersion = "1.2.1"
+lifecycleViewmodelKtx = "2.8.3"
+lottieVersion = "6.4.0"
+material = "1.12.0"
+espresso = "3.6.1"
 navigationFragmentKtx = "2.7.7"
 navigationUiKtx = "2.7.7"
 okhttp = "4.12.0"
-retrofit = "2.9.0"
+retrofit = "2.11.0"
 roomRuntime = "2.6.1"
-rxandroid = "3.0.0"
-rxjava = "3.0.2"
+rxandroid = "3.0.2"
+rxjava = "3.1.8"
 timberVersion = "5.0.1"
-androidApp = "8.4.0-rc02"
-androidLib = "8.1.2"
-daggerHilt = "2.48.1"
-kotlinAndroid = "1.7.0"
+androidApp = "8.4.2"
+androidLib = "8.1.4"
+daggerHilt = "2.51.1"
+kotlinAndroid = "1.9.22"
+viewPager = "1.1.0"
+pagingVersion = "3.3.0"
+
 
 
 [libraries]
@@ -72,6 +75,10 @@ androidx-datastore-rxjava3 = { module = "androidx.datastore:datastore-rxjava3", 
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottieVersion" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+android-viewpager = {module = "androidx.viewpager2:viewpager2", version.ref = "viewPager"}
+androidPagingRunTime = {module = "androidx.paging:paging-runtime", version.ref = "pagingVersion"}
+androidPagingRx = {module = "androidx.paging:paging-rxjava3", version.ref = "pagingVersion"}
+
 
 #Timber
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timberVersion" }

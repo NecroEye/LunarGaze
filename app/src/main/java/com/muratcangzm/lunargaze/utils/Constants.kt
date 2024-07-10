@@ -17,7 +17,7 @@ object Constants {
 
     //Giphy
 
-    const val BASE_URL = "https://api.giphy.com/v1/"
+    const val GIPHY_BASE = "https://api.giphy.com/v1/"
 
     const val TRENDS = "trending"
 

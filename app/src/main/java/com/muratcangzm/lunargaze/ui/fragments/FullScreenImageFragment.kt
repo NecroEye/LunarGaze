@@ -54,7 +54,9 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
     private var _binding: ImageFullscreenLayoutBinding? = null
     private val binding
-        get() = _binding!!
+        by lazy(LazyThreadSafetyMode.NONE) {
+            _binding!!
+        }
 
     @Inject
     lateinit var glide: RequestManager

@@ -107,7 +107,8 @@ constructor(
                                 Timber.tag("Adapter")
                                     .d("Image deleted from database for position: %s", position)
                                 notifyItemRemoved(position)
-                                roomList = roomList.filter { it.id != favoriteModel.id }.toTypedArray() // Update internal data structure
+                                roomList = roomList.filter { it.id != favoriteModel.id }
+                                    .toTypedArray() // Update internal data structure
                             }, { error ->
                                 error.printStackTrace()
                             })
@@ -185,11 +186,7 @@ constructor(
 
         (context as Activity).applicationContext.unregisterComponentCallbacks(componentCallbacks)
 
-        if (disposable!!.isDisposed) {
-            compositeDisposable.add(disposable!!)
-            compositeDisposable.clear()
-        }
-
+        compositeDisposable.dispose()
 
     }
 

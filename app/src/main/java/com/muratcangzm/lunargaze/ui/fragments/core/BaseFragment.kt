@@ -15,11 +15,13 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     private var _binding: VB? = null
     protected val binding: VB
-        get() = _binding ?: error("fragment view not initialized")
+            by lazy(LazyThreadSafetyMode.NONE) {
+                _binding ?: error("fragment view not initialized")
+            }
 
-    protected var fragmentName:String? = null
+    protected var fragmentName: String? = null
 
-    protected val exceptionHandler = CoroutineExceptionHandler{_, throwable ->
+    protected val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         fragmentName?.let {
             log("$fragmentName Coroutine Error ${throwable.message.toString()}")
         }

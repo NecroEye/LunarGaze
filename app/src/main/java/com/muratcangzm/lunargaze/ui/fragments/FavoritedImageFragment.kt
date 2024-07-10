@@ -13,6 +13,7 @@ import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.ui.adapters.BookMarkFileAdapter
+import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -23,7 +24,7 @@ class FavoritedImageFragment : Fragment() {
 
     private var _binding: FavoritedImageLayoutBinding? = null
     private val binding
-        get() = _binding!!
+        by lazy(LazyThreadSafetyMode.NONE) { _binding!! }
 
     @Inject
     lateinit var bookmarkAdapter: BookMarkFileAdapter

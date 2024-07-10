@@ -18,7 +18,7 @@ open class BaseViewModel : ViewModel() {
         }
     }
 
-    open val compositeDisposable by lazy {
+    open val compositeDisposable by lazy(LazyThreadSafetyMode.NONE) {
         CompositeDisposable()
     }
 

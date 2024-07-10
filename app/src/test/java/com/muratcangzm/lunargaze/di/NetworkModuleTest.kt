@@ -1,5 +1,6 @@
 package com.muratcangzm.lunargaze.di
 
+import android.content.Context
 import com.google.gson.Gson
 import com.muratcangzm.lunargaze.service.GiphyAPI
 import com.muratcangzm.lunargaze.utils.Constants
@@ -31,6 +32,9 @@ class NetworkModuleTest {
     @Mock
     lateinit var networkModuleTest: NetworkModule
 
+    @Mock
+    lateinit var context:Context
+
 
     @Before
     fun setup() {
@@ -45,7 +49,7 @@ class NetworkModuleTest {
     @Test
     fun testProvideBaseUrl() {
         val baseUrl = networkModuleTest.provideGiphyBaseUrl()
-        assertEquals(Constants.BASE_URL, baseUrl)
+        assertEquals(Constants.GIPHY_BASE, baseUrl)
     }
 
     @Test
@@ -57,7 +61,7 @@ class NetworkModuleTest {
     @Test
     fun testOkkHttpClientProvider() {
 
-        val okHttpClient = networkModuleTest.provideOkhttpClient()
+        val okHttpClient = networkModuleTest.provideOkhttpClient(context)
         assertEquals(okHttpClient, mockOkkHttpClient)
 
     }
@@ -68,7 +72,7 @@ class NetworkModuleTest {
         val mockGiphyApi = mock(GiphyAPI::class.java)
         `when`(mockRetrofit.create(GiphyAPI::class.java)).thenReturn(mockGiphyApi)
 
-        val api = NetworkModule.provideGiphyApi(Constants.BASE_URL, mockGson, mockOkkHttpClient)
+        val api = NetworkModule.provideGiphyApi(Constants.GIPHY_BASE, mockGson, mockOkkHttpClient)
         assertEquals(api, mockGiphyApi)
 
     }

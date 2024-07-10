@@ -33,7 +33,9 @@ class SearchDisplayFragment : Fragment() {
 
     private var _binding: SearchDisplayFragmentLayoutBinding? = null
     private val binding
-        get() = _binding!!
+            by lazy(LazyThreadSafetyMode.NONE) {
+                _binding!!
+            }
 
     @Inject
     lateinit var searchAdapter: DisplayAdapter
@@ -49,7 +51,7 @@ class SearchDisplayFragment : Fragment() {
 
     private var offset: Int? = null
 
-    private val exceptionHandler = CoroutineExceptionHandler{_, throwable ->
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         log("SearchDisplayFragment Coroutine Error ${throwable.message.toString()}")
     }
 

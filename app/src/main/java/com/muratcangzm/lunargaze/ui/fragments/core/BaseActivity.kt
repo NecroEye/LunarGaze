@@ -33,6 +33,7 @@ abstract class BaseActivity<DB : ViewDataBinding> : AppCompatActivity() {
     @LayoutRes
     protected abstract fun getLayoutResId(): Int
 
+
     open fun buildNavOptions(
         @AnimRes @AnimatorRes enterAnim:Int? = null,
         @AnimRes @AnimatorRes exitAnim:Int? = null,

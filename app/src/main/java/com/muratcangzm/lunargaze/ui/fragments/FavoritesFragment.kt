@@ -34,7 +34,9 @@ class FavoritesFragment : Fragment() {
 
     private var _binding: FavoritesFragmentLayoutBinding? = null
     private val binding
-        get() = _binding!!
+            by lazy(LazyThreadSafetyMode.NONE) {
+                _binding!!
+            }
     private var overlayView: View? = null
     private var alertDialog: AlertDialog? = null
     private var stringList: List<String>? = null
@@ -48,11 +50,11 @@ class FavoritesFragment : Fragment() {
     @Inject
     lateinit var dataStoreRepo: DataStoreRepo
 
-    companion object{
+    companion object {
         private const val TAG = "FavoritesFragment"
     }
 
-    private val exceptionHandler = CoroutineExceptionHandler{_, throwable ->
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         log("FavoritesFragment Coroutine Error ${throwable.message.toString()}")
     }
 

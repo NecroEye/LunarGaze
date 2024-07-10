@@ -1,6 +1,7 @@
 package com.muratcangzm.lunargaze.di
 
 
+import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.muratcangzm.lunargaze.service.GiphyAPI
@@ -9,8 +10,12 @@ import com.muratcangzm.lunargaze.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
+import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -25,7 +30,7 @@ object NetworkModule {
     @Singleton
     @Provides
     @Named("giphyBaseUrl")
-    fun provideGiphyBaseUrl() = Constants.BASE_URL
+    fun provideGiphyBaseUrl() = Constants.GIPHY_BASE
 
     @Singleton
     @Provides
@@ -40,14 +45,26 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideOkhttpClient() = OkHttpClient.Builder()
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
-        .followRedirects(true)
-        .followSslRedirects(true)
-        .retryOnConnectionFailure(true)
-        .build()
+    fun provideOkhttpClient(@ApplicationContext context: Context): OkHttpClient {
+
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        val cacheSize = (10 * 1024 * 1024).toLong() // 10 Mb probably...
+        val cache = Cache(context.cacheDir, cacheSize)
+
+        return OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .followRedirects(true)
+            .followSslRedirects(true)
+            .retryOnConnectionFailure(true)
+            .addNetworkInterceptor(loggingInterceptor)
+            .cache(cache)
+            .build()
+    }
 
 
     @Singleton

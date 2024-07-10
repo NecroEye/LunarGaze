@@ -15,6 +15,7 @@ import androidx.room.Room
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -79,9 +80,9 @@ object AppModule {
     @Provides
     @Singleton
     fun provideTenorRepository(
-        api:TenorAPI,
+        api: TenorAPI,
         @IoDispatcher ioDispatcher: CoroutineDispatcher
-    ) : TenorRepo {
+    ): TenorRepo {
         return TenorRepo(api, ioDispatcher)
     }
 
@@ -125,7 +126,7 @@ object AppModule {
                     .placeholder(R.drawable.not_found)
                     .error(R.drawable.not_found)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-
+                    .priority(Priority.HIGH)
             )
     }
 
@@ -157,7 +158,10 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideViewModelFactory(giphyRepo: GiphyRepo, tenorRepo: TenorRepo): ViewModelProvider.Factory {
+    fun provideViewModelFactory(
+        giphyRepo: GiphyRepo,
+        tenorRepo: TenorRepo
+    ): ViewModelProvider.Factory {
         return ViewModelFactory.provideFactory(giphyRepo, tenorRepo)
     }
 
