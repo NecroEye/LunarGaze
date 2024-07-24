@@ -21,6 +21,7 @@ import com.muratcangzm.lunargaze.ui.fragments.core.BaseFragment
 import com.muratcangzm.lunargaze.utils.NetworkChecking
 import com.muratcangzm.lunargaze.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -94,14 +95,14 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
             viewLifecycleOwner.lifecycleScope.launch(exceptionHandler) {
 
                 launch {
-                    viewModel.tenorCategoryResult.collect {
+                    viewModel.tenorCategoryResult.collectLatest {
                         it?.let { result ->
                             Timber.tag("Tenor Data:").d("${result.tags.size}")
                         }
                     }
                 }
 
-                viewModel.categoriesResult.collect {
+                viewModel.categoriesResult.collectLatest {
                     it?.let { result ->
 
                         categoryAdapter.submitCategory(result)

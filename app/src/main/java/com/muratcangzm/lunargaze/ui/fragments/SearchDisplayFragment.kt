@@ -23,6 +23,7 @@ import com.muratcangzm.lunargaze.utils.log
 import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.random.Random
@@ -103,7 +104,7 @@ class SearchDisplayFragment : Fragment() {
         if (networkChecking.isNetworkAvailable()) {
 
             viewLifecycleOwner.lifecycleScope.launch(exceptionHandler) {
-                viewModel.channelResult.collect {
+                viewModel.channelResult.collectLatest {
 
                     it?.let {
 
