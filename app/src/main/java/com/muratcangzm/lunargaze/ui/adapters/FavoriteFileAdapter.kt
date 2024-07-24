@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.FavoriteFolderLayoutBinding
+import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.repository.local.DataStoreRepo
 import com.muratcangzm.lunargaze.repository.local.FavoriteRepo
@@ -76,7 +77,7 @@ constructor(
             binding.apply {
                 customFolderName.text = fileName
 
-                fileCard.setOnClickListener { button ->
+                fileCard.setSafeOnClickListener { button ->
 
 
                     disposable = repo.getAllFavImages()

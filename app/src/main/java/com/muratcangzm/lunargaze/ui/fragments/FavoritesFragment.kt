@@ -16,6 +16,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.FavoritesFragmentLayoutBinding
 import com.muratcangzm.lunargaze.extensions.hideView
+import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
 import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.repository.local.DataStoreRepo
 import com.muratcangzm.lunargaze.ui.adapters.FavoriteFileAdapter
@@ -104,7 +105,7 @@ class FavoritesFragment : Fragment() {
 
         binding.fileRecycler.hasFixedSize()
 
-        binding.favButton.setOnClickListener {
+        binding.favButton.setSafeOnClickListener {
             showPopUp()
         }
 
@@ -149,7 +150,7 @@ class FavoritesFragment : Fragment() {
         val saveButton = popupView.findViewById<MaterialButton>(R.id.saveButton)
 
 
-        saveButton.setOnClickListener {
+        saveButton.setSafeOnClickListener {
 
             if (input.text.toString().isNotEmpty()) {
 

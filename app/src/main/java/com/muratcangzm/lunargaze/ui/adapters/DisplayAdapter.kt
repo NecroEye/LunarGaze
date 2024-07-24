@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.DisplayAdapterFragmentBinding
+import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
 import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
@@ -83,7 +84,7 @@ constructor(
                     .load(data.user!!.avatarUrl)
                     .into(displayImage)
 
-                displayCard.setOnClickListener {
+                displayCard.setSafeOnClickListener {
 
                     val bundle = bundleOf("imageData" to data)
 

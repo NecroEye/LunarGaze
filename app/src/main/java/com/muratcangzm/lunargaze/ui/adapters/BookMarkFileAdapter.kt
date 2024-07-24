@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.DisplayAdapterFragmentBinding
+import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.repository.local.FavoriteRepo
 import dagger.hilt.android.qualifiers.ActivityContext
@@ -81,7 +82,7 @@ constructor(
                     .into(displayImage)
 
 
-                displayCard.setOnClickListener {
+                displayCard.setSafeOnClickListener {
 
                     val bundle = bundleOf("roomModelData" to favoriteModel)
                     Navigation.findNavController(it).navigate(

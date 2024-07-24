@@ -34,6 +34,7 @@ import com.google.android.material.textview.MaterialTextView
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.ImageFullscreenLayoutBinding
 import com.muratcangzm.lunargaze.extensions.goneView
+import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
 import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.extensions.tost
 import com.muratcangzm.lunargaze.helper.Downloader
@@ -148,18 +149,18 @@ class FullScreenImageFragment : Fragment(), Downloader {
                 true
             }
 
-            backButton.setOnClickListener {
+            backButton.setSafeOnClickListener {
                 findNavController().navigateUp()
             }
 
-            bottomSheetPopUp.setOnClickListener {
+            bottomSheetPopUp.setSafeOnClickListener {
                 showBottomSheet()
 
             }
 
 
 
-            bookmarkedButtonCard.setOnClickListener {
+            bookmarkedButtonCard.setSafeOnClickListener {
 
                 val inflater = LayoutInflater.from(requireContext())
                 val popupSave = inflater.inflate(R.layout.saved_popup_layout, null)
@@ -178,7 +179,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
                 alertDialog?.show()
 
-                saveButton.setOnClickListener {
+                saveButton.setSafeOnClickListener {
 
                     tost(R.string.successful_save)
 
@@ -206,7 +207,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
                 }
             }
 
-            shareButtonCard.setOnClickListener {
+            shareButtonCard.setSafeOnClickListener {
 
                 val sharedIntent = Intent(Intent.ACTION_SEND)
                 sharedIntent.type = "text/plain"
@@ -220,7 +221,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
             }
 
             //TODO: Add an toast message when it started to download successfully
-            saveButtonCard.setOnClickListener {
+            saveButtonCard.setSafeOnClickListener {
                 if (receivedData != null)
                     requestPermissionIfHasnt(channelModel = receivedData, roomModel = null)
                 else
@@ -352,7 +353,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
         }
 
 
-        link.setOnClickListener {
+        link.setSafeOnClickListener {
 
             val clipboardManager =
                 requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -372,7 +373,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
         }
 
-        close.setOnClickListener {
+        close.setSafeOnClickListener {
 
             sheetView.startAnimation(android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.slide_down))
 

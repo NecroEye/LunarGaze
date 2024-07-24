@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.CategoryRecyclerLayoutBinding
+import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
 import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
@@ -80,7 +81,7 @@ class CategoryAdapter
 
                 categoryText.text = data.name ?: "Empty"
 
-                categoryCard.setOnClickListener {
+                categoryCard.setSafeOnClickListener {
 
 
                     val bundle = bundleOf("searchData" to data.name)
