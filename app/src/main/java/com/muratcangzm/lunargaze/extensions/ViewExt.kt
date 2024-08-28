@@ -12,15 +12,15 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import com.muratcangzm.lunargaze.common.SafeClickListener
 
-fun View.showView() {
+fun View.showView(){
     visibility = View.VISIBLE
 }
 
-fun View.hideView() {
+fun View.hideView(){
     visibility = View.INVISIBLE
 }
 
-fun View.goneView() {
+fun View.goneView(){
     visibility = View.GONE
 }
 
