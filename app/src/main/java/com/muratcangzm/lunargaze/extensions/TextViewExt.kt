@@ -1,8 +1,6 @@
 package com.muratcangzm.lunargaze.extensions
 
-import android.graphics.LinearGradient
 import android.graphics.Paint
-import android.graphics.Shader
 import android.os.Handler
 import android.os.Looper
 import android.text.SpannableStringBuilder
@@ -12,8 +10,6 @@ import android.text.style.ClickableSpan
 import android.text.style.URLSpan
 import android.view.View
 import android.widget.TextView
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
 
 fun TextView.underline() {
     this.paintFlags = this.paintFlags or Paint.UNDERLINE_TEXT_FLAG
@@ -21,15 +17,6 @@ fun TextView.underline() {
 
 fun TextView.removeUnderline() {
     this.paintFlags = this.paintFlags and Paint.UNDERLINE_TEXT_FLAG.inv()
-}
-
-fun TextView.gradientColor(@ColorRes startColor: Int, @ColorRes endColor: Int) {
-    this.afterMeasured {
-        val mStartColor = ContextCompat.getColor(context, startColor)
-        val mEndColor = ContextCompat.getColor(context, endColor)
-        val textShader = LinearGradient(0f, 0f, width.toFloat(), height.toFloat(), intArrayOf(mStartColor, mEndColor), null, Shader.TileMode.CLAMP)
-        (this as TextView).paint.shader = textShader
-    }
 }
 
 fun TextView.writeTextSlowly(text: String, delay: Long = 0, onStart: (() -> Unit)? = null, onComplete: (() -> Unit)? = null) {

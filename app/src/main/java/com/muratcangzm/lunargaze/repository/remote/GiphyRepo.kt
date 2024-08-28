@@ -40,7 +40,7 @@ class GiphyRepo @Inject constructor(
 
         } catch (e: Exception) {
             Timber.tag("Api Error").d(e)
-            emit(DataResponse.error("Failed to fetch categories ${e.cause} ${e.message}" ))
+            emit(DataResponse.error("Failed to fetch categories ${e.cause} ${e.message}"))
 
         }
 
