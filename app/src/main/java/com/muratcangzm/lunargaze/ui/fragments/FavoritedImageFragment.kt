@@ -1,26 +1,22 @@
 package com.muratcangzm.lunargaze.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.muratcangzm.lunargaze.databinding.FavoritedImageLayoutBinding
 import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.ui.adapters.BookMarkFileAdapter
-import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class FavoritedImageFragment : Fragment() {
-
 
     private var _binding: FavoritedImageLayoutBinding? = null
     private val binding
@@ -34,11 +30,8 @@ class FavoritedImageFragment : Fragment() {
     }
 
     init {
-
         //Empty Constructor
-
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,23 +57,16 @@ class FavoritedImageFragment : Fragment() {
             StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         binding.bookmarkRecycler.hasFixedSize()
 
-
-
         return binding.root
-
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
 
         _binding = null
     }
-
-
 }

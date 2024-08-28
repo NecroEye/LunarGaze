@@ -3,9 +3,9 @@ package com.muratcangzm.lunargaze.repository.remote
 import com.muratcangzm.lunargaze.models.remote.tenor.TenorCategoryModel
 import com.muratcangzm.lunargaze.models.remote.tenor.TenorSearchResultModel
 import com.muratcangzm.lunargaze.service.TenorAPI
-import com.muratcangzm.lunargaze.utils.DataResponse
-import com.muratcangzm.lunargaze.utils.IoDispatcher
-import com.muratcangzm.lunargaze.utils.log
+import com.muratcangzm.lunargaze.common.utils.DataResponse
+import com.muratcangzm.lunargaze.common.utils.IoDispatcher
+import com.muratcangzm.lunargaze.common.utils.log
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

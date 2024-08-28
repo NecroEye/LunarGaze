@@ -7,7 +7,10 @@
     <dimen name="great_padding">30dp</dimen>
 
     <!-- specific dimens -->
+    <dimen name="dimen_10dp">10dp</dimen>
+    <dimen name="dimen_25dp">25dp</dimen>
     <dimen name="dimen_50dp">50dp</dimen>
+    <dimen name="dimen_60dp">60dp</dimen>
     <dimen name="dimen_75dp">75dp</dimen>
     <dimen name="dimen_100dp">100dp</dimen>
 

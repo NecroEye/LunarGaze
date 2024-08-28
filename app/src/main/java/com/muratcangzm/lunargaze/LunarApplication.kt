@@ -1,7 +1,7 @@
 package com.muratcangzm.lunargaze
 
 import android.app.Application
-import com.muratcangzm.lunargaze.utils.Constants
+import com.muratcangzm.lunargaze.common.utils.Constants
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 

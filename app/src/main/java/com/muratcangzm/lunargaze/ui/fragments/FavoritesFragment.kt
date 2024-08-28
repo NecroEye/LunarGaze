@@ -19,7 +19,7 @@ import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.repository.local.DataStoreRepo
 import com.muratcangzm.lunargaze.ui.adapters.FavoriteFileAdapter
-import com.muratcangzm.lunargaze.utils.log
+import com.muratcangzm.lunargaze.common.utils.log
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers

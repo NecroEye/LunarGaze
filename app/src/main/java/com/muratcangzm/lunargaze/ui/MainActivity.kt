@@ -17,7 +17,7 @@ import com.muratcangzm.lunargaze.extensions.goneView
 import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.ui.fragments.HomeFragmentDirections
-import com.muratcangzm.lunargaze.utils.NetworkChecking
+import com.muratcangzm.lunargaze.common.utils.NetworkChecking
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject

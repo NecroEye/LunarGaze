@@ -27,10 +27,10 @@ import com.muratcangzm.lunargaze.repository.remote.GiphyRepo
 import com.muratcangzm.lunargaze.repository.remote.TenorRepo
 import com.muratcangzm.lunargaze.service.GiphyAPI
 import com.muratcangzm.lunargaze.service.TenorAPI
-import com.muratcangzm.lunargaze.utils.Constants
-import com.muratcangzm.lunargaze.utils.DefaultDispatcher
-import com.muratcangzm.lunargaze.utils.IoDispatcher
-import com.muratcangzm.lunargaze.utils.MainDispatcher
+import com.muratcangzm.lunargaze.common.utils.Constants
+import com.muratcangzm.lunargaze.common.utils.DefaultDispatcher
+import com.muratcangzm.lunargaze.common.utils.IoDispatcher
+import com.muratcangzm.lunargaze.common.utils.MainDispatcher
 import com.muratcangzm.lunargaze.viewmodels.HomeViewModel
 import com.muratcangzm.lunargaze.viewmodels.ViewModelFactory
 import dagger.Module

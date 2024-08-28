@@ -2,7 +2,7 @@ package com.muratcangzm.lunargaze.viewmodels.core
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.muratcangzm.lunargaze.utils.log
+import com.muratcangzm.lunargaze.common.utils.log
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.cancel

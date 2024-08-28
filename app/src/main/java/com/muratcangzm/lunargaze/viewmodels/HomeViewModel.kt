@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,8 +25,8 @@ constructor(
 
 
     private var _tenorCategoryResult = MutableStateFlow<TenorCategoryModel?>(null)
-    val tenorCategoryResult: StateFlow<TenorCategoryModel?> get() = _tenorCategoryResult.asStateFlow()
-
+    val tenorCategoryResult: StateFlow<TenorCategoryModel?>
+        get() = _tenorCategoryResult.asStateFlow()
 
     private val _categoriesResult = MutableStateFlow<CategoryModel?>(null)
     val categoriesResult: StateFlow<CategoryModel?>
@@ -49,21 +49,15 @@ constructor(
         _mutableDataLoading.value = true
 
         viewModelScope.launch(exceptionHandler) {
-
-            supervisorScope {
-                repo.fetchCategories().collectLatest { result ->
-
-                    _categoriesResult.value = result.data
-                    _mutableDataLoading.value = false
-
-
-                }
+            repo.fetchCategories().collectLatest { result ->
+                Timber.tag("Giphy Data2:").d("${result.message}")
+                _categoriesResult.value = result.data
+                _mutableDataLoading.value = false
             }
         }
     }
 
     private fun fetchTenorCategory() {
-
         viewModelScope.launch(exceptionHandler) {
             tenorRepo.fetchTenorCategory().collectLatest { result ->
                 _tenorCategoryResult.value = result.data

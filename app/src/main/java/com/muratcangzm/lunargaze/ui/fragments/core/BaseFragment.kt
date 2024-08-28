@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.muratcangzm.lunargaze.utils.log
+import com.muratcangzm.lunargaze.common.utils.log
 import kotlinx.coroutines.CoroutineExceptionHandler
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {

@@ -3,7 +3,7 @@ package com.muratcangzm.lunargaze.di
 import android.content.Context
 import com.google.gson.Gson
 import com.muratcangzm.lunargaze.service.GiphyAPI
-import com.muratcangzm.lunargaze.utils.Constants
+import com.muratcangzm.lunargaze.common.utils.Constants
 import okhttp3.OkHttpClient
 import org.junit.After
 import org.junit.Assert.assertEquals

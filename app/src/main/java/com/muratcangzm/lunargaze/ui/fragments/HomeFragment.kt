@@ -18,11 +18,12 @@ import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.ui.MainActivity
 import com.muratcangzm.lunargaze.ui.adapters.CategoryAdapter
 import com.muratcangzm.lunargaze.ui.fragments.core.BaseFragment
-import com.muratcangzm.lunargaze.utils.NetworkChecking
+import com.muratcangzm.lunargaze.common.utils.NetworkChecking
 import com.muratcangzm.lunargaze.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.supervisorScope
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -92,24 +93,30 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
     private fun observeDataChange() {
 
         if (networkChecking.isNetworkAvailable()) {
-            viewLifecycleOwner.lifecycleScope.launch(exceptionHandler) {
 
-                launch {
-                    viewModel.tenorCategoryResult.collectLatest {
-                        it?.let { result ->
-                            Timber.tag("Tenor Data:").d("${result.tags.size}")
+            viewLifecycleOwner.lifecycleScope.launch(exceptionHandler) {
+                supervisorScope {
+
+                    launch {
+                        viewModel.tenorCategoryResult.collectLatest {
+                            it?.let { result ->
+                                Timber.tag("Tenor Data:").d("${result.tags.size}")
+                            }
                         }
                     }
-                }
 
-                viewModel.categoriesResult.collectLatest {
-                    it?.let { result ->
+                    launch {
+                        viewModel.categoriesResult.collectLatest {
+                            it?.let { result ->
+                                Timber.tag("Giphy Data:").d("${result.categories?.size}")
+                                categoryAdapter.submitCategory(result)
+                                binding.categoryRecycler.showView()
+                                binding.loadingScreen.loadingScreenLayout.goneView()
 
-                        categoryAdapter.submitCategory(result)
-                        binding.categoryRecycler.showView()
-                        binding.loadingScreen.loadingScreenLayout.goneView()
-
+                            }
+                        }
                     }
+
                 }
             }
         } else {

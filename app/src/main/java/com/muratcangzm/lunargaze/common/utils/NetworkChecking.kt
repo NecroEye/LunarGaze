@@ -1,4 +1,4 @@
-package com.muratcangzm.lunargaze.utils
+package com.muratcangzm.lunargaze.common.utils
 
 import android.annotation.SuppressLint
 import android.content.Context

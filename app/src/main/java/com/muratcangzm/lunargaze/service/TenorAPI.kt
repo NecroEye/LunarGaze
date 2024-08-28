@@ -4,7 +4,7 @@ import com.muratcangzm.lunargaze.BuildConfig
 import com.muratcangzm.lunargaze.models.remote.tenor.ContentFilter
 import com.muratcangzm.lunargaze.models.remote.tenor.TenorCategoryModel
 import com.muratcangzm.lunargaze.models.remote.tenor.TenorSearchResultModel
-import com.muratcangzm.lunargaze.utils.Constants
+import com.muratcangzm.lunargaze.common.utils.Constants
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import retrofit2.http.GET

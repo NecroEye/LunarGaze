@@ -1,12 +1,12 @@
 package com.muratcangzm.lunargaze.repository.remote
 
+import com.muratcangzm.lunargaze.common.utils.DataResponse
+import com.muratcangzm.lunargaze.common.utils.IoDispatcher
+import com.muratcangzm.lunargaze.common.utils.log
 import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
 import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
 import com.muratcangzm.lunargaze.models.remote.giphy.SearchModel
 import com.muratcangzm.lunargaze.service.GiphyAPI
-import com.muratcangzm.lunargaze.utils.DataResponse
-import com.muratcangzm.lunargaze.utils.IoDispatcher
-import com.muratcangzm.lunargaze.utils.log
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -26,8 +26,7 @@ class GiphyRepo @Inject constructor(
     suspend fun fetchCategories(): Flow<DataResponse<CategoryModel>> = flow {
         try {
             val response = api.getCategory()
-
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 categoryCache = DataResponse.success(response.body())
 
                 categoryCache?.let {
@@ -35,13 +34,16 @@ class GiphyRepo @Inject constructor(
                     return@let
                 }
                 emit(DataResponse.success(response.body()))
-            }
-            else
+            } else {
                 emit(DataResponse.error("Network error, please try again later!"))
+            }
 
         } catch (e: Exception) {
             Timber.tag("Api Error").d(e)
+            emit(DataResponse.error("Failed to fetch categories ${e.cause} ${e.message}" ))
+
         }
+
     }.flowOn(ioDispatcher)
 
 

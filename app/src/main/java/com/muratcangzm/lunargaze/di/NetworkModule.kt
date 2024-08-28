@@ -6,7 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.muratcangzm.lunargaze.service.GiphyAPI
 import com.muratcangzm.lunargaze.service.TenorAPI
-import com.muratcangzm.lunargaze.utils.Constants
+import com.muratcangzm.lunargaze.common.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
