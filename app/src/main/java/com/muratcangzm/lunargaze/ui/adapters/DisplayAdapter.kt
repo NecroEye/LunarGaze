@@ -78,7 +78,7 @@ constructor(
             val navController = findNavController(currentFragment!!)
             val currentDestination = navController.currentDestination
 
-            binding.apply {
+            with(binding) {
 
                 glide
                     .load(data.user!!.avatarUrl)

@@ -36,13 +36,11 @@ constructor(
 ) :
     RecyclerView.Adapter<BookMarkFileAdapter.BookMarkFileHolder>() {
 
-
     private lateinit var binding: DisplayAdapterFragmentBinding
     private var roomList = emptyArray<FavoriteModel>()
     private var compositeDisposable = CompositeDisposable()
     private var disposable: Disposable? = null
     private var componentCallbacks: ComponentCallbacks2? = null
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookMarkFileHolder {
 
@@ -73,14 +71,13 @@ constructor(
         @SuppressLint("NotifyDataSetChanged")
         fun setData(favoriteModel: FavoriteModel, position: Int) {
 
-            binding.apply {
+            with(binding) {
 
                 Glide.get(context).clearMemory()
 
                 glide
                     .load(favoriteModel.imageUrl)
                     .into(displayImage)
-
 
                 displayCard.setSafeOnClickListener {
 
@@ -89,8 +86,6 @@ constructor(
                         R.id.action_favoritedImageFragment_to_fullScreenImageFragment2,
                         bundle
                     )
-
-
                 }
                 displayCard.setOnLongClickListener {
 
@@ -190,5 +185,4 @@ constructor(
         compositeDisposable.dispose()
 
     }
-
 }

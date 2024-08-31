@@ -42,13 +42,13 @@ fun ImageView.setTint(@ColorRes colorRes: Int) {
     setColorFilter(ContextCompat.getColor(context, colorRes), PorterDuff.Mode.SRC_IN)
 }
 
-fun View.fadeIn(duration: Long = 300) {
+fun View.fadeIn(duration: Long = 200L) {
     alpha = 0f
     visibility = View.VISIBLE
     animate().alpha(1f).setDuration(duration).start()
 }
 
-fun View.fadeOut(duration: Long = 300) {
+fun View.fadeOut(duration: Long = 200L) {
     animate().alpha(0f).setDuration(duration).withEndAction { visibility = View.GONE }.start()
 }
 

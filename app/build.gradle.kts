@@ -77,6 +77,10 @@ android {
         buildConfig = true
     }
 
+    lint {
+        disable.add("MissingTranslation")
+    }
+
     hilt {
         enableAggregatingTask = true
     }

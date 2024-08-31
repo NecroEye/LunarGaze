@@ -18,7 +18,7 @@ import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
 import com.muratcangzm.lunargaze.ui.adapters.DisplayAdapter
-import com.muratcangzm.lunargaze.common.utils.NetworkChecking
+import com.muratcangzm.lunargaze.common.NetworkChecking
 import com.muratcangzm.lunargaze.common.utils.log
 import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
 import dagger.hilt.android.AndroidEntryPoint

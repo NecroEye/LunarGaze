@@ -18,7 +18,7 @@ import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.ui.MainActivity
 import com.muratcangzm.lunargaze.ui.adapters.CategoryAdapter
 import com.muratcangzm.lunargaze.ui.fragments.core.BaseFragment
-import com.muratcangzm.lunargaze.common.utils.NetworkChecking
+import com.muratcangzm.lunargaze.common.NetworkChecking
 import com.muratcangzm.lunargaze.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

@@ -1,4 +1,4 @@
-package com.muratcangzm.lunargaze.common.utils
+package com.muratcangzm.lunargaze.common
 
 class DataResponse<out T>
     (val status: Status, val data: T? = null, val message: String? = null) {

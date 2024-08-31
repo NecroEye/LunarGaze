@@ -72,7 +72,7 @@ class CategoryAdapter
         @SuppressLint("SuspiciousIndentation")
         fun setData(data: CategoryModel.CategoryData) {
 
-            binding.apply {
+            with(binding) {
 
                 glide
                     .asGif()

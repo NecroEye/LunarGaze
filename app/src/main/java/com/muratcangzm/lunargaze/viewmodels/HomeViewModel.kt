@@ -23,7 +23,6 @@ constructor(
     private val tenorRepo: TenorRepo
 ) : BaseViewModel() {
 
-
     private var _tenorCategoryResult = MutableStateFlow<TenorCategoryModel?>(null)
     val tenorCategoryResult: StateFlow<TenorCategoryModel?>
         get() = _tenorCategoryResult.asStateFlow()
@@ -37,9 +36,7 @@ constructor(
         get() = _mutableDataLoading.asStateFlow()
 
     init {
-
         viewModelName = "HomeViewModel"
-
         fetchCategories()
         fetchTenorCategory()
     }
@@ -70,5 +67,4 @@ constructor(
     override fun onCleared() {
         super.onCleared()
     }
-
 }

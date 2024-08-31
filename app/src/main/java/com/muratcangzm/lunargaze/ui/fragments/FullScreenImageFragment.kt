@@ -27,7 +27,6 @@ import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.net.toUri
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.animation.AnimationUtils
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
@@ -52,12 +51,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class FullScreenImageFragment : Fragment(), Downloader {
 
-
     private var _binding: ImageFullscreenLayoutBinding? = null
-    private val binding
-        by lazy(LazyThreadSafetyMode.NONE) {
-            _binding!!
-        }
+    private val binding by lazy(LazyThreadSafetyMode.NONE) { _binding!! }
 
     @Inject
     lateinit var glide: RequestManager
@@ -123,7 +118,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
     @SuppressLint("InflateParams", "ClickableViewAccessibility")
     private fun setUIComponent() {
 
-        binding.apply {
+        with(binding) {
 
             if (roomData == null) {
                 glide
@@ -277,7 +272,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
     override fun downloadFile(url: String, imageType: String, imageName: String): Long {
 
 
-
         val request = DownloadManager.Request(url.toUri())
             .setMimeType("image/jpg")
             .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
@@ -303,14 +297,19 @@ class FullScreenImageFragment : Fragment(), Downloader {
         parentView?.let {
             val behavior = BottomSheetBehavior.from(it)
 
-            behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback(){
+            behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(p0: View, p1: Int) {
-                    if(p1 == BottomSheetBehavior.STATE_HIDDEN){
-                        sheetView.startAnimation(android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.slide_down))
+                    if (p1 == BottomSheetBehavior.STATE_HIDDEN) {
+                        sheetView.startAnimation(
+                            android.view.animation.AnimationUtils.loadAnimation(
+                                requireContext(),
+                                R.anim.slide_down_anim
+                            )
+                        )
 
                         sheetView.postDelayed({
                             bottomSheetDialog.dismiss()
-                        },300)
+                        }, 300)
                     }
                 }
 
@@ -320,7 +319,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
             })
         }
-
 
 
         val updateTime = sheetView.findViewById<MaterialTextView>(R.id.updateTime)
@@ -375,11 +373,16 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
         close.setSafeOnClickListener {
 
-            sheetView.startAnimation(android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.slide_down))
+            sheetView.startAnimation(
+                android.view.animation.AnimationUtils.loadAnimation(
+                    requireContext(),
+                    R.anim.slide_down_anim
+                )
+            )
 
             sheetView.postDelayed({
                 bottomSheetDialog.dismiss()
-            },300)
+            }, 300)
 
         }
 

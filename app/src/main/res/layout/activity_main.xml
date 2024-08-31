@@ -2,12 +2,12 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer_layout"
-    tools:openDrawer="start"
     android:fitsSystemWindows="true"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.MainActivity"
+    tools:openDrawer="start">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,19 +17,17 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
             android:background="@color/night_blue"
             android:elevation="6dp"
-            app:title="   Lunar Gaze"
-            app:logo="@drawable/toolbar_icon2"
-            app:logoScaleType="centerInside"
             android:tooltipText="Developed by Muratcan Gözüm"
+            app:logo="@drawable/toolbar_icon2"
             app:logoAdjustViewBounds="true"
-            android:layout_alignParentTop="true"
+            app:logoScaleType="centerInside"
             app:menu="@menu/toolbar_icons"
+            app:title="   Lunar Gaze"
             app:titleTextAppearance="@style/Widget.LunarGaze.Toolbar"
             app:titleTextColor="@color/white" />
-
-
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
@@ -39,7 +37,6 @@
             app:defaultNavHost="true"
             app:navGraph="@navigation/nav_graph" />
 
-
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
@@ -47,27 +44,27 @@
             android:layout_alignParentBottom="true"
             android:background="@color/transparent_half_background"
             android:elevation="6dp"
-            app:labelVisibilityMode="unlabeled"
             app:itemActiveIndicatorStyle="@style/CustomBottomNavIndicator"
             app:itemIconSize="32dp"
             app:itemIconTint="@color/silver"
             app:itemRippleColor="@color/grey"
+            app:labelVisibilityMode="unlabeled"
             app:menu="@menu/menu" />
     </RelativeLayout>
 
-<com.google.android.material.navigation.NavigationView
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:id="@+id/nav_view"
-    android:layout_gravity="start"
-    app:headerLayout="@layout/drawer_header"
-    android:background="@color/white"
-    app:itemShapeFillColor="@color/black"
-    app:itemRippleColor="@color/grey"
-    app:elevation="6dp"
-    app:itemTextColor="@color/white"
-    app:itemIconTint="@color/white"
-    app:menu="@menu/drawer_menu" />
-
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#D0E4F7"
+        app:itemBackground="@drawable/drawer_item_background"
+        app:drawerLayoutCornerSize="35dp"
+        app:elevation="6dp"
+        app:headerLayout="@layout/drawer_header"
+        app:itemIconTint="@color/white"
+        app:itemRippleColor="@color/grey"
+        app:itemTextColor="#E0E0E0"
+        app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

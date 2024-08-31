@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.muratcangzm.lunargaze.R
-import com.muratcangzm.lunargaze.common.utils.NetworkChecking
+import com.muratcangzm.lunargaze.common.NetworkChecking
 import com.muratcangzm.lunargaze.databinding.DisplayFragmentLayoutBinding
 import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showView

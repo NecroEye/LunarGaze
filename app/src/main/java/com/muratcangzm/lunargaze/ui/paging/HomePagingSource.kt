@@ -4,11 +4,9 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
 import com.muratcangzm.lunargaze.repository.remote.GiphyRepo
-import com.muratcangzm.lunargaze.common.utils.DataResponse
+import com.muratcangzm.lunargaze.common.DataResponse
 import kotlinx.coroutines.flow.collectLatest
-import timber.log.Timber
 import javax.inject.Inject
-import kotlin.math.log
 
 class HomePagingSource
 @Inject

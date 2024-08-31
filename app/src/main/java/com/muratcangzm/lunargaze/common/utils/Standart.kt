@@ -19,3 +19,11 @@ inline fun tryOrZero(block: () -> Double): Double {
         0.0
     }
 }
+
+inline fun <T> tryOrLog(block: () -> T) {
+    try {
+        block()
+    } catch (e: Exception) {
+        Timber.e(e.message.orEmpty())
+    }
+}

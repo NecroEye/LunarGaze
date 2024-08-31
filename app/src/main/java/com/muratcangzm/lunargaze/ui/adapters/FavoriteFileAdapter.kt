@@ -74,7 +74,7 @@ constructor(
         @SuppressLint("NotifyDataSetChanged")
         fun setData(fileName: String, position: Int) {
 
-            binding.apply {
+            with(binding) {
                 customFolderName.text = fileName
 
                 fileCard.setSafeOnClickListener { button ->

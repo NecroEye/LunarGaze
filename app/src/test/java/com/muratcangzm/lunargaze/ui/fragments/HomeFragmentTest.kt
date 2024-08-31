@@ -4,7 +4,7 @@ import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
 import com.muratcangzm.lunargaze.ui.adapters.CategoryAdapter
 import com.muratcangzm.lunargaze.ui.fragments.HomeFragment
-import com.muratcangzm.lunargaze.common.utils.NetworkChecking
+import com.muratcangzm.lunargaze.common.NetworkChecking
 import com.muratcangzm.lunargaze.viewmodels.HomeViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -69,7 +69,7 @@ constructor(
 
         fun setData(fileName: String) {
 
-            binding.apply {
+            with(binding) {
                 saveRadioButton.text = fileName ?: "boş"
 
                 saveRadioButton.setOnCheckedChangeListener { _, isChecked ->

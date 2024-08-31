@@ -5,13 +5,13 @@ constraintlayout = "2.1.4"
 coreKtx = "1.13.1"
 coreSplashscreen = "1.0.1"
 datastore = "1.1.1"
-firebaseAnalytics = "22.0.2"
+firebaseAnalytics = "22.1.0"
 glide = "4.16.0"
 googleServices = "4.4.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
-lifecycleViewmodelKtx = "2.8.3"
-lottieVersion = "6.4.0"
+lifecycleViewmodelKtx = "2.8.4"
+lottieVersion = "6.4.1"
 material = "1.12.0"
 espresso = "3.6.1"
 navigationFragmentKtx = "2.7.7"
@@ -27,10 +27,11 @@ androidLib = "8.1.2"
 daggerHilt = "2.48.1"
 kotlinAndroid = "1.7.0"
 viewPager = "1.1.0"
-pagingVersion = "3.3.0"
+pagingVersion = "3.3.2"
 okhttpLoggingVersion = "4.9.1"
 playServiceAuth = "21.2.0"
 playServiceAuthPhone = "18.1.0"
+playReview = "2.0.1"
 hilt = "2.49"
 hiltCompiler = "2.48.1"
 mockitoVersion = "4.7.0"
@@ -38,7 +39,7 @@ truthVersion = "1.1.4"
 hiltTestingVersion = "2.44"
 kotlinCoroutineVersion = "1.8.0"
 mockitoKotlinVersion = "4.0.0"
-fragmentTestVersion = "1.6.2"
+fragmentTestVersion = "1.8.2"
 
 
 
@@ -99,6 +100,7 @@ androidPagingRx = { module = "androidx.paging:paging-rxjava3", version.ref = "pa
 #Google Auth
 google-play-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServiceAuth" }
 google-play-auth-phone = { module = "com.google.android.gms:play-services-auth-api-phone", version.ref = "playServiceAuthPhone" }
+google-play-review = { module = "com.google.android.play:review", version.ref = "playReview" }
 
 #Timber
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timberVersion" }
@@ -166,7 +168,8 @@ ui = [
 ]
 google-auth = [
     "google-play-auth",
-    "google-play-auth-phone"
+    "google-play-auth-phone",
+    "google-play-review"
 ]
 android-testing = [
     "navigation-testing",

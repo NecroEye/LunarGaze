@@ -1,6 +1,6 @@
 package com.muratcangzm.lunargaze.repository.remote
 
-import com.muratcangzm.lunargaze.common.utils.DataResponse
+import com.muratcangzm.lunargaze.common.DataResponse
 import com.muratcangzm.lunargaze.common.utils.IoDispatcher
 import com.muratcangzm.lunargaze.common.utils.log
 import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
@@ -24,19 +24,20 @@ class GiphyRepo @Inject constructor(
     private var categoryCache: DataResponse<CategoryModel>? = null
 
     suspend fun fetchCategories(): Flow<DataResponse<CategoryModel>> = flow {
+
+        categoryCache?.let {
+            emit(it)
+            return@flow
+        }
+
         try {
             val response = api.getCategory()
             if (response.isSuccessful) {
                 categoryCache = DataResponse.success(response.body())
-
-                categoryCache?.let {
-                    emit(categoryCache!!)
-                    return@let
-                }
                 emit(DataResponse.success(response.body()))
-            } else {
+            } else
                 emit(DataResponse.error("Network error, please try again later!"))
-            }
+
 
         } catch (e: Exception) {
             Timber.tag("Api Error").d(e)
@@ -46,6 +47,9 @@ class GiphyRepo @Inject constructor(
 
     }.flowOn(ioDispatcher)
 
+    fun clearCategoryCache() {
+        if (categoryCache != null) categoryCache = null
+    }
 
     suspend fun fetchChannels(search: String, offset: Int?): Flow<DataResponse<ChannelModel>> =
         flow {
@@ -76,5 +80,4 @@ class GiphyRepo @Inject constructor(
 
         }
     }.flowOn(ioDispatcher)
-
 }

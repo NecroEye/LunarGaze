@@ -28,4 +28,18 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="DialogOpeningAnimation" parent="android:style/Theme.Panel">
+        <item name="android:windowAnimationStyle">@style/Animation.Window</item>
+    </style>
+
+    <style name="Animation.Window" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/slide_up_anim</item>
+        <item name="android:windowExitAnimation">@anim/slide_down_anim</item>
+    </style>
+
+    <style name="ShapeAppearanceDrawerItem" parent="Widget.MaterialComponents.NavigationView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
 </resources>

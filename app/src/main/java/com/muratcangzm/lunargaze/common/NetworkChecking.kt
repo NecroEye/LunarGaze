@@ -1,4 +1,4 @@
-package com.muratcangzm.lunargaze.common.utils
+package com.muratcangzm.lunargaze.common
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,7 +6,6 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.wifi.WifiManager
 import android.os.Build
-import androidx.annotation.IntRange
 import androidx.annotation.RequiresApi
 import dagger.hilt.android.qualifiers.ActivityContext
 

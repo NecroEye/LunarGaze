@@ -31,7 +31,7 @@
     <string name="file_name">File Name</string>
     <string name="browse">Browse:</string>
     <string name="current_folder_in">Current folder in:</string>
-    <string name="google_sign_in">Google Sign In</string>
+    <string name="google_sign_in">Sign-in with Google</string>
     <string name="google_sign_out" >Google Sign Out</string>
     <string name="permission_denied" >You must give permission</string>
     <string name="manage_permission" >Manage the permissions</string>
