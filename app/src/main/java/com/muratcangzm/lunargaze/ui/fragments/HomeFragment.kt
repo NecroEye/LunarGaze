@@ -126,7 +126,6 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
         }
     }
 
-
     //TODO: while downloading picture or gif add a progress bar
     private fun setupViews() {
 

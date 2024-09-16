@@ -12,11 +12,15 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Authenticator
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.InetAddress
+import java.net.InetSocketAddress
+import java.net.Proxy
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -65,6 +69,14 @@ object NetworkModule {
             .build()
     }
 
+    @Singleton
+    @Provides
+    fun createOkHttpClientWithProxy(): OkHttpClient{
+        val proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("80.14.162.49", 80)) // if it doesnt work then check spys.one for new port
+        return OkHttpClient.Builder()
+            .proxy(proxy)
+            .build()
+    }
 
     @Singleton
     @Provides

@@ -66,5 +66,4 @@
         app:itemRippleColor="@color/grey"
         app:itemTextColor="#E0E0E0"
         app:menu="@menu/drawer_menu" />
-
 </androidx.drawerlayout.widget.DrawerLayout>

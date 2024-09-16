@@ -12,14 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.muratcangzm.lunargaze.databinding.SearchDisplayFragmentLayoutBinding
+import com.muratcangzm.lunargaze.common.NetworkChecking
+import com.muratcangzm.lunargaze.common.utils.log
+import com.muratcangzm.lunargaze.databinding.FragmentSearchDisplayBinding
 import com.muratcangzm.lunargaze.extensions.goneView
 import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
 import com.muratcangzm.lunargaze.ui.adapters.DisplayAdapter
-import com.muratcangzm.lunargaze.common.NetworkChecking
-import com.muratcangzm.lunargaze.common.utils.log
 import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -31,8 +31,7 @@ import kotlin.random.Random
 @AndroidEntryPoint
 class SearchDisplayFragment : Fragment() {
 
-
-    private var _binding: SearchDisplayFragmentLayoutBinding? = null
+    private var _binding: FragmentSearchDisplayBinding? = null
     private val binding
             by lazy(LazyThreadSafetyMode.NONE) {
                 _binding!!
@@ -58,11 +57,8 @@ class SearchDisplayFragment : Fragment() {
 
     private val args: SearchDisplayFragmentArgs by navArgs()
 
-
     init {
-
         //Empty Constructor
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -71,7 +67,7 @@ class SearchDisplayFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = SearchDisplayFragmentLayoutBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchDisplayBinding.inflate(inflater, container, false)
 
         val receivedData = args.searchData
 
@@ -82,10 +78,7 @@ class SearchDisplayFragment : Fragment() {
             StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         binding.searchAdapter.hasFixedSize()
 
-
-
         viewModel.getChannels(receivedData.trim().lowercase(), offset)
-
 
         return binding.root
     }
@@ -148,15 +141,10 @@ class SearchDisplayFragment : Fragment() {
 
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
 
         _binding = null
         offset = null
-
-
     }
-
-
 }

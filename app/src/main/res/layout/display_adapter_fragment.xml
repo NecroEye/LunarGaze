@@ -19,7 +19,6 @@
         app:cardCornerRadius="0.5dp"
         app:rippleColor="@color/silver">
 
-
         <ImageView
             android:id="@+id/displayImage"
             android:layout_width="wrap_content"

@@ -14,5 +14,4 @@
         android:contentDescription="@string/empty"
         android:scaleType="fitXY"
         android:src="@drawable/drawer_header_image" />
-
 </LinearLayout>

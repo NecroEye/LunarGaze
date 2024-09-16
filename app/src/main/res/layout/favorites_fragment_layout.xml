@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/night">
 
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/emptyFavFileText"
         android:layout_width="match_parent"
@@ -19,14 +18,12 @@
         android:textStyle="bold"
         android:visibility="invisible" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fileRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="64dp" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +32,6 @@
         android:layout_marginBottom="140dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
-
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieArrow"
@@ -52,7 +48,6 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/anim_arrow" />
 
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/favButton"
             android:layout_width="wrap_content"
@@ -68,6 +63,4 @@
             app:rippleColor="@color/deep_blue" />
 
     </LinearLayout>
-
-
 </RelativeLayout>

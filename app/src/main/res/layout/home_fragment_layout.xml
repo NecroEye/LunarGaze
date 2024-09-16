@@ -10,7 +10,6 @@
         layout="@layout/loading_screen_layout"
         android:visibility="visible" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoryRecycler"
         android:layout_width="match_parent"
@@ -19,6 +18,4 @@
         android:clipChildren="false"
         android:padding="1dp"
         android:visibility="gone" />
-
-
 </LinearLayout>

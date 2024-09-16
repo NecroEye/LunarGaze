@@ -4,12 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <include
         android:id="@+id/tenorLoading"
         layout="@layout/loading_screen_layout"
         android:visibility="visible" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tenorRecyclerView"
@@ -19,5 +17,4 @@
         android:clipChildren="true"
         android:padding="1dp"
         android:visibility="gone" />
-
 </LinearLayout>

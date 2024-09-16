@@ -44,6 +44,5 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

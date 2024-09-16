@@ -289,7 +289,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
     @SuppressLint("InflateParams")
     private fun showBottomSheet() {
 
-        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
+        val sheetView = layoutInflater.inflate(R.layout.giphy_item_detail_bottom_sheet_layout, null)
         val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
 
         val parentView = sheetView.parent as? View

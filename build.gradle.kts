@@ -5,9 +5,9 @@ buildscript {
         maven { url = uri("https://www.jitpack.io") }
     }
     dependencies {
-        val nav_version = "2.7.7"
-        classpath("com.google.gms:google-services:4.4.1")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
+        classpath("com.google.gms:google-services:${libs.versions.googleServices}")
+        classpath("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:${libs.versions.ksp}")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:${libs.versions.hilt}")
     }
 }
 
@@ -16,6 +16,8 @@ plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.dagger.hilt) apply false
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.google.services) apply false
 }
 
 task("clean", type = Delete::class) {

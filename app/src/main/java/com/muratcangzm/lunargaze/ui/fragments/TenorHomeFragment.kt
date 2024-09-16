@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.muratcangzm.lunargaze.R
-import com.muratcangzm.lunargaze.databinding.TenorHomeFragmentLayoutBinding
+import com.muratcangzm.lunargaze.databinding.TenorHomeFragmentBinding
 import com.muratcangzm.lunargaze.ui.fragments.core.BaseFragment
 import com.muratcangzm.lunargaze.viewmodels.TenorViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -16,11 +16,10 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-class TenorHomeFragment : BaseFragment<TenorHomeFragmentLayoutBinding>(){
-
+class TenorHomeFragment : BaseFragment<TenorHomeFragmentBinding>(){
 
     override val layoutId: Int
-        get() = R.layout.tenor_home_fragment_layout
+        get() = R.layout.tenor_home_fragment
 
     @Inject
     lateinit var viewModelFactory:ViewModelProvider.Factory
@@ -30,15 +29,13 @@ class TenorHomeFragment : BaseFragment<TenorHomeFragmentLayoutBinding>(){
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): TenorHomeFragmentLayoutBinding {
-        return TenorHomeFragmentLayoutBinding.inflate(inflater, container, false)
+    ): TenorHomeFragmentBinding {
+        return TenorHomeFragmentBinding.inflate(inflater, container, false)
     }
 
-
-    override fun TenorHomeFragmentLayoutBinding.initializeViews() {
-        //Not necessary here rn
+    override fun TenorHomeFragmentBinding.initializeViews() {
+        //Not necessary here rn.
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +47,6 @@ class TenorHomeFragment : BaseFragment<TenorHomeFragmentLayoutBinding>(){
 
         return super.onCreateView(inflater, container, savedInstanceState)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,14 +61,11 @@ class TenorHomeFragment : BaseFragment<TenorHomeFragmentLayoutBinding>(){
             }
 
         }
-
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
     }
-
 }
 
 

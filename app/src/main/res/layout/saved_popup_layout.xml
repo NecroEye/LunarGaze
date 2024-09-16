@@ -9,7 +9,6 @@
     android:background="@drawable/pop_up_design"
     android:orientation="vertical">
 
-
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,8 +40,6 @@
 
     </RadioGroup>
 
-
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/popupSaveButton"
         android:layout_width="100dp"
@@ -57,5 +54,4 @@
         android:textStyle="bold"
         app:cornerRadius="5dp"
         app:rippleColor="@color/silver" />
-
 </LinearLayout>

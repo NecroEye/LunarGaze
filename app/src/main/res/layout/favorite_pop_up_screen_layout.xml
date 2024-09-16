@@ -9,7 +9,6 @@
     android:orientation="vertical"
     android:padding="2dp">
 
-
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -36,7 +35,6 @@
         android:layout_marginTop="25dp"
         android:layout_marginBottom="15dp"
         android:hint="@string/file_name">
-
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/favoriteName"

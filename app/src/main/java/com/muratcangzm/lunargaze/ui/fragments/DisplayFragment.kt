@@ -27,7 +27,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class DisplayFragment : BaseFragment<DisplayFragmentLayoutBinding>() {
 
-
     private var offset: Int? = null
 
     @Inject
@@ -63,7 +62,6 @@ class DisplayFragment : BaseFragment<DisplayFragmentLayoutBinding>() {
         val receivedData = requireArguments().getString("channelData")
         setAdapter()
 
-
         viewModel.getChannels(receivedData!!.lowercase(), offset)
         observeDataChange()
 
@@ -83,9 +81,8 @@ class DisplayFragment : BaseFragment<DisplayFragmentLayoutBinding>() {
     }
 
     override fun DisplayFragmentLayoutBinding.initializeViews() {
-        //not necessary rn either.
+        //not necessary rn.
     }
-
 
     @SuppressLint("SetTextI18n", "SuspiciousIndentation")
     private fun observeDataChange() {
@@ -112,7 +109,6 @@ class DisplayFragment : BaseFragment<DisplayFragmentLayoutBinding>() {
                 }
             }
         }
-
     }
 
     private fun setAdapter() {
@@ -124,9 +120,7 @@ class DisplayFragment : BaseFragment<DisplayFragmentLayoutBinding>() {
             hasFixedSize()
 
         }
-
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -134,6 +128,4 @@ class DisplayFragment : BaseFragment<DisplayFragmentLayoutBinding>() {
         offset = null
 
     }
-
-
 }

@@ -64,7 +64,7 @@
         android:id="@+id/searchDisplayFragment"
         android:name="com.muratcangzm.lunargaze.ui.fragments.SearchDisplayFragment"
         android:label="SearchDisplayFragment"
-        tools:layout="@layout/search_display_fragment_layout">
+        tools:layout="@layout/fragment_search_display">
         <action
             android:id="@+id/action_searchDisplayFragment_to_homeFragment"
             app:destination="@id/homeFragment" />

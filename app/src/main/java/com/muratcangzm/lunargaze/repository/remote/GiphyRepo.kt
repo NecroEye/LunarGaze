@@ -56,10 +56,8 @@ class GiphyRepo @Inject constructor(
             try {
                 val response = api.getChannels(query = search, offset = offset)
 
-                if (response.isSuccessful)
-                    emit(DataResponse.success(response.body()))
-                else
-                    emit(DataResponse.error("Network error, please try again later!"))
+                if (response.isSuccessful) emit(DataResponse.success(response.body()))
+                else emit(DataResponse.error("Network error, please try again later!"))
 
             } catch (e: Exception) {
                 Timber.tag("Api Error").d(e)
@@ -70,10 +68,8 @@ class GiphyRepo @Inject constructor(
         try {
             val response = api.getSearch(query = search)
 
-            if (response.isSuccessful)
-                emit(DataResponse.success(response.body()))
-            else
-                emit(DataResponse.error("Network error, please try again later!"))
+            if (response.isSuccessful) emit(DataResponse.success(response.body()))
+            else emit(DataResponse.error("Network error, please try again later!"))
 
         } catch (e: Exception) {
             log(e.message.toString())

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.R
-import com.muratcangzm.lunargaze.databinding.CategoryRecyclerLayoutBinding
+import com.muratcangzm.lunargaze.databinding.ItemCategoryGiphyBinding
 import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
 import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
 import dagger.hilt.android.qualifiers.ActivityContext
@@ -25,14 +25,14 @@ class CategoryAdapter
     private val glide: RequestManager
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
-    private lateinit var binding: CategoryRecyclerLayoutBinding
+    private lateinit var binding: ItemCategoryGiphyBinding
     private var categoryList: CategoryModel? = null
     private var componentCallbacks:ComponentCallbacks2? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
 
-        binding = CategoryRecyclerLayoutBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding = ItemCategoryGiphyBinding.inflate(LayoutInflater.from(context), parent, false)
 
         return CategoryViewHolder()
 

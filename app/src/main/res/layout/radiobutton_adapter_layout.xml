@@ -21,5 +21,4 @@
         android:textSize="16.5sp"
         android:textStyle="bold"
         tools:ignore="RtlSymmetry" />
-
 </LinearLayout>

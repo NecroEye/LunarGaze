@@ -1,18 +1,19 @@
+import com.android.build.api.dsl.ApplicationBuildFeatures
 import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
-    id("com.android.application")
-    id("androidx.navigation.safeargs")
-    id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
-    id("com.google.dagger.hilt.android")
-    id("com.google.gms.google-services")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.safe.navigation)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.google.services)
 }
 
 android {
     namespace = "com.muratcangzm.lunargaze"
-    compileSdk = 34
+    compileSdk = 35
 
     val localProperties = Properties().apply {
         load(FileInputStream(File(rootProject.rootDir, "local.properties")))
@@ -31,8 +32,7 @@ android {
     }
 
     buildTypes {
-        release {
-
+        getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
             isDebuggable = false
@@ -40,16 +40,13 @@ android {
             buildConfigField("String", "GIPHY_KEY", localProperties.getProperty("GIPHY_KEY"))
             buildConfigField("String", "TENOR_KEY", localProperties.getProperty("TENOR_KEY"))
 
-
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
         }
 
-        debug {
-
+        getByName("debug") {
             isDebuggable = true
             isMinifyEnabled = false
             isShrinkResources = false
@@ -63,19 +60,21 @@ android {
             )
         }
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = JavaVersion.VERSION_21.toString()
     }
 
-    buildFeatures {
+    buildFeatures(Action<ApplicationBuildFeatures> {
         viewBinding = true
         dataBinding = true
         buildConfig = true
-    }
+    })
 
     lint {
         disable.add("MissingTranslation")
@@ -94,10 +93,10 @@ dependencies {
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.rxjava3)
     implementation(libs.bundles.room)
-    annotationProcessor(libs.androidx.room.compiler)
-    kapt(libs.androidx.room.compiler)
     implementation(libs.dagger.hilt)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
+    ksp(libs.androidx.room.compiler)
+    annotationProcessor(libs.androidx.room.compiler)
     implementation(libs.bundles.datastore)
     implementation(libs.firebase.analytics)
     implementation(libs.bundles.ui)
@@ -110,8 +109,7 @@ dependencies {
     debugImplementation(libs.fragment.testing)
     androidTestImplementation(libs.bundles.android.testing)
 
+    coreLibraryDesugaring(libs.desugare)
 }
 
-kapt {
-    correctErrorTypes = true
-}
+ksp {}

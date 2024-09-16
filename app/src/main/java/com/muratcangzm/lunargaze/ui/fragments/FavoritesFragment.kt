@@ -121,7 +121,7 @@ class FavoritesFragment : Fragment() {
     private fun showPopUp() {
 
         val inflater = LayoutInflater.from(requireContext())
-        val popupView = inflater.inflate(R.layout.pop_up_screen_layout, null)
+        val popupView = inflater.inflate(R.layout.favorite_pop_up_screen_layout, null)
 
         val builder = AlertDialog.Builder(requireContext())
         builder.setView(popupView)
