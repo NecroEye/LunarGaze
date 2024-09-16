@@ -71,6 +71,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
+    @Named("proxyOkHttpClient")
     fun createOkHttpClientWithProxy(): OkHttpClient{
         val proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("80.14.162.49", 80)) // if it doesnt work then check spys.one for new port
         return OkHttpClient.Builder()
