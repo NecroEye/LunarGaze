@@ -48,6 +48,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
+    @Named("standardOkHttpClient")
     fun provideOkhttpClient(@ApplicationContext context: Context): OkHttpClient {
 
         val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -84,7 +85,7 @@ object NetworkModule {
     fun provideGiphyApi(
         @Named("giphyBaseUrl") baseUrl: String,
         gson: Gson,
-        client: OkHttpClient
+        @Named("standardOkHttpClient") client: OkHttpClient
     ): GiphyAPI {
 
         return Retrofit.Builder()
@@ -100,7 +101,7 @@ object NetworkModule {
     fun provideTenorApi(
         @Named("tenorBaseUrl") baseUrl: String,
         gson: Gson,
-        client: OkHttpClient
+        @Named("standardOkHttpClient") client: OkHttpClient
     ): TenorAPI {
 
         return Retrofit.Builder()

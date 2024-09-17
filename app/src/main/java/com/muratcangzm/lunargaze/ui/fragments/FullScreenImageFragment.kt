@@ -77,16 +77,13 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
     private val downloadManager by lazy { requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager }
 
-
     companion object {
         private const val REQUEST_CODE = 1
         private const val TAG = "FullScreenFragment"
     }
 
     init {
-
         //Empty Constructor
-
     }
 
     override fun onCreateView(
@@ -110,7 +107,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
@@ -133,10 +129,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
                     .into(fullScreenImage)
 
                 bookmarkedButtonCard.goneView()
-
             }
-
-
 
             fullScreenImage.setOnTouchListener { _, event ->
 
@@ -152,8 +145,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
                 showBottomSheet()
 
             }
-
-
 
             bookmarkedButtonCard.setSafeOnClickListener {
 
@@ -228,7 +219,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
         }
     }
 
-
     private fun requestPermissionIfHasnt(
         channelModel: ChannelModel.ChannelData?,
         roomModel: FavoriteModel?
@@ -271,7 +261,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
     override fun downloadFile(url: String, imageType: String, imageName: String): Long {
 
-
         val request = DownloadManager.Request(url.toUri())
             .setMimeType("image/jpg")
             .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
@@ -284,7 +273,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
         return downloadManager.enqueue(request)
     }
-
 
     @SuppressLint("InflateParams")
     private fun showBottomSheet() {
@@ -320,7 +308,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
             })
         }
 
-
         val updateTime = sheetView.findViewById<MaterialTextView>(R.id.updateTime)
         val description = sheetView.findViewById<MaterialTextView>(R.id.descriptionText)
         val close = sheetView.findViewById<LinearLayout>(R.id.SheetClose)
@@ -328,7 +315,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
         val type = sheetView.findViewById<MaterialTextView>(R.id.imageType)
         val rating = sheetView.findViewById<MaterialTextView>(R.id.imageRating)
         val link = sheetView.findViewById<MaterialTextView>(R.id.imageLinkText)
-
 
         if (roomData == null) {
             updateTime.text =
@@ -349,7 +335,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
             description.text = roomData!!.description ?: resources.getString(R.string.empty)
             link.text = roomData!!.imageUrl ?: resources.getString(R.string.empty)
         }
-
 
         link.setSafeOnClickListener {
 
@@ -388,9 +373,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
         bottomSheetDialog.setContentView(sheetView)
         bottomSheetDialog.show()
-
     }
-
 
     inner class ScaleListener(private val imageView: ImageView) :
         ScaleGestureDetector.SimpleOnScaleGestureListener() {
@@ -407,7 +390,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
         }
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         receivedData = null
@@ -419,6 +401,4 @@ class FullScreenImageFragment : Fragment(), Downloader {
         compositeDisposable.dispose()
 
     }
-
-
 }

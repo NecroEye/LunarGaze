@@ -40,7 +40,7 @@
             android:layout_marginEnd="10dp"
             android:maxWidth="250dp"
             android:minWidth="100dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="@dimen/dimen_20dp"
             android:scaleType="center"
             android:visibility="visible"
             android:layout_marginStart="30dp"
@@ -59,6 +59,7 @@
             android:contentDescription="@string/create_favorite_folder"
             android:elevation="8dp"
             android:src="@drawable/add_icon"
+            android:layout_marginTop="@dimen/dimen_20dp"
             app:fabSize="normal"
             app:rippleColor="@color/deep_blue" />
 

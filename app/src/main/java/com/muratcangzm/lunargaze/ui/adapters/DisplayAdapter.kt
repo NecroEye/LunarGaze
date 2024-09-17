@@ -122,6 +122,7 @@ constructor(
                 // Not implemented
             }
 
+            @Deprecated("Deprecated in Java")
             override fun onLowMemory() {
                 Glide.get(context).clearDiskCache()
                 Glide.get(context).clearMemory()
@@ -133,6 +134,7 @@ constructor(
         super.onDetachedFromRecyclerView(recyclerView)
         (context as Activity).applicationContext.unregisterComponentCallbacks(componentCallbacks)
         currentFragment = null
+
     }
 
 

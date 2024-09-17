@@ -26,9 +26,7 @@ constructor(
     var whichChecked = mutableListOf<String>()
 
     init {
-
         loadData()
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RadioButtonHolder {
@@ -63,9 +61,7 @@ constructor(
         }
     }
 
-
     inner class RadioButtonHolder() : RecyclerView.ViewHolder(binding.root) {
-
 
         fun setData(fileName: String) {
 
@@ -79,19 +75,13 @@ constructor(
 
 
                 }
-
             }
-
         }
-
-
     }
-
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
 
         allFileNames = null
     }
-
 }

@@ -24,7 +24,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
-import kotlin.jvm.Throws
 
 class FavoriteFileAdapter
 @Inject
@@ -112,14 +111,13 @@ constructor(
                         .setIcon(R.drawable.baseline_warning_amber_24)
                         .setPositiveButton("Delete") { dialog, _ ->
 
-                            CoroutineScope(Dispatchers.IO).launch{
+                            CoroutineScope(Dispatchers.IO).launch {
                                 dataStoreRepo.deleteNameFromPreferences(fileName.uppercase())
 
                             }
 
                             emptyFileName = emptyFileName.filter { it != fileName }
                             removeAnItemFromList(position)
-
 
                             disposable = repo.getAllFavImages()
                                 .subscribeOn(Schedulers.io())
@@ -144,9 +142,9 @@ constructor(
                                 },
                                     { error ->
                                         error.localizedMessage?.let {
-                                            Timber.tag("Bütün oda: ").d(it) }
+                                            Timber.tag("Bütün oda: ").d(it)
+                                        }
                                     })
-
 
                             dialog.dismiss()
 
@@ -158,13 +156,10 @@ constructor(
                         }
                         .show()
 
-
                     return@setOnLongClickListener true
                 }
             }
         }
-
-
     }
 
     inner class FavoriteFileDiffCallback(
@@ -197,11 +192,9 @@ constructor(
     }
 
     fun addAnItemToList(position: Int) {
-
         //emptyFileName.add(position, folderName)
         notifyItemInserted(position)
         notifyItemRangeInserted(position, emptyFileName.size)
-
 
     }
 
@@ -213,7 +206,6 @@ constructor(
 
     }
 
-
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
 
@@ -223,8 +215,5 @@ constructor(
             disposable = null
 
         }
-
-
     }
-
 }

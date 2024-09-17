@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -39,20 +40,16 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         Timber.tag("DataSpeed1: ").d("%s", networkChecking.getMobileSpeed().first)
         Timber.tag("DataSpeed2: ").d("%s", networkChecking.getMobileSpeed().second)
-
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
 
         NavigationUI.setupWithNavController(binding.bottomNavigation, navHostFragment.navController)
 
-
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
-
 
         val toggle = ActionBarDrawerToggle(
             this,
@@ -61,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             R.string.open_nav,
             R.string.close_nav
         )
-        toggle.drawerArrowDrawable.color = resources.getColor(R.color.white)
+        toggle.drawerArrowDrawable.color = ContextCompat.getColor(this ,R.color.white)
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -75,7 +72,6 @@ class MainActivity : AppCompatActivity() {
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                 }
             }
-
             true
         }
 
@@ -89,37 +85,31 @@ class MainActivity : AppCompatActivity() {
                     binding.toolbar.goneView()
 
                 }
-
                 R.id.favoritesFragment -> {
                     binding.toolbar.showView()
                     binding.bottomNavigation.showView()
                     searchItem?.isVisible = false
 
                 }
-
                 R.id.searchDisplayFragment -> {
                     binding.bottomNavigation.goneView()
                     binding.toolbar.hideView()
                 }
-
                 R.id.homeFragment -> {
                     binding.bottomNavigation.showView()
                     binding.toolbar.showView()
                     searchItem?.isVisible = true
 
                 }
-
                 R.id.fullScreenImageFragment -> {
                     binding.toolbar.goneView()
                     binding.bottomNavigation.goneView()
                 }
-
                 R.id.favoritedImageFragment -> {
 
                     binding.toolbar.goneView()
                     binding.bottomNavigation.goneView()
                 }
-
                 else -> throw Exception("There isn't any destination")
             }
         }
@@ -128,7 +118,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
         menuInflater.inflate(R.menu.toolbar_icons, menu)
-
 
         searchItem = menu!!.findItem(R.id.search_icon)
         val searchView = searchItem?.actionView as SearchView
@@ -161,19 +150,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
         return true
     }
 
     fun getBottomNavigationView() : BottomNavigationView{
         return binding.bottomNavigation
     }
-
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
-
-
 }

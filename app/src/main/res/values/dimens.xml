@@ -8,6 +8,7 @@
 
     <!-- specific dimens -->
     <dimen name="dimen_10dp">10dp</dimen>
+    <dimen name="dimen_20dp">20dp</dimen>
     <dimen name="dimen_25dp">25dp</dimen>
     <dimen name="dimen_50dp">50dp</dimen>
     <dimen name="dimen_60dp">60dp</dimen>

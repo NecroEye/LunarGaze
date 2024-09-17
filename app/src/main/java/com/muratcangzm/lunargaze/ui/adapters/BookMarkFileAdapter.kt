@@ -55,10 +55,7 @@ constructor(
     }
 
     override fun onBindViewHolder(holder: BookMarkFileHolder, position: Int) {
-
         holder.setData(roomList[position], position)
-
-
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -174,7 +171,6 @@ constructor(
                 Glide.get(context).clearMemory()
             }
         }
-
     }
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {

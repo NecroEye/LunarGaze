@@ -122,4 +122,9 @@
             android:id="@+id/action_favoritedImageFragment_to_fullScreenImageFragment2"
             app:destination="@id/fullScreenImageFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/tenorHomeFragment"
+        tools:layout="@layout/tenor_home_fragment"
+        android:name="com.muratcangzm.lunargaze.ui.fragments.TenorHomeFragment"
+        android:label="TenorHomeFragment" />
 </navigation>
