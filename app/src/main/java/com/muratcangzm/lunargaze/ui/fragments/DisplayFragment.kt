@@ -100,11 +100,9 @@ class DisplayFragment : BaseFragment<DisplayFragmentLayoutBinding>() {
                             result.channelData!!.toMutableList(),
                             this@DisplayFragment
                         )
-                        Timber.tag(TAG).d("Gelen Data ${result.pagination.totalCount}")
+                        Timber.tag(TAG).d("Gelen Data ${result.pagination!!.totalCount}")
 
                         binding.displayEmptyText.hideView()
-
-
                     }
                 }
             }

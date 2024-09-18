@@ -37,8 +37,8 @@ import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
 import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.extensions.tost
 import com.muratcangzm.lunargaze.helper.Downloader
-import com.muratcangzm.lunargaze.models.local.FavoriteModel
-import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
+import com.muratcangzm.models.local.FavoriteModel
+import com.muratcangzm.models.remote.giphy.ChannelModel
 import com.muratcangzm.lunargaze.repository.local.FavoriteRepo
 import com.muratcangzm.lunargaze.ui.adapters.RadioButtonAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -228,9 +228,9 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
             channelModel?.let {
 
-                val type = it.user!!.avatarUrl!!.substring(it.user.avatarUrl!!.length - 3)
+                val type = it.user!!.avatarUrl!!.substring(it.user?.avatarUrl!!.length - 3)
                 Timber.tag(TAG).d("Channel Resmin tipi: $type")
-                downloadFile(it.user.avatarUrl, "image/".plus(type), it.featuredGif?.username!!)
+                downloadFile(it.user!!.avatarUrl!!, "image/".plus(type), it.featuredGif?.username!!)
             }
             roomModel?.let {
 

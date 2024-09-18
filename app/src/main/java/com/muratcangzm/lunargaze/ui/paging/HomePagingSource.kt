@@ -2,7 +2,7 @@ package com.muratcangzm.lunargaze.ui.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
+import com.muratcangzm.models.remote.giphy.CategoryModel
 import com.muratcangzm.lunargaze.repository.remote.GiphyRepo
 import com.muratcangzm.lunargaze.common.DataResponse
 import kotlinx.coroutines.flow.collectLatest
@@ -10,24 +10,24 @@ import javax.inject.Inject
 
 class HomePagingSource
 @Inject
-    constructor(private val giphyRepo: GiphyRepo) : PagingSource<Int, CategoryModel.CategoryData>() {
+    constructor(private val giphyRepo: GiphyRepo) : PagingSource<Int, com.muratcangzm.models.remote.giphy.CategoryModel.CategoryData>() {
 
 
-    override fun getRefreshKey(state: PagingState<Int, CategoryModel.CategoryData>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, com.muratcangzm.models.remote.giphy.CategoryModel.CategoryData>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CategoryModel.CategoryData> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, com.muratcangzm.models.remote.giphy.CategoryModel.CategoryData> {
 
         val page = params.key ?: 1
         val pageSize = params.loadSize
 
         return try {
             val responseFlow = giphyRepo.fetchCategories()
-            var categories: CategoryModel? = null
+            var categories: com.muratcangzm.models.remote.giphy.CategoryModel? = null
 
             responseFlow.collectLatest {response ->
                 when(response.status){

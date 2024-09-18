@@ -1,9 +1,9 @@
 package com.muratcangzm.lunargaze.service
 
 import com.muratcangzm.lunargaze.BuildConfig
-import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
-import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
-import com.muratcangzm.lunargaze.models.remote.giphy.SearchModel
+import com.muratcangzm.models.remote.giphy.CategoryModel
+import com.muratcangzm.models.remote.giphy.ChannelModel
+import com.muratcangzm.models.remote.giphy.SearchModel
 import com.muratcangzm.lunargaze.common.utils.Constants
 import retrofit2.Response
 import retrofit2.http.GET

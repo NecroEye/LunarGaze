@@ -1,7 +1,7 @@
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.lifecycle.ViewModelProvider
 import com.muratcangzm.lunargaze.R
-import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
+import com.muratcangzm.models.remote.giphy.CategoryModel
 import com.muratcangzm.lunargaze.ui.adapters.CategoryAdapter
 import com.muratcangzm.lunargaze.ui.fragments.HomeFragment
 import com.muratcangzm.lunargaze.common.NetworkChecking
@@ -20,7 +20,7 @@ class HomeFragmentTest {
     private lateinit var viewModel: HomeViewModel
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var networkChecking: NetworkChecking
-    private lateinit var mockCategoryModel: CategoryModel
+    private lateinit var mockCategoryModel: com.muratcangzm.models.remote.giphy.CategoryModel
 
 
     @Before

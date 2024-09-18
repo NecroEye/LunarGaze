@@ -1,9 +1,9 @@
 package com.muratcangzm.lunargaze.service
 
 import com.muratcangzm.lunargaze.BuildConfig
-import com.muratcangzm.lunargaze.models.remote.tenor.ContentFilter
-import com.muratcangzm.lunargaze.models.remote.tenor.TenorCategoryModel
-import com.muratcangzm.lunargaze.models.remote.tenor.TenorSearchResultModel
+import com.muratcangzm.models.remote.tenor.ContentFilter
+import com.muratcangzm.models.remote.tenor.TenorCategoryModel
+import com.muratcangzm.models.remote.tenor.TenorSearchResultModel
 import com.muratcangzm.lunargaze.common.utils.Constants
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
@@ -17,8 +17,8 @@ interface TenorAPI {
     suspend fun getTenorCategories(
         @Query("key") apiKey: String = BuildConfig.TENOR_KEY,
         @Query("locale") locale: String = Locale.getDefault().language.lowercase(),
-        @Query("contentfilter") contentFilter: ContentFilter = ContentFilter.low
-    ): Response<TenorCategoryModel>
+        @Query("contentfilter") contentFilter: com.muratcangzm.models.remote.tenor.ContentFilter = com.muratcangzm.models.remote.tenor.ContentFilter.low
+    ): Response<com.muratcangzm.models.remote.tenor.TenorCategoryModel>
 
 
     @GET(Constants.TENOR_SEARCH)
@@ -26,11 +26,11 @@ interface TenorAPI {
         @Query("key") apiKey: String = BuildConfig.TENOR_KEY,
         @Query("q") q: String,
         @Query("locale") locale: String = Locale.getDefault().language.lowercase(),
-        @Query("contentfilter") contentFilter: ContentFilter = ContentFilter.off,
+        @Query("contentfilter") contentFilter: com.muratcangzm.models.remote.tenor.ContentFilter = com.muratcangzm.models.remote.tenor.ContentFilter.off,
         @Query("standard") standard: String = "standard",
         @Query("random") random: Boolean = true,
         @Query("limit") limit: Int = 50,
 
-        ): Response<TenorSearchResultModel>
+        ): Response<com.muratcangzm.models.remote.tenor.TenorSearchResultModel>
 
 }

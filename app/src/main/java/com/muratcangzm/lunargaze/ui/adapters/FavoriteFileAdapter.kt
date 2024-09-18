@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.FavoriteFolderLayoutBinding
 import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
-import com.muratcangzm.lunargaze.models.local.FavoriteModel
+import com.muratcangzm.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.repository.local.DataStoreRepo
 import com.muratcangzm.lunargaze.repository.local.FavoriteRepo
 import com.muratcangzm.lunargaze.ui.fragments.FavoritesFragmentDirections
@@ -37,7 +37,7 @@ constructor(
 
     private lateinit var binding: FavoriteFolderLayoutBinding
     private var emptyFileName = emptyList<String>()
-    private var deletedOnes = emptyList<FavoriteModel>()
+    private var deletedOnes = emptyList<com.muratcangzm.models.local.FavoriteModel>()
     private var disposable: Disposable? = null
 
 

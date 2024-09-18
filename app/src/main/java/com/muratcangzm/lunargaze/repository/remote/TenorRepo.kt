@@ -1,7 +1,7 @@
 package com.muratcangzm.lunargaze.repository.remote
 
-import com.muratcangzm.lunargaze.models.remote.tenor.TenorCategoryModel
-import com.muratcangzm.lunargaze.models.remote.tenor.TenorSearchResultModel
+import com.muratcangzm.models.remote.tenor.TenorCategoryModel
+import com.muratcangzm.models.remote.tenor.TenorSearchResultModel
 import com.muratcangzm.lunargaze.service.TenorAPI
 import com.muratcangzm.lunargaze.common.DataResponse
 import com.muratcangzm.lunargaze.common.utils.IoDispatcher
@@ -18,9 +18,9 @@ constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
 
-    private var tenorCategoryCache: DataResponse<TenorCategoryModel>? = null
+    private var tenorCategoryCache: DataResponse<com.muratcangzm.models.remote.tenor.TenorCategoryModel>? = null
 
-    suspend fun fetchTenorCategory(): Flow<DataResponse<TenorCategoryModel>> = flow {
+    suspend fun fetchTenorCategory(): Flow<DataResponse<com.muratcangzm.models.remote.tenor.TenorCategoryModel>> = flow {
         tenorCategoryCache?.let {
             emit(it)
             return@flow
@@ -41,7 +41,7 @@ constructor(
     }.flowOn(ioDispatcher)
 
 
-    suspend fun fetchTenorSearchResult(query: String?): Flow<DataResponse<TenorSearchResultModel>> =
+    suspend fun fetchTenorSearchResult(query: String?): Flow<DataResponse<com.muratcangzm.models.remote.tenor.TenorSearchResultModel>> =
         flow {
             try {
                 val response = query?.let { api.getSearchResult(q = query) }

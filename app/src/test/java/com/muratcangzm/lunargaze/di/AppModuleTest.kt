@@ -3,7 +3,7 @@ package com.muratcangzm.lunargaze.di
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.muratcangzm.lunargaze.models.local.FavoriteDatabase
+import com.muratcangzm.models.local.FavoriteDatabase
 import com.muratcangzm.lunargaze.repository.remote.GiphyRepo
 import com.muratcangzm.lunargaze.repository.remote.TenorRepo
 import com.muratcangzm.lunargaze.service.GiphyAPI
@@ -100,7 +100,7 @@ class AppModuleTest {
     @Test
     fun testFavoriteDao(){
 
-        val mockDatabase = mock(FavoriteDatabase::class.java)
+        val mockDatabase = mock(com.muratcangzm.models.local.FavoriteDatabase::class.java)
         val dao  = AppModule.provideDao(mockDatabase)
 
         assertNotNull(dao)

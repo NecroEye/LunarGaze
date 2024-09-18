@@ -13,7 +13,7 @@ plugins {
 
 android {
     namespace = "com.muratcangzm.lunargaze"
-    compileSdk = 35
+    compileSdk = ProjectConfig.compileSdk
 
     val localProperties = Properties().apply {
         load(FileInputStream(File(rootProject.rootDir, "local.properties")))
@@ -21,8 +21,8 @@ android {
 
     defaultConfig {
         applicationId = "com.muratcangzm.lunargaze"
-        minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = 34
+        minSdk = ProjectConfig.minSdk
+        targetSdk = ProjectConfig.targetSdk
         versionCode = 4
         versionName = "1.273642736427364"
 
@@ -86,6 +86,8 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":core:model"))
 
     implementation(libs.bundles.androidx)
     implementation(libs.bundles.retrofit)

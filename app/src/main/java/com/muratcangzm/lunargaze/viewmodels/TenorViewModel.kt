@@ -1,7 +1,7 @@
 package com.muratcangzm.lunargaze.viewmodels
 
 import androidx.lifecycle.viewModelScope
-import com.muratcangzm.lunargaze.models.remote.tenor.TenorCategoryModel
+import com.muratcangzm.models.remote.tenor.TenorCategoryModel
 import com.muratcangzm.lunargaze.repository.remote.TenorRepo
 import com.muratcangzm.lunargaze.viewmodels.core.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,8 +19,8 @@ class TenorViewModel
 constructor(private val tenorRepo: TenorRepo) : BaseViewModel() {
 
 
-    private var _tenorCategory = MutableStateFlow<TenorCategoryModel?>(null)
-    val tenorCategory: StateFlow<TenorCategoryModel?> get() = _tenorCategory.asStateFlow()
+    private var _tenorCategory = MutableStateFlow<com.muratcangzm.models.remote.tenor.TenorCategoryModel?>(null)
+    val tenorCategory: StateFlow<com.muratcangzm.models.remote.tenor.TenorCategoryModel?> get() = _tenorCategory.asStateFlow()
 
 
     init {

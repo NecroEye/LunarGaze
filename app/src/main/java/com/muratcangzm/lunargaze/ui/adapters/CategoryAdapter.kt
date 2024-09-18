@@ -15,7 +15,7 @@ import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.ItemCategoryGiphyBinding
 import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
-import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
+import com.muratcangzm.models.remote.giphy.CategoryModel
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
@@ -26,7 +26,7 @@ class CategoryAdapter
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     private lateinit var binding: ItemCategoryGiphyBinding
-    private var categoryList: CategoryModel? = null
+    private var categoryList: com.muratcangzm.models.remote.giphy.CategoryModel? = null
     private var componentCallbacks:ComponentCallbacks2? = null
 
 
@@ -57,7 +57,7 @@ class CategoryAdapter
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitCategory(categories: CategoryModel) {
+    fun submitCategory(categories: com.muratcangzm.models.remote.giphy.CategoryModel) {
 
         categories.let {
             categoryList = categories
@@ -70,7 +70,7 @@ class CategoryAdapter
 
 
         @SuppressLint("SuspiciousIndentation")
-        fun setData(data: CategoryModel.CategoryData) {
+        fun setData(data: com.muratcangzm.models.remote.giphy.CategoryModel.CategoryData) {
 
             with(binding) {
 

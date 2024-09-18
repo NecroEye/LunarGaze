@@ -84,13 +84,13 @@
         <!--suppress NavigationFile -->
         <argument
             android:name="imageData"
-            app:argType="com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel$ChannelData"
+            app:argType="com.muratcangzm.models.remote.giphy.ChannelModel$ChannelData"
             app:nullable="true"
             android:defaultValue="@null" />
         <!--suppress NavigationFile -->
         <argument
             android:name="roomModelData"
-            app:argType="com.muratcangzm.lunargaze.models.local.FavoriteModel"
+            app:argType="com.muratcangzm.models.local.FavoriteModel"
             app:nullable="true"
             android:defaultValue="@null" />
         <action
@@ -117,7 +117,7 @@
         <!--suppress NavigationFile -->
         <argument
             android:name="roomData"
-            app:argType="com.muratcangzm.lunargaze.models.local.FavoriteModel[]" />
+            app:argType="com.muratcangzm.models.local.FavoriteModel[]" />
         <action
             android:id="@+id/action_favoritedImageFragment_to_fullScreenImageFragment2"
             app:destination="@id/fullScreenImageFragment" />

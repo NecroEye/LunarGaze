@@ -1,7 +1,7 @@
 package com.muratcangzm.lunargaze.viewmodels
 
 import androidx.lifecycle.viewModelScope
-import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
+import com.muratcangzm.models.remote.giphy.ChannelModel
 import com.muratcangzm.lunargaze.repository.remote.GiphyRepo
 import com.muratcangzm.lunargaze.viewmodels.core.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,8 +21,8 @@ constructor(
     private val giphyRepo: GiphyRepo,
 ) : BaseViewModel() {
 
-    private val _mutableChannelResult = MutableStateFlow<ChannelModel?>(null)
-    val channelResult: StateFlow<ChannelModel?>
+    private val _mutableChannelResult = MutableStateFlow<com.muratcangzm.models.remote.giphy.ChannelModel?>(null)
+    val channelResult: StateFlow<com.muratcangzm.models.remote.giphy.ChannelModel?>
         get() = _mutableChannelResult.asStateFlow()
 
     private val _mutableDataLoading = MutableStateFlow<Boolean>(false)

@@ -20,8 +20,7 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.muratcangzm.lunargaze.R
-import com.muratcangzm.lunargaze.models.local.FavoriteDao
-import com.muratcangzm.lunargaze.models.local.FavoriteDatabase
+import com.muratcangzm.models.local.FavoriteDatabase
 import com.muratcangzm.lunargaze.repository.local.FavoriteRepo
 import com.muratcangzm.lunargaze.repository.remote.GiphyRepo
 import com.muratcangzm.lunargaze.repository.remote.TenorRepo
@@ -88,7 +87,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideFavoriteRepo(dao: FavoriteDao): FavoriteRepo {
+    fun provideFavoriteRepo(dao: com.muratcangzm.models.local.FavoriteDao): FavoriteRepo {
         return FavoriteRepo(dao)
     }
 
@@ -112,7 +111,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDao(favoriteDatabase: FavoriteDatabase): FavoriteDao {
+    fun provideDao(favoriteDatabase: FavoriteDatabase): com.muratcangzm.models.local.FavoriteDao {
         return favoriteDatabase.getDao()
     }
 

@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "LunarGaze"
 include(":app")
+include(":core:model")

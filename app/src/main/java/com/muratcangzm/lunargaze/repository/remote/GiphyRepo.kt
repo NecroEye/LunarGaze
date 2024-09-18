@@ -3,9 +3,9 @@ package com.muratcangzm.lunargaze.repository.remote
 import com.muratcangzm.lunargaze.common.DataResponse
 import com.muratcangzm.lunargaze.common.utils.IoDispatcher
 import com.muratcangzm.lunargaze.common.utils.log
-import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
-import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
-import com.muratcangzm.lunargaze.models.remote.giphy.SearchModel
+import com.muratcangzm.models.remote.giphy.CategoryModel
+import com.muratcangzm.models.remote.giphy.ChannelModel
+import com.muratcangzm.models.remote.giphy.SearchModel
 import com.muratcangzm.lunargaze.service.GiphyAPI
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -21,9 +21,9 @@ class GiphyRepo @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
 
-    private var categoryCache: DataResponse<CategoryModel>? = null
+    private var categoryCache: DataResponse<com.muratcangzm.models.remote.giphy.CategoryModel>? = null
 
-    suspend fun fetchCategories(): Flow<DataResponse<CategoryModel>> = flow {
+    suspend fun fetchCategories(): Flow<DataResponse<com.muratcangzm.models.remote.giphy.CategoryModel>> = flow {
 
         categoryCache?.let {
             emit(it)
@@ -51,7 +51,7 @@ class GiphyRepo @Inject constructor(
         if (categoryCache != null) categoryCache = null
     }
 
-    suspend fun fetchChannels(search: String, offset: Int?): Flow<DataResponse<ChannelModel>> =
+    suspend fun fetchChannels(search: String, offset: Int?): Flow<DataResponse<com.muratcangzm.models.remote.giphy.ChannelModel>> =
         flow {
             try {
                 val response = api.getChannels(query = search, offset = offset)
@@ -64,7 +64,7 @@ class GiphyRepo @Inject constructor(
             }
         }.flowOn(ioDispatcher)
 
-    suspend fun fetchSearch(search: String): Flow<DataResponse<SearchModel>> = flow {
+    suspend fun fetchSearch(search: String): Flow<DataResponse<com.muratcangzm.models.remote.giphy.SearchModel>> = flow {
         try {
             val response = api.getSearch(query = search)
 

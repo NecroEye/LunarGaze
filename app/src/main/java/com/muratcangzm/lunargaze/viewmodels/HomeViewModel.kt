@@ -1,8 +1,8 @@
 package com.muratcangzm.lunargaze.viewmodels
 
 import androidx.lifecycle.viewModelScope
-import com.muratcangzm.lunargaze.models.remote.giphy.CategoryModel
-import com.muratcangzm.lunargaze.models.remote.tenor.TenorCategoryModel
+import com.muratcangzm.models.remote.giphy.CategoryModel
+import com.muratcangzm.models.remote.tenor.TenorCategoryModel
 import com.muratcangzm.lunargaze.repository.remote.GiphyRepo
 import com.muratcangzm.lunargaze.repository.remote.TenorRepo
 import com.muratcangzm.lunargaze.viewmodels.core.BaseViewModel
@@ -23,12 +23,12 @@ constructor(
     private val tenorRepo: TenorRepo
 ) : BaseViewModel() {
 
-    private var _tenorCategoryResult = MutableStateFlow<TenorCategoryModel?>(null)
-    val tenorCategoryResult: StateFlow<TenorCategoryModel?>
+    private var _tenorCategoryResult = MutableStateFlow<com.muratcangzm.models.remote.tenor.TenorCategoryModel?>(null)
+    val tenorCategoryResult: StateFlow<com.muratcangzm.models.remote.tenor.TenorCategoryModel?>
         get() = _tenorCategoryResult.asStateFlow()
 
-    private val _categoriesResult = MutableStateFlow<CategoryModel?>(null)
-    val categoriesResult: StateFlow<CategoryModel?>
+    private val _categoriesResult = MutableStateFlow<com.muratcangzm.models.remote.giphy.CategoryModel?>(null)
+    val categoriesResult: StateFlow<com.muratcangzm.models.remote.giphy.CategoryModel?>
         get() = _categoriesResult.asStateFlow()
 
     private val _mutableDataLoading = MutableStateFlow(false)

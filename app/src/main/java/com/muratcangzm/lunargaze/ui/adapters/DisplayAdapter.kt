@@ -17,7 +17,7 @@ import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.DisplayAdapterFragmentBinding
 import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
-import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
+import com.muratcangzm.models.remote.giphy.ChannelModel
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 import kotlin.jvm.Throws
@@ -31,7 +31,7 @@ constructor(
 ) : RecyclerView.Adapter<DisplayAdapter.DisplayHolder>() {
 
     private lateinit var binding: DisplayAdapterFragmentBinding
-    private var channelModels = mutableListOf<ChannelModel.ChannelData>()
+    private var channelModels = mutableListOf<com.muratcangzm.models.remote.giphy.ChannelModel.ChannelData>()
     private var currentFragment: Fragment? = null
     private var  componentCallbacks: ComponentCallbacks2? = null
 
@@ -59,7 +59,7 @@ constructor(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitData(mutableChannels: MutableList<ChannelModel.ChannelData>, fragment: Fragment) {
+    fun submitData(mutableChannels: MutableList<com.muratcangzm.models.remote.giphy.ChannelModel.ChannelData>, fragment: Fragment) {
 
         currentFragment = fragment
 
@@ -73,7 +73,7 @@ constructor(
     inner class DisplayHolder() : RecyclerView.ViewHolder(binding.root) {
 
 
-        fun setData(data: ChannelModel.ChannelData) {
+        fun setData(data: com.muratcangzm.models.remote.giphy.ChannelModel.ChannelData) {
 
             val navController = findNavController(currentFragment!!)
             val currentDestination = navController.currentDestination

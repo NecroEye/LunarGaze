@@ -16,7 +16,7 @@ import com.bumptech.glide.RequestManager
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.DisplayAdapterFragmentBinding
 import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
-import com.muratcangzm.lunargaze.models.local.FavoriteModel
+import com.muratcangzm.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.repository.local.FavoriteRepo
 import dagger.hilt.android.qualifiers.ActivityContext
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -37,7 +37,7 @@ constructor(
     RecyclerView.Adapter<BookMarkFileAdapter.BookMarkFileHolder>() {
 
     private lateinit var binding: DisplayAdapterFragmentBinding
-    private var roomList = emptyArray<FavoriteModel>()
+    private var roomList = emptyArray<com.muratcangzm.models.local.FavoriteModel>()
     private var compositeDisposable = CompositeDisposable()
     private var disposable: Disposable? = null
     private var componentCallbacks: ComponentCallbacks2? = null
@@ -66,7 +66,7 @@ constructor(
 
 
         @SuppressLint("NotifyDataSetChanged")
-        fun setData(favoriteModel: FavoriteModel, position: Int) {
+        fun setData(favoriteModel: com.muratcangzm.models.local.FavoriteModel, position: Int) {
 
             with(binding) {
 
@@ -123,8 +123,8 @@ constructor(
     }
 
     inner class BookMarkDiffCallback(
-        private val oldList: Array<FavoriteModel>,
-        private val newList: Array<FavoriteModel>
+        private val oldList: Array<com.muratcangzm.models.local.FavoriteModel>,
+        private val newList: Array<com.muratcangzm.models.local.FavoriteModel>
     ) : DiffUtil.Callback() {
 
         override fun getOldListSize(): Int = oldList.size
@@ -145,7 +145,7 @@ constructor(
         }
     }
 
-    fun bindRoomArray(array: Array<FavoriteModel>) {
+    fun bindRoomArray(array: Array<com.muratcangzm.models.local.FavoriteModel>) {
         val diffResult = DiffUtil.calculateDiff(
             BookMarkDiffCallback(roomList, array),
             true // Batch updates for better performance

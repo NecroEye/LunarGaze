@@ -18,7 +18,7 @@ import com.muratcangzm.lunargaze.databinding.FragmentSearchDisplayBinding
 import com.muratcangzm.lunargaze.extensions.goneView
 import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showView
-import com.muratcangzm.lunargaze.models.remote.giphy.ChannelModel
+import com.muratcangzm.models.remote.giphy.ChannelModel
 import com.muratcangzm.lunargaze.ui.adapters.DisplayAdapter
 import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -123,9 +123,9 @@ class SearchDisplayFragment : Fragment() {
     }
 
     //Cannot get more than 50 because of call limit
-    private fun randomizer(channelModel: ChannelModel) {
+    private fun randomizer(channelModel: com.muratcangzm.models.remote.giphy.ChannelModel) {
 
-        val randomModel = mutableListOf<ChannelModel.ChannelData>()
+        val randomModel = mutableListOf<com.muratcangzm.models.remote.giphy.ChannelModel.ChannelData>()
 
         repeat(50) {
 

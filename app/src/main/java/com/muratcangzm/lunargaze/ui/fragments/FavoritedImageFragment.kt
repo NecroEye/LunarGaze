@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.muratcangzm.lunargaze.databinding.FavoritedImageLayoutBinding
 import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.showView
-import com.muratcangzm.lunargaze.models.local.FavoriteModel
+import com.muratcangzm.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.ui.adapters.BookMarkFileAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -41,7 +41,7 @@ class FavoritedImageFragment : Fragment() {
         _binding = FavoritedImageLayoutBinding.inflate(inflater, container, false)
 
         val receivedData =
-            requireArguments().getParcelableArray("roomData") as Array<FavoriteModel>?
+            requireArguments().getParcelableArray("roomData") as Array<com.muratcangzm.models.local.FavoriteModel>?
 
         Timber.tag(TAG).d("Yerel Data: ${receivedData?.size}")
 
