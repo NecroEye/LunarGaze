@@ -114,4 +114,6 @@ dependencies {
     coreLibraryDesugaring(libs.desugare)
 }
 
-ksp {}
+ksp {
+    arg("room.schemaLocation", "${projectDir}/schemas")
+}
