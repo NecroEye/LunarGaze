@@ -14,6 +14,7 @@ import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
 import com.muratcangzm.models.local.FavoriteModel
 import com.muratcangzm.lunargaze.repository.local.DataStoreRepo
 import com.muratcangzm.lunargaze.repository.local.FavoriteRepo
+import com.muratcangzm.lunargaze.repository.local.FavoriteRepoImpl
 import com.muratcangzm.lunargaze.ui.fragments.FavoritesFragmentDirections
 import dagger.hilt.android.qualifiers.ActivityContext
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -30,14 +31,14 @@ class FavoriteFileAdapter
 constructor(
     @ActivityContext private val context: Context,
     private val dataStoreRepo: DataStoreRepo,
-    private val repo: FavoriteRepo,
-    private val favoriteRepo: FavoriteRepo
+    private val repo: FavoriteRepoImpl,
+    private val favoriteRepo: FavoriteRepoImpl
 ) :
     RecyclerView.Adapter<FavoriteFileAdapter.FavFileHolder>() {
 
     private lateinit var binding: FavoriteFolderLayoutBinding
     private var emptyFileName = emptyList<String>()
-    private var deletedOnes = emptyList<com.muratcangzm.models.local.FavoriteModel>()
+    private var deletedOnes = emptyList<FavoriteModel>()
     private var disposable: Disposable? = null
 
 
@@ -100,7 +101,6 @@ constructor(
                             { error ->
                                 error.localizedMessage?.let { Timber.tag("Bütün oda: ").d(it) }
                             })
-
                 }
 
                 fileCard.setOnLongClickListener {

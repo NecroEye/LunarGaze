@@ -32,7 +32,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class FavoritesFragment : Fragment() {
 
-
     private var _binding: FavoritesFragmentLayoutBinding? = null
     private val binding
             by lazy(LazyThreadSafetyMode.NONE) {
@@ -60,9 +59,7 @@ class FavoritesFragment : Fragment() {
     }
 
     init {
-
         //Empty Constructor
-
     }
 
     override fun onCreateView(
@@ -108,7 +105,6 @@ class FavoritesFragment : Fragment() {
         binding.favButton.setSafeOnClickListener {
             showPopUp()
         }
-
         return binding.root
     }
 
@@ -175,12 +171,8 @@ class FavoritesFragment : Fragment() {
                 binding.lottieArrow.hideView()
                 binding.emptyFavFileText.hideView()
             }
-
-
-
             alertDialog?.dismiss()
         }
-
     }
 
 
@@ -193,5 +185,4 @@ class FavoritesFragment : Fragment() {
         stringList = null
 
     }
-
 }

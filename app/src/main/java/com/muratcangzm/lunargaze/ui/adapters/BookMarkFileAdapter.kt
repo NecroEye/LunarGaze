@@ -17,7 +17,7 @@ import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.databinding.DisplayAdapterFragmentBinding
 import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
 import com.muratcangzm.models.local.FavoriteModel
-import com.muratcangzm.lunargaze.repository.local.FavoriteRepo
+import com.muratcangzm.lunargaze.repository.local.FavoriteRepoImpl
 import dagger.hilt.android.qualifiers.ActivityContext
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -32,12 +32,12 @@ class BookMarkFileAdapter
 constructor(
     @ActivityContext private val context: Context,
     private val glide: RequestManager,
-    private val favoriteRepo: FavoriteRepo
+    private val favoriteRepo: FavoriteRepoImpl
 ) :
     RecyclerView.Adapter<BookMarkFileAdapter.BookMarkFileHolder>() {
 
     private lateinit var binding: DisplayAdapterFragmentBinding
-    private var roomList = emptyArray<com.muratcangzm.models.local.FavoriteModel>()
+    private var roomList = emptyArray<FavoriteModel>()
     private var compositeDisposable = CompositeDisposable()
     private var disposable: Disposable? = null
     private var componentCallbacks: ComponentCallbacks2? = null
@@ -66,7 +66,7 @@ constructor(
 
 
         @SuppressLint("NotifyDataSetChanged")
-        fun setData(favoriteModel: com.muratcangzm.models.local.FavoriteModel, position: Int) {
+        fun setData(favoriteModel: FavoriteModel, position: Int) {
 
             with(binding) {
 
@@ -123,8 +123,8 @@ constructor(
     }
 
     inner class BookMarkDiffCallback(
-        private val oldList: Array<com.muratcangzm.models.local.FavoriteModel>,
-        private val newList: Array<com.muratcangzm.models.local.FavoriteModel>
+        private val oldList: Array<FavoriteModel>,
+        private val newList: Array<FavoriteModel>
     ) : DiffUtil.Callback() {
 
         override fun getOldListSize(): Int = oldList.size
@@ -145,7 +145,7 @@ constructor(
         }
     }
 
-    fun bindRoomArray(array: Array<com.muratcangzm.models.local.FavoriteModel>) {
+    fun bindRoomArray(array: Array<FavoriteModel>) {
         val diffResult = DiffUtil.calculateDiff(
             BookMarkDiffCallback(roomList, array),
             true // Batch updates for better performance

@@ -39,7 +39,7 @@ import com.muratcangzm.lunargaze.extensions.tost
 import com.muratcangzm.lunargaze.helper.Downloader
 import com.muratcangzm.models.local.FavoriteModel
 import com.muratcangzm.models.remote.giphy.ChannelModel
-import com.muratcangzm.lunargaze.repository.local.FavoriteRepo
+import com.muratcangzm.lunargaze.repository.local.FavoriteRepoImpl
 import com.muratcangzm.lunargaze.ui.adapters.RadioButtonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -61,7 +61,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
     lateinit var radioAdapter: RadioButtonAdapter
 
     @Inject
-    lateinit var favoriteRepo: FavoriteRepo
+    lateinit var favoriteRepo: FavoriteRepoImpl
 
     private var receivedData: ChannelModel.ChannelData? = null
     private var roomData: FavoriteModel? = null

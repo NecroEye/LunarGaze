@@ -30,7 +30,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     }
-
+    @Suppress("UnstableApiUsage")
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
@@ -39,6 +39,7 @@ android {
 
             buildConfigField("String", "GIPHY_KEY", localProperties.getProperty("GIPHY_KEY"))
             buildConfigField("String", "TENOR_KEY", localProperties.getProperty("TENOR_KEY"))
+            buildConfigField("String", "OPEN_AI_KEY", localProperties.getProperty("OPEN_AI_KEY"))
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -53,6 +54,7 @@ android {
 
             buildConfigField("String", "GIPHY_KEY", localProperties.getProperty("GIPHY_KEY"))
             buildConfigField("String", "TENOR_KEY", localProperties.getProperty("TENOR_KEY"))
+            buildConfigField("String", "OPEN_AI_KEY", localProperties.getProperty("OPEN_AI_KEY"))
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -69,13 +71,13 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_21.toString()
     }
-
+    @Suppress("UnstableApiUsage")
     buildFeatures(Action<ApplicationBuildFeatures> {
         viewBinding = true
         dataBinding = true
         buildConfig = true
     })
-
+    @Suppress("UnstableApiUsage")
     lint {
         disable.add("MissingTranslation")
     }
@@ -105,6 +107,7 @@ dependencies {
     implementation(libs.bundles.google.auth)
     implementation(libs.timber)
     implementation(libs.truth)
+    implementation(libs.androidx.security.crypto)
     testImplementation(libs.mockito.core)
     testImplementation(libs.kotlin.coroutines.test)
     testImplementation(libs.mockito.kotlin)
@@ -114,6 +117,4 @@ dependencies {
     coreLibraryDesugaring(libs.desugare)
 }
 
-ksp {
-    arg("room.schemaLocation", "${projectDir}/schemas")
-}
+ksp { arg("room.schemaLocation", "${projectDir}/schemas") }

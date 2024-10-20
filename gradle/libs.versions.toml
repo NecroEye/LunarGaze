@@ -4,7 +4,7 @@ constraintlayout = "2.1.4"
 coreKtx = "1.13.1"
 coreSplashscreen = "1.0.1"
 datastore = "1.1.1"
-firebaseAnalytics = "22.1.0"
+firebaseAnalytics = "22.1.2"
 glide = "4.16.0"
 googleServices = "4.4.2"
 junit = "4.13.2"
@@ -13,8 +13,8 @@ lifecycleViewmodelKtx = "2.8.6"
 lottieVersion = "6.5.2"
 material = "1.12.0"
 espresso = "3.6.1"
-navigationFragmentKtx = "2.8.1"
-navigationUiKtx = "2.8.1"
+navigationFragmentKtx = "2.8.3"
+navigationUiKtx = "2.8.3"
 okhttp = "4.12.0"
 retrofit = "2.11.0"
 roomRuntime = "2.6.1"
@@ -22,7 +22,7 @@ ksp = "2.0.20-1.0.25"
 rxandroid = "3.0.2"
 rxjava = "3.1.9"
 timberVersion = "5.0.1"
-androidApp = "8.4.2"
+androidApp = "8.7.1"
 androidLib = "8.1.4"
 kotlinAndroid = "2.0.20"
 viewPager = "1.1.0"
@@ -30,19 +30,20 @@ pagingVersion = "3.3.2"
 okhttpLoggingVersion = "4.12.0"
 playServiceAuth = "21.2.0"
 playServiceAuthPhone = "18.1.0"
-playReview = "2.0.1"
+playReview = "2.0.2"
 hilt = "2.52"
 hiltCompiler = "2.52"
 mockitoVersion = "4.7.0"
 truthVersion = "1.1.4"
 hiltTestingVersion = "2.44"
-kotlinCoroutineVersion = "1.8.0"
+kotlinCoroutineVersion = "1.8.1"
 mockitoKotlinVersion = "4.0.0"
-fragmentTestVersion = "1.8.3"
-safeNavigation = "2.8.1"
+fragmentTestVersion = "1.8.4"
+safeNavigation = "2.8.3"
 desugareVersion = "2.1.2"
-facebooksdkVersion = "17.0.1"
+facebooksdkVersion = "17.0.2"
 awsSdkVersion = "2.77.0"
+security = "1.0.0"
 
 [libraries]
 
@@ -89,6 +90,9 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics", versio
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 androidx-datastore-rxjava3 = { module = "androidx.datastore:datastore-rxjava3", version.ref = "datastore" }
+
+#Preference Security & Encryption
+androidx-security-crypto = {module = "androidx.security:security-crypto", version.ref = "security" }
 
 #UI - Glide, Lottie, Paging, ViewPager and SplashScreen
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottieVersion" }

@@ -8,6 +8,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.SharedPreferencesMigration
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -30,6 +31,10 @@ import com.muratcangzm.lunargaze.common.utils.Constants
 import com.muratcangzm.lunargaze.common.utils.DefaultDispatcher
 import com.muratcangzm.lunargaze.common.utils.IoDispatcher
 import com.muratcangzm.lunargaze.common.utils.MainDispatcher
+import com.muratcangzm.lunargaze.helper.EncryptionHelper
+import com.muratcangzm.lunargaze.repository.local.DataStoreRepo
+import com.muratcangzm.lunargaze.repository.local.DataStoreRepoImpl
+import com.muratcangzm.lunargaze.repository.local.FavoriteRepoImpl
 import com.muratcangzm.lunargaze.viewmodels.HomeViewModel
 import com.muratcangzm.lunargaze.viewmodels.ViewModelFactory
 import dagger.Module
@@ -87,14 +92,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideFavoriteRepo(dao: com.muratcangzm.models.local.FavoriteDao): FavoriteRepo {
-        return FavoriteRepo(dao)
+    fun provideFavoriteRepo(dao: com.muratcangzm.models.local.FavoriteDao): FavoriteRepoImpl {
+        return FavoriteRepoImpl(dao)
     }
 
     @Provides
     @Singleton
     fun provideHomeViewModel(repo: GiphyRepo, tenorRepo: TenorRepo): HomeViewModel {
-
         return HomeViewModel(repo, tenorRepo)
     }
 
@@ -103,7 +107,7 @@ object AppModule {
     fun provideRoom(@ApplicationContext context: Context): FavoriteDatabase = Room.databaseBuilder(
         context,
         FavoriteDatabase::class.java,
-        "db"
+        "lunar_db"
     )
         .fallbackToDestructiveMigration()
         .build()
@@ -135,10 +139,9 @@ object AppModule {
         return context.getSharedPreferences(Constants.SHARED_DB_NAME, Context.MODE_PRIVATE)
     }
 
-
     @Provides
     @Singleton
-    fun provideDataStore(@ApplicationContext context: Context): DataStore<androidx.datastore.preferences.core.Preferences> {
+    fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
             corruptionHandler = ReplaceFileCorruptionHandler(
                 produceNewData = { emptyPreferences() }
@@ -151,9 +154,22 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideDataStoreRepo(
+        dataStore: DataStore<Preferences>,
+        encryptionHelper: EncryptionHelper
+    ): DataStoreRepo {
+        return DataStoreRepoImpl(dataStore, encryptionHelper)
+    }
+
+    @Provides
+    @Singleton
     fun provideNavController(@ActivityContext activity: Activity): NavController {
         return Navigation.findNavController(activity, R.id.fragmentContainerView)
     }
+
+    @Provides
+    @Singleton
+    fun provideEncryptionHelper(@ApplicationContext context: Context) = EncryptionHelper(context)
 
     @Provides
     @Singleton
@@ -163,7 +179,6 @@ object AppModule {
     ): ViewModelProvider.Factory {
         return ViewModelFactory.provideFactory(giphyRepo, tenorRepo)
     }
-
 }
 
 
