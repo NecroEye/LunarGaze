@@ -12,23 +12,29 @@ import javax.inject.Inject
 
 class DataStoreRepoImpl @Inject constructor(
     private val dataStore: DataStore<Preferences>,
-    private val encryptionHelper: EncryptionHelper
+    private val encryptionHelper: EncryptionHelper // Inject the EncryptionHelper for encryption/decryption
 ) : DataStoreRepo {
 
     override suspend fun saveDataStore(key: String, value: String) {
         val transformedKey = stringPreferencesKey(key)
+
+        // Encrypt the value using EncryptionHelper
         val encryptedValue = encryptionHelper.encrypt(value)
 
-        dataStore.edit { preference ->
-            preference[transformedKey] = encryptedValue
+        // Save the encrypted value to DataStore
+        dataStore.edit { preferences ->
+            preferences[transformedKey] = encryptedValue
         }
     }
 
     override suspend fun readDataStore(key: String): String? {
         val transformedKey = stringPreferencesKey(key)
-        val preference = dataStore.data.first()
+        val preferences = dataStore.data.first()
 
-        return preference[transformedKey]?.let { encryptionHelper.decrypt(it) }
+        // Retrieve and decrypt the value from DataStore
+        return preferences[transformedKey]?.let { encryptedValue ->
+            encryptionHelper.decrypt(encryptedValue)
+        }
     }
 
     override suspend fun getAllKeys(): Set<Preferences.Key<*>>? {
@@ -39,41 +45,39 @@ class DataStoreRepoImpl @Inject constructor(
     }
 
     override suspend fun getAllValues(): Collection<String>? {
-        val values = dataStore.data
-            .map { preferences ->
-                preferences.asMap().values.mapNotNull { encryptedValue ->
-                    if (encryptedValue is String) {
+        return try {
+            dataStore.data
+                .map { preferences ->
+                    preferences.asMap().values.mapNotNull { value ->
+                        // Decrypt each value in the preferences
                         try {
-                            encryptionHelper.decrypt(encryptedValue)
+                            (value as? String?).let { encryptionHelper.decrypt(it!!) }
                         } catch (e: IllegalArgumentException) {
                             null
                         }
-                    } else {
-                        null
                     }
                 }
-            }
-
-        return values.firstOrNull()
+                .firstOrNull()
+        } catch (e: Exception) {
+            null
+        }
     }
 
     override suspend fun getValueByKey(key: Preferences.Key<String>): String? {
-        val value = dataStore.data
-            .map { it[key] }
-
-        return value.firstOrNull()
+        val preferences = dataStore.data.first()
+        return preferences[key]?.let { encryptionHelper.decrypt(it) }
     }
 
     override suspend fun deleteNameFromPreferences(key: String) {
         val transformedKey = stringPreferencesKey(key)
-        dataStore.edit { preference ->
-            preference.remove(transformedKey)
+        dataStore.edit { preferences ->
+            preferences.remove(transformedKey)
         }
     }
 
     override suspend fun deleteAllPreferences() {
-        dataStore.edit { preference ->
-            preference.clear()
+        dataStore.edit { preferences ->
+            preferences.clear()
         }
     }
 }

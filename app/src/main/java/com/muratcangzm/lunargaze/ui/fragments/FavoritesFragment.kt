@@ -149,7 +149,6 @@ class FavoritesFragment : Fragment() {
         saveButton.setSafeOnClickListener {
 
             if (input.text.toString().isNotEmpty()) {
-
                 viewLifecycleOwner.lifecycleScope.launch {
                     withContext(Dispatchers.IO) {
                         dataStoreRepo.saveDataStore(
@@ -159,8 +158,10 @@ class FavoritesFragment : Fragment() {
                     }
                 }
 
-                val updatedList = stringList!!.toMutableList().apply { add(input.text.toString()) }
-                favoriteFileAdapter.submitFileNames(updatedList)
+                val updatedList = stringList?.toMutableList()?.apply { add(input.text.toString()) }
+                if (updatedList != null) {
+                    favoriteFileAdapter.submitFileNames(updatedList)
+                }
 
                 Toast.makeText(
                     requireContext(),
