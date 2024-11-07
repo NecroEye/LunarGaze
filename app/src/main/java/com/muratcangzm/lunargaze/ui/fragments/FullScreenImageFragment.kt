@@ -100,11 +100,9 @@ class FullScreenImageFragment : Fragment(), Downloader {
         scaleGestureDetector =
             ScaleGestureDetector(requireContext(), ScaleListener(binding.fullScreenImage))
 
-
         setUIComponent()
 
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
