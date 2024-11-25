@@ -14,7 +14,6 @@ import javax.crypto.spec.SecretKeySpec
 class EncryptionHelper(context: Context) {
 
     private var sharedPreferences: SharedPreferences
-
     private val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
     init {

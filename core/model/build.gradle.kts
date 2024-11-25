@@ -45,8 +45,13 @@ android {
 dependencies {
 
     implementation(libs.bundles.androidx)
+    testImplementation(libs.arch.core)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.room.testing)
+    androidTestImplementation(libs.truth)
+    androidTestImplementation(libs.mockito.core)
+    androidTestImplementation(libs.mockito.android)
     ksp(libs.androidx.room.compiler)
     ksp(libs.hilt.compiler)
     implementation(libs.dagger.hilt)

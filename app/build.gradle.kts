@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 android {
@@ -30,7 +31,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     }
-    @Suppress("UnstableApiUsage")
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
@@ -71,13 +72,13 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_21.toString()
     }
-    @Suppress("UnstableApiUsage")
+
     buildFeatures(Action<ApplicationBuildFeatures> {
         viewBinding = true
         dataBinding = true
         buildConfig = true
     })
-    @Suppress("UnstableApiUsage")
+
     lint {
         disable.add("MissingTranslation")
     }
@@ -85,6 +86,7 @@ android {
     hilt {
         enableAggregatingTask = true
     }
+
 }
 
 dependencies {
