@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -30,7 +31,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
 
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -48,11 +48,9 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
     override val layoutId: Int
         get() = R.layout.home_fragment_layout
 
-
     companion object {
         private const val TAG = "HomeFragment"
     }
-
 
     init {
         //Empty Constructor
@@ -60,6 +58,7 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressed)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -116,27 +115,22 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
                             }
                         }
                     }
-
                 }
             }
         } else {
             binding.loadingScreen.loadingScreenLayout.showView()
             binding.categoryRecycler.goneView()
-
         }
     }
 
     //TODO: while downloading picture or gif add a progress bar
     private fun setupViews() {
-
         binding.categoryRecycler.apply {
-
             layoutManager = GridLayoutManager(
                 requireContext(), 2, RecyclerView.VERTICAL, false
             )
             adapter = categoryAdapter
             hasFixedSize()
-
 
             binding.categoryRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -149,15 +143,18 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
                     } else if (dy < 0) {
                         bottomNavigation.animate().translationY(0f).duration = 300
                     }
-
                 }
             })
-
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+    }
 
+    private val onBackPressed = object : OnBackPressedCallback(enabled = true){
+        override fun handleOnBackPressed() {
+            TODO("Not yet implemented")
+        }
     }
 }

@@ -24,6 +24,7 @@ import android.content.Context
 import android.view.ScaleGestureDetector
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.net.toUri
 import androidx.navigation.fragment.navArgs
@@ -93,15 +94,13 @@ class FullScreenImageFragment : Fragment(), Downloader {
     ): View {
 
         _binding = ImageFullscreenLayoutBinding.inflate(inflater, container, false)
-
         receivedData = args.imageData
         roomData = args.roomModelData
-
         scaleGestureDetector =
             ScaleGestureDetector(requireContext(), ScaleListener(binding.fullScreenImage))
 
         setUIComponent()
-
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressed)
         return binding.root
     }
 
@@ -213,7 +212,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
 
             }
-
         }
     }
 
@@ -223,7 +221,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
     ) {
 
         if (hasStoragePermission()) {
-
             channelModel?.let {
 
                 val type = it.user!!.avatarUrl!!.substring(it.user?.avatarUrl!!.length - 3)
@@ -398,5 +395,11 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
         compositeDisposable.dispose()
 
+    }
+
+    private val onBackPressed = object : OnBackPressedCallback(enabled = true) {
+        override fun handleOnBackPressed() {
+            TODO("Not yet implemented")
+        }
     }
 }
