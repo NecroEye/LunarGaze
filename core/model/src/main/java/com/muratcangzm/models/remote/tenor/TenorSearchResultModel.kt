@@ -2,7 +2,9 @@ package com.muratcangzm.models.remote.tenor
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import javax.annotation.concurrent.Immutable
 
+@Immutable
 data class TenorSearchResultModel(
     @Expose
     @SerializedName("id")

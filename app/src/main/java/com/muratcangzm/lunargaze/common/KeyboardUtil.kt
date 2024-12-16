@@ -22,5 +22,4 @@ object KeyboardUtil {
         view.requestFocus()
         inputMethodManager.showSoftInput(view, 0)
     }
-
 }

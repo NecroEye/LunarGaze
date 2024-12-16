@@ -2,7 +2,9 @@ package com.muratcangzm.models.remote.giphy
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import javax.annotation.concurrent.Immutable
 
+@Immutable
 data class CategoryModel(
     @SerializedName("data")
     @Expose

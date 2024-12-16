@@ -14,7 +14,6 @@ class DownloadCompletedReceiver: BroadcastReceiver() {
 
         downloadManager = context?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
-
         if(intent?.action == "android.intent.action.DOWNLOAD_COMPLETE"){
 
             val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1L)
@@ -24,6 +23,5 @@ class DownloadCompletedReceiver: BroadcastReceiver() {
                 Timber.tag("Download Completed").d("Download Completed")
             }
         }
-
     }
 }

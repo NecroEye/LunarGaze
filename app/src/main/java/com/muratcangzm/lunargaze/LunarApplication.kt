@@ -13,6 +13,5 @@ class LunarApplication : Application() {
 
         if (Constants.DEBUG)
             Timber.plant(Timber.DebugTree())
-
     }
 }

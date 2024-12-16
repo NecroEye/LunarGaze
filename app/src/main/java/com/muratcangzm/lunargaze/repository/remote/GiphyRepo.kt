@@ -51,7 +51,7 @@ class GiphyRepo @Inject constructor(
         if (categoryCache != null) categoryCache = null
     }
 
-    suspend fun fetchChannels(search: String, offset: Int?): Flow<DataResponse<com.muratcangzm.models.remote.giphy.ChannelModel>> =
+    suspend fun fetchChannels(search: String, offset: Int?): Flow<DataResponse<ChannelModel>> =
         flow {
             try {
                 val response = api.getChannels(query = search, offset = offset)
@@ -64,7 +64,7 @@ class GiphyRepo @Inject constructor(
             }
         }.flowOn(ioDispatcher)
 
-    suspend fun fetchSearch(search: String): Flow<DataResponse<com.muratcangzm.models.remote.giphy.SearchModel>> = flow {
+    suspend fun fetchSearch(search: String): Flow<DataResponse<SearchModel>> = flow {
         try {
             val response = api.getSearch(query = search)
 

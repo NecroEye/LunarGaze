@@ -36,7 +36,6 @@ constructor(@ActivityContext private val context: Context) {
 
     }
 
-
     fun getMobileSpeed() : Pair<Int?, Int?>{
 
         val connectivity = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -47,5 +46,4 @@ constructor(@ActivityContext private val context: Context) {
 
         return Pair(downSpeed, upSpeed)
     }
-
 }

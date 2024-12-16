@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class DataStoreRepoImpl @Inject constructor(
     private val dataStore: DataStore<Preferences>,
-    private val encryptionHelper: EncryptionHelper // Inject the EncryptionHelper for encryption/decryption
+    private val encryptionHelper: EncryptionHelper
 ) : DataStoreRepo {
 
     override suspend fun saveDataStore(key: String, value: String) {
