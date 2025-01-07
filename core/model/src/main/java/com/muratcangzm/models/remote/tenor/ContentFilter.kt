@@ -6,5 +6,4 @@ enum class ContentFilter {
     low,
     medium,
     high;
-
 }

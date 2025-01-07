@@ -27,3 +27,7 @@ inline fun <T> tryOrLog(block: () -> T) {
         Timber.e(e.message.orEmpty())
     }
 }
+@Suppress("UNCHECKED_CAST")
+fun <T> safeCast(value: Any?): T? {
+    return value as? T
+}

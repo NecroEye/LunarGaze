@@ -76,7 +76,7 @@ class FullScreenImageFragment : Fragment(), Downloader {
     private var compositeDisposable = CompositeDisposable()
     private val args: FullScreenImageFragmentArgs by navArgs()
 
-    private val downloadManager by lazy { requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager }
+    private val downloadManager by lazy(LazyThreadSafetyMode.NONE) { requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager }
 
     companion object {
         private const val REQUEST_CODE = 1
