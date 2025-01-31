@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.muratcangzm.lunargaze.R
 import com.muratcangzm.lunargaze.common.NetworkChecking
@@ -21,7 +23,6 @@ import com.muratcangzm.lunargaze.viewmodels.DisplayViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -45,7 +46,7 @@ class DisplayFragment : BaseFragment<DisplayFragmentLayoutBinding>() {
         get() = R.layout.display_fragment_layout
 
 
-    companion object{
+    companion object {
         private const val TAG = "DisplayFragment"
     }
 
@@ -86,23 +87,20 @@ class DisplayFragment : BaseFragment<DisplayFragmentLayoutBinding>() {
 
     @SuppressLint("SetTextI18n", "SuspiciousIndentation")
     private fun observeDataChange() {
+        lifecycleScope.launch(exceptionHandler) {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.channelResult.collectLatest {
+                    it?.let { result ->
+                        if (result.pagination!!.totalCount == 0) {
+                            binding.displayEmptyText.showView()
 
-        viewLifecycleOwner.lifecycleScope.launch(exceptionHandler) {
-            viewModel.channelResult.collectLatest {
-
-                it?.let { result ->
-
-                    if (result.pagination!!.totalCount == 0) {
-                        binding.displayEmptyText.showView()
-
-                    } else {
-                        displayAdapter.submitData(
-                            result.channelData!!.toMutableList(),
-                            this@DisplayFragment
-                        )
-                        Timber.tag(TAG).d("Gelen Data ${result.pagination!!.totalCount}")
-
-                        binding.displayEmptyText.hideView()
+                        } else {
+                            displayAdapter.submitData(
+                                result.channelData!!.toMutableList(),
+                                this@DisplayFragment
+                            )
+                            binding.displayEmptyText.hideView()
+                        }
                     }
                 }
             }

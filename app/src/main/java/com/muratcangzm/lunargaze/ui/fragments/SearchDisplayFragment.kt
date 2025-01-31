@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.muratcangzm.lunargaze.common.NetworkChecking
@@ -96,22 +98,22 @@ class SearchDisplayFragment : Fragment() {
 
         if (networkChecking.isNetworkAvailable()) {
 
-            viewLifecycleOwner.lifecycleScope.launch(exceptionHandler) {
-                viewModel.channelResult.collectLatest {
-
-                    it?.let {
-
-                        if (it.pagination!!.totalCount == 0) {
-                            binding.searchFragmentEmpty.showView()
-                            binding.searchLoadingScreen.loadingScreenLayout.goneView()
-                        } else {
-                            binding.searchFragmentEmpty.hideView()
-                            binding.searchLoadingScreen.loadingScreenLayout.goneView()
-                            searchAdapter.submitData(
-                                it.channelData!!.toMutableList(),
-                                this@SearchDisplayFragment
-                            )
-                            binding.searchAdapter.showView()
+            lifecycleScope.launch(exceptionHandler) {
+                repeatOnLifecycle(Lifecycle.State.STARTED){
+                    viewModel.channelResult.collectLatest {
+                        it?.let {
+                            if (it.pagination!!.totalCount == 0) {
+                                binding.searchFragmentEmpty.showView()
+                                binding.searchLoadingScreen.loadingScreenLayout.goneView()
+                            } else {
+                                binding.searchFragmentEmpty.hideView()
+                                binding.searchLoadingScreen.loadingScreenLayout.goneView()
+                                searchAdapter.submitData(
+                                    it.channelData!!.toMutableList(),
+                                    this@SearchDisplayFragment
+                                )
+                                binding.searchAdapter.showView()
+                            }
                         }
                     }
                 }

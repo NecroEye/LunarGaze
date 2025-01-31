@@ -9,6 +9,7 @@ import com.muratcangzm.lunargaze.viewmodels.HomeViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
@@ -35,7 +36,7 @@ class HomeFragmentTest {
     }
 
     @Test
-    fun `test fragment_view_created`() = runBlockingTest {
+    fun `test fragment_view_created`() = runTest {
         // Mocking network availability
         Mockito.`when`(networkChecking.isNetworkAvailable()).thenReturn(true)
 
@@ -46,6 +47,15 @@ class HomeFragmentTest {
             R.style.Theme_LunarGaze,
             null
         )
+
+        /**  remove comment line to test
+        scenario.onFragment { fragment ->
+            fragment.viewModel.categoriesResult.value = mockCategoryModel
+
+            // assertNotNull(fragment.binding.categoryRecycler)
+            Mockito.verify(categoryAdapter).submitCategory(mockCategoryModel)
+        }
+        **/
 
         /**  remove comment line to test
         scenario.onFragment { fragment ->

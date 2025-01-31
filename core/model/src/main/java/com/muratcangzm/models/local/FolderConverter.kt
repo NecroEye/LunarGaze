@@ -5,7 +5,6 @@ import com.google.gson.Gson
 
 class FolderConverter {
 
-
     @TypeConverter
     fun fromStringList(value: String?): List<String>?{
         return Gson().fromJson(value, Array<String>::class.java)?.toList()
@@ -15,5 +14,4 @@ class FolderConverter {
     fun toStringList(list: List<String>?) : String?{
         return Gson().toJson(list)
     }
-
 }

@@ -29,7 +29,6 @@ android {
 
         resourceConfigurations += listOf("tr", "ru", "fr", "de", "es")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -65,12 +64,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_20
+        targetCompatibility = JavaVersion.VERSION_20
         isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_21.toString()
+        jvmTarget = JavaVersion.VERSION_20.toString()
     }
 
     buildFeatures(Action<ApplicationBuildFeatures> {
@@ -85,6 +84,12 @@ android {
 
     hilt {
         enableAggregatingTask = true
+    }
+
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(20))
+        }
     }
 }
 

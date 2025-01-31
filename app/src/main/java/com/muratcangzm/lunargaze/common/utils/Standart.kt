@@ -2,7 +2,7 @@ package com.muratcangzm.lunargaze.common.utils
 
 import timber.log.Timber
 
-inline fun <T> tryOrNull(block: () -> T): T? {
+inline fun <reified T> tryOrNull(block: () -> T): T? {
     return try {
         block()
     } catch (e: Exception) {
@@ -20,7 +20,7 @@ inline fun tryOrZero(block: () -> Double): Double {
     }
 }
 
-inline fun <T> tryOrLog(block: () -> T) {
+inline fun <reified T> tryOrLog(block: () -> T) {
     try {
         block()
     } catch (e: Exception) {

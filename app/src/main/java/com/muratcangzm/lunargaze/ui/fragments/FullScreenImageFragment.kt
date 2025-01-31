@@ -399,7 +399,6 @@ class FullScreenImageFragment : Fragment(), Downloader {
 
     private val onBackPressed = object : OnBackPressedCallback(enabled = true) {
         override fun handleOnBackPressed() {
-            TODO("Not yet implemented")
         }
     }
 }

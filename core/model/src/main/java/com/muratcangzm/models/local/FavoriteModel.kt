@@ -25,8 +25,8 @@ data class FavoriteModel(
     var updateTime:String?,
     @ColumnInfo("table_description")
     var description:String?,
-
 ) : Parcelable {
+
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.createStringArrayList(),
@@ -36,8 +36,7 @@ data class FavoriteModel(
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)

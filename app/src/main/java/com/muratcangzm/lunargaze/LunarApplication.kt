@@ -10,7 +10,6 @@ class LunarApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
         if (Constants.DEBUG)
             Timber.plant(Timber.DebugTree())
     }

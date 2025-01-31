@@ -1,9 +1,9 @@
 package com.muratcangzm.lunargaze.viewmodels
 
 import androidx.lifecycle.viewModelScope
-import com.muratcangzm.models.remote.giphy.SearchModel
 import com.muratcangzm.lunargaze.repository.remote.GiphyRepo
 import com.muratcangzm.lunargaze.viewmodels.core.BaseViewModel
+import com.muratcangzm.models.remote.giphy.SearchModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,9 +19,8 @@ class SearchViewModel
 @Inject
 constructor(private val repo: GiphyRepo) : BaseViewModel() {
 
-
-    private val mutableSearchResult = MutableStateFlow<com.muratcangzm.models.remote.giphy.SearchModel?>(null)
-    val searchResult: StateFlow<com.muratcangzm.models.remote.giphy.SearchModel?>
+    private val mutableSearchResult = MutableStateFlow<SearchModel?>(null)
+    val searchResult: StateFlow<SearchModel?>
         get() = mutableSearchResult.asStateFlow()
 
     init {

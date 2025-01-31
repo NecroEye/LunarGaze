@@ -90,12 +90,9 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
     }
 
     private fun observeDataChange() {
-
         if (networkChecking.isNetworkAvailable()) {
-
             viewLifecycleOwner.lifecycleScope.launch(exceptionHandler) {
                 supervisorScope {
-
                     launch {
                         viewModel.tenorCategoryResult.collectLatest {
                             it?.let { result ->
@@ -103,7 +100,6 @@ class HomeFragment : BaseFragment<HomeFragmentLayoutBinding>() {
                             }
                         }
                     }
-
                     launch {
                         viewModel.categoriesResult.collectLatest {
                             it?.let { result ->

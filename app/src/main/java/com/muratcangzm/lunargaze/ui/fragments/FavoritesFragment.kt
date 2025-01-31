@@ -14,19 +14,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.muratcangzm.lunargaze.R
+import com.muratcangzm.lunargaze.common.utils.log
 import com.muratcangzm.lunargaze.databinding.FavoritesFragmentLayoutBinding
 import com.muratcangzm.lunargaze.extensions.hideView
 import com.muratcangzm.lunargaze.extensions.setSafeOnClickListener
 import com.muratcangzm.lunargaze.extensions.showView
 import com.muratcangzm.lunargaze.repository.local.DataStoreRepo
 import com.muratcangzm.lunargaze.ui.adapters.FavoriteFileAdapter
-import com.muratcangzm.lunargaze.common.utils.log
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
+import java.util.concurrent.Executors
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -81,12 +81,6 @@ class FavoritesFragment : Fragment() {
             withContext(Dispatchers.Main) {
                 stringList = dataStoreRepo.getAllValues()?.toList() as List<String>
 
-                for (deger in stringList!!) {
-                    Timber.tag(TAG).d("Değer: $deger")
-                }
-
-                Timber.tag("Boyutu: ").d("${stringList?.size}")
-
                 if (stringList!!.isEmpty()) {
                     binding.emptyFavFileText.showView()
                     binding.lottieArrow.showView()
@@ -96,7 +90,6 @@ class FavoritesFragment : Fragment() {
                 }
 
                 favoriteFileAdapter.submitFileNames(stringList!!)
-
             }
         }
 
@@ -145,9 +138,7 @@ class FavoritesFragment : Fragment() {
         val input = popupView.findViewById<TextInputEditText>(R.id.favoriteName)
         val saveButton = popupView.findViewById<MaterialButton>(R.id.saveButton)
 
-
         saveButton.setSafeOnClickListener {
-
             if (input.text.toString().isNotEmpty()) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     withContext(Dispatchers.IO) {
@@ -175,7 +166,6 @@ class FavoritesFragment : Fragment() {
             alertDialog?.dismiss()
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
